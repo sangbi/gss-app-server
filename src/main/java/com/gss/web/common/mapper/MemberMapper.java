@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.gss.web.common.domain.Member;
 
+
+
 @Mapper
 public interface MemberMapper {
 

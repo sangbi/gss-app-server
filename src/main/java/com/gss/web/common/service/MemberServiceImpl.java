@@ -1,5 +1,6 @@
 package com.gss.web.common.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gss.web.api.dto.MemberCreateDto.MemberCreateRequest;
@@ -11,11 +12,12 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
+	@Autowired
 	private final MemberDAO memberDAO;
 
 	@Override
 	public int joinUp(MemberCreateRequest dto) {
-		final Member member = new Member(dto.getEmail(), dto.getPassword(), dto.getPhoneNumber());
+		Member member = new Member(dto.getEmail(), dto.getPassword(), dto.getPhoneNumber());
 		if(memberDAO.findByEmail(member.getEmail()) != null) {
 			throw new IllegalStateException();
 		}
@@ -27,7 +29,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member findByEmail(String email) {
 		Member member = memberDAO.findByEmail(email);
-		System.out.println("181818181881" + member.getEmail());
 		return member;
 	}
 
