@@ -1,4 +1,4 @@
-package com.gss.web.common.domain;
+package com.gss.web.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Notice {
+public class NoticeDto {
 	private String noticeTitle;
 	private String noticeUrl;
 	private String noticePostTime;
