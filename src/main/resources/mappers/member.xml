@@ -16,6 +16,7 @@
 			#{privilge}
 		)
 	</insert>
+	
 	<select id="checkEmail" parameterType="String" resultType="boolean">
 		select count(*) 
 		from gssusertab 

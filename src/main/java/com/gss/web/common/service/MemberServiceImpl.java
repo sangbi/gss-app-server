@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.joinMember(member);
 		return result;
 	}
-
+ 
 	@Override
 	public Member findByEmail(String email) {
 		Member member = memberDAO.findByEmail(email);
