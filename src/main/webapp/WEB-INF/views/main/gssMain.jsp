@@ -11,11 +11,14 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<c:forEach items="${noticeList}" var="notice">
-		title : <a href="/main/notice?address=${notice.noticeUrl}">${notice.noticeTitle}</a><br>
-		url : ${notice.noticeUrl}<br>
-		time : ${notice.noticePostTime}<br>
-		<br><br>
-	</c:forEach>
+	<div>
+		<ul>
+		<c:forEach items="${noticeList}" var="notice">
+			<li><a href="/main/notice?address=${notice.noticeUrl}">${notice.noticeTitle}</a>
+			${notice.noticePostTime}
+			<br><br>
+		</c:forEach>
+		</ul>
+	</div>
 </body>
 </html>
