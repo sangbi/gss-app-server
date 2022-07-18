@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
-
+ 
 	@Override
 	public Member findByEmail(String email) {
 		Member member = memberDAO.findByEmail(email);
