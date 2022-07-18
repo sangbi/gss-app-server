@@ -6,16 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 
 import com.gss.web.api.dto.MemberCreateDto;
-import com.gss.web.api.validator.ValidationSequence;
 import com.gss.web.common.dao.MemberDAO;
 import com.gss.web.common.domain.Member;
-import com.gss.web.config.MemberConfig;
 
 import lombok.AllArgsConstructor;
 
