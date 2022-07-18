@@ -27,7 +27,8 @@
 	</tr>
 	</c:forEach>
 </table>
+
 <a href="/admin/main"><input type="button" value="목록"></a>
-<a href="/admin/boss/insertBoss"><input type="button" value="보스정보 추가"></a>
+<a href="/admin/addBoss"><input type="button" value="보스정보 추가"></a>
 </body>
 </html>

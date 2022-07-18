@@ -8,21 +8,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileService {
-	private String uploadDir ="C:\\image\\";
 	
-	public String fileUpload(MultipartFile mul, String fileName) {
-		String imagePath=uploadDir;
+	
+	public String fileUpload(MultipartFile mul, String fileName, String filePath) {
+		String imagePath=filePath;
+		System.out.println(filePath);
 		String fileExtension=fileName.substring(fileName.lastIndexOf("."));
 		if(fileExtension.equals(".PNG") || fileExtension.equals(".JPEG")|| fileExtension.equals(".jpg")) {
 			try {
-				mul.transferTo(new File(imagePath+fileName));
+				mul.transferTo(new File(filePath,fileName));
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
-		}
-		else {
-			System.out.println("file서비스의 else");
-			imagePath="";
 		}
 		return imagePath;
 	}

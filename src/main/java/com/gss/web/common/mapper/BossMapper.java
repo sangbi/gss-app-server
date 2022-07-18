@@ -6,11 +6,12 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gss.web.api.dto.BossDto;
+import com.gss.web.common.domain.Boss;
 
 @Mapper
 public interface BossMapper {
 	//보스 추가
-	int insertBoss(BossDto bossDto);
+	int insertBoss(Boss boss);
 	
 	public abstract List<BossDto> list();
 	

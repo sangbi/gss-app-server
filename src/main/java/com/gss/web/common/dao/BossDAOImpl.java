@@ -23,20 +23,17 @@ public class BossDAOImpl implements BossDAO{
 	}
 
 	@Override
-	public int insertBoss(BossDto bossDto) {
-		// TODO Auto-generated method stub
-		return sqlSession.getMapper(BossMapper.class).insertBoss(bossDto);
+	public Integer insertBoss(Boss boss) {
+		return sqlSession.getMapper(BossMapper.class).insertBoss(boss);
 	}
 
 	@Override
 	public List<BossDto> selectAllBoss() {
-		// TODO Auto-generated method stub
 		return sqlSession.getMapper(BossMapper.class).list();
 	}
 
 	@Override
 	public BossDto deleteByBossName(String bossName) {
-		// TODO Auto-generated method stub
 		return sqlSession.getMapper(BossMapper.class).deleteByBossName(bossName);
 	}
 

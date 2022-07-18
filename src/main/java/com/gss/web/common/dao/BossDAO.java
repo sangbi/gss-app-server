@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.gss.web.api.dto.BossDto;
+import com.gss.web.common.domain.Boss;
 
 public interface BossDAO {
 	//보스 추가
-	public  int insertBoss(BossDto bossDto);
+	public  Integer insertBoss(Boss boss);
 	
 	public  List<BossDto> list();
 	
