@@ -26,4 +26,3 @@ public class MemberCreateDto {
 	@Pattern(regexp="^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$",message="{Pattern.phone}")
 	private String phoneNumber;
 }
-

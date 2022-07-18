@@ -13,4 +13,6 @@ public interface MemberMapper {
 	boolean checkID(String userID);
 
 	Member findByEmail(String email);
+	
+	Member findByID(String userid);
 }

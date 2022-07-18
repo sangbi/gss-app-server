@@ -11,6 +11,7 @@
 <title>회원가입</title>
 </head>
 <body>
+	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 	<form:form modelAttribute="MemberCreateDto" method="POST">
 		<div>
 			<label>ID</label>

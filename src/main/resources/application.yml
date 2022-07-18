@@ -19,6 +19,9 @@ spring:
     multipart:
       maxFileSize: 100MB
       max-request-size: 200MB
+  messages:
+    basename: messages,config.i18n.messages
+    encoding: UTF-8
           
 mybatis:
   mapper-locations: classpath:mappers/*.xml

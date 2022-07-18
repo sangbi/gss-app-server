@@ -39,4 +39,14 @@
 		from gssusertab
 		where email = #{email} 
 	</select>
+	
+	<select id="findByID" parameterType="String" resultType="com.gss.web.common.domain.Member">
+		select
+			email, 
+			userpassword, 
+			userphone,
+			privilge
+		from gssusertab
+		where gssuserid= #{userid} 
+	</select>
 </mapper>

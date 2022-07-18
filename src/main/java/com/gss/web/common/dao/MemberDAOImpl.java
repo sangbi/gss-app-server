@@ -31,4 +31,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public boolean checkID(String userID) {
 		return sqlSession.getMapper(MemberMapper.class).checkID(userID);
 	}
+
+	@Override
+	public Member findByID(String userid) {
+		return sqlSession.getMapper(MemberMapper.class).findByID(userid);
+	}
 }

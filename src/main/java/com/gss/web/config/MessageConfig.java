@@ -7,7 +7,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class MemberConfig implements WebMvcConfigurer{
+public class MessageConfig implements WebMvcConfigurer{
 	
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer PropertySourcesPlaceholderConfigurer() {
@@ -17,7 +17,7 @@ public class MemberConfig implements WebMvcConfigurer{
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() {
 		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
-		res.setBasenames("/WEB-INF/properties/error_message");
+		res.setBasenames("/WEB-INF/properties/message");
 		res.setDefaultEncoding("UTF-8");
 		return res;
 	}
