@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.div_main_mid {
+	margin:auto;
+	width:50%;
+	margin-top:5%;
+	margin-bottom:5%;
+}
+
+.div_main_botnav {
+	margin:0 auto;
+	width:100%;
+}
+
+.pagination {
+	text-align:center;
+	margin:auto;
+	margin-left:30%;
+}
+
+ul {
+	display: table;
+ 	margin-left: auto;
+  	margin-right: auto;
+}
+
+.div_main_bottom {
+	margin:auto;
+	margin-top:5%;
+	width:100%;
+	height:100px;
+	background-color:#343a40;
+}

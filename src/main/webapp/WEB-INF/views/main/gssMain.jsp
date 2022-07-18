@@ -6,19 +6,118 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/resources/assets/css/mainPage.css" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.js"></script>
 	<title>GSS</title>
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div>
-		<ul>
-		<c:forEach items="${noticeList}" var="notice">
-			<li><a href="/main/notice?address=${notice.noticeUrl}">${notice.noticeTitle}</a>
-			${notice.noticePostTime}
-			<br><br>
-		</c:forEach>
-		</ul>
+	<div class="div_main_mid">
+		<table class="table">
+			<thead class="table-dark">
+				<tr>
+					<th>공지사항</th><th>날짜</th>
+				</tr>
+			</thead>
+			<c:forEach items="${noticeList}" var="notice" varStatus="status">
+				<tbody>
+					<tr>
+						<td><a href="/main/notice?address=${notice.noticeUrl}">${notice.noticeTitle}</a></td>
+						<td>${notice.noticePostTime}</td>
+					</tr>
+				</tbody>
+			</c:forEach>
+		</table>
 	</div>
+	<div class="div_main_botnav">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<c:choose>
+					<c:when test="${page > 1}">
+						<c:choose>
+							<c:when test="${page >= 10}">
+								<li class="page-item">
+								<a class="page-link" href="/main/home/page=${(page-(page%10)+1)-10}" aria-label="Previous">
+					        		<span aria-hidden="true">&laquo;</span>
+					      		</a>
+					      		</li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item">
+									<a class="page-link" href="/main/home/page=1" aria-label="Previous">
+					        			<span aria-hidden="true">&laquo;</span>
+					      			</a>
+					      		</li>
+					      	</c:otherwise>
+				      	</c:choose>
+				      	<li class="page-item">
+							<a class="page-link" href="/main/home/page=${page-1}" aria-label="Previous">
+							    <span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+			      	</c:when>
+			      	<c:otherwise>
+			      		<li class="page-item">
+							<a class="page-link" href="#" aria-label="Previous">
+			        			<span aria-hidden="true">&laquo;</span>
+			      			</a>
+			      		</li>
+			      		<li class="page-item">
+							<a class="page-link" href="#" aria-label="Previous">
+					        	<span aria-hidden="true">&laquo;</span>
+					      	</a>
+			      		</li>
+			      	</c:otherwise>
+				</c:choose>	
+				<c:choose>
+					<c:when test="${pageCount < endPageCount}">
+						<c:forEach items="${noticeList}" var="notice" varStatus="status">
+							<c:choose>
+								<c:when test="${pageCount%10 != 0}">
+									<li class="page-item"><a class="page-link" href="/main/home/page=${(pageCount-(pageCount%10))+status.count}">${(pageCount-(pageCount%10))+status.count}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="/main/home/page=${(pageCount-(pageCount%10)-10)+status.count}">${(pageCount-(pageCount%10)-10)+status.count}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="i" begin="1" end="10" varStatus="status">
+							<li class="page-item"><a class="page-link" href="/main/home/page=${(pageCount-(pageCount%10)-10)+status.count}">${(pageCount-(pageCount%10)-10)+status.count}</a></li>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				<c:if test="${pageCount < endPageCount}">
+				<c:choose>
+					<c:when test="${pageCount != 1}">
+						<li class="page-item">
+							<a class="page-link" href="/main/home/page=${page+1}" aria-label="Next">
+			        			<span aria-hidden="true">&raquo;</span>
+			      			</a>
+			      		</li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item">
+							<a class="page-link" href="/main/home/page=2" aria-label="Next">
+			        			<span aria-hidden="true">&raquo;</span>
+			      			</a>
+			      		</li>
+					</c:otherwise>
+				</c:choose>
+				<li class="page-item">
+					<a class="page-link" href="/main/home/page=${(page-(page%10)+1)+10}" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      	</a>
+			    </li>
+				</c:if>
+			</ul>
+		</nav>
+	</div>
+	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,17 +24,41 @@ public class MainApi {
 		return "main/gssNav";
 	}
 	
+	@GetMapping("/bottom")
+	public String bottomPage() {
+		return "main/gssBottom";
+	}
+	
+	@PostMapping("/bottom")
+	public String postBottomPage() {
+		return "main/gssBottom";
+	}
+	
 	// gssMain.jsp 호출, 가장 처음 화면
 	@GetMapping("/home")
 	public String mainPage(Model model) {
+		int pageCount = 1;
+		int endPageCount = 510;
+		
 		model.addAttribute("noticeList", noticeService.getNoticeList("1"));
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("endPageCount", endPageCount);
+		
 		return "main/gssMain";
 	}
 	
 	// gssMain.jsp 호출, 페이지 번호에 따른 화면 호출
-	@GetMapping("/home/{page}")
+	@GetMapping("/home/page={page}")
 	public String mainPage(Model model, @PathVariable("page") String page) {
+		int pageCount = 1;
+		int endPageCount = 510;
+		pageCount = Integer.parseInt(page);
+
 		model.addAttribute("noticeList", noticeService.getNoticeList(page));
+		model.addAttribute("page", page);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("endPageCount", endPageCount);
+		
 		return "main/gssMain";
 	}
 	
