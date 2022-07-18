@@ -16,10 +16,7 @@
 	</insert>
 	<select id="selectByBoss" parameterType="Map" resultType="int">
 		select
-			bossnum,
-			bossname,
-			bossimagepath,
-			bossgrade
+			count(*)
 		from bosstab
 		where bossname=#{bossName} and bossgrade=#{bossGrade}
 	</select>

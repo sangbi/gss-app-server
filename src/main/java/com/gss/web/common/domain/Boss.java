@@ -10,4 +10,10 @@ public class Boss {
 	private String bossName;	//보스 이름
 	private String bossImagepath;	//보스 이미지
 	private String bossGrade;	//보스 난이도
+	
+	public Boss(String boossName,String bossImagepath,String bossGrade) {
+		this.bossName=boossName;
+		this.bossImagepath=bossImagepath;
+		this.bossGrade=bossGrade;
+	}
 }

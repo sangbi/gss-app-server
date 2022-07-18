@@ -64,6 +64,5 @@
 		<input type="submit" value="회원 가입">
 		<input type="button" value="취소">
 	</form:form>
-
 </body>
 </html>

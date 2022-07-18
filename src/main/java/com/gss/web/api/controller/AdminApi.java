@@ -1,7 +1,9 @@
 package com.gss.web.api.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,13 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gss.web.api.dto.BossDto;
 import com.gss.web.api.dto.ItemDto;
-import com.gss.web.common.service.BossService;
+import com.gss.web.common.domain.Boss;
+import com.gss.web.common.service.BossServiceImpl;
 import com.gss.web.common.service.FileService;
 
 import lombok.AllArgsConstructor;
@@ -26,8 +29,10 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/admin")
 public class AdminApi {
 	@Autowired
-	private FileService fileService; 
-	
+	private FileService fileService;
+	@Autowired
+	private BossServiceImpl bossServiceImpl;
+
 	// 관리자 메인
 	@GetMapping("/main")
 	public String adminMain() {
@@ -40,33 +45,31 @@ public class AdminApi {
 	public String adminBoss(Model model) {
 		List<BossDto> bossList = new ArrayList<>();
 		model.addAttribute("bossList", bossList);
-		System.out.println("보스 페이지");
 		return "/admin/boss/bossList";
 	}
-	
-//	@RequestMapping(method = RequestMethod.POST)
-//	public String insertBoss(@ModelAttribute("BossDto") BossDto bossDto) {
-//		String urlPath = "";
-//			MultipartFile file = bossDto.getBossImagepath();
-//			String path = fileService.fileUpload(file, path);
-//			if (!path.equals("")) {
-//				try {
-//					bossDto.setBossImagepath(path);
-//					BossService(bossDto);
-//					System.out.println("upload su");
-//				} catch (AlreadyExistingBookException e) {
-//					System.out.println("upload fail");
-//					errors.rejectValue("isbn", "duplicate");
-//					urlPath = "lib/book_reg_form";
-//				}
-//				urlPath = "redirect:/list";
-//			} else {
-//				System.out.println("실패");
-//				urlPath = "lib/book_reg_form";
-//			}
-//		}
 
-	// ---------------------------------------------------------
+	@GetMapping("/addBoss")
+	public String insertBoss(@ModelAttribute("BossDto") BossDto bossDto) {
+		return "/admin/boss/insertBoss";
+	}
+	
+	@PostMapping("/addBoss")
+	public String insertBossReq(@ModelAttribute("BossDto") BossDto bossDto, HttpServletRequest req) {
+		String uploadPath = req.getSession().getServletContext().getRealPath("/").concat("resources"+"\\"+"bossImage");
+		String urlPath = "";
+		Boss boss;
+		MultipartFile file = bossDto.getBossImagepath();
+		String fileName=file.getOriginalFilename();
+		String path = fileService.fileUpload(file, fileName,uploadPath);
+			if (!path.equals("")) {
+					boss=new Boss(bossDto.getBossName(),path,bossDto.getBossGrade());
+					urlPath=bossServiceImpl.bossExistence(boss);
+					System.out.println("1111111111111111111"+urlPath);
+			} else {
+				urlPath = "admin/boss";
+			}
+		return urlPath;
+	}
 
 	// 선택한보스 정보페이지
 	@GetMapping("/boss/select")
