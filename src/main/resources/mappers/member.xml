@@ -5,11 +5,13 @@
 <mapper namespace="com.gss.web.common.mapper.MemberMapper">
 	<insert id="joinUp" parameterType="com.gss.web.common.domain.Member">
 		INSERT INTO gssusertab (
+			gssuserid,
 			email, 
 			userpassword, 
 			userphone,
 			privilge
 		) values(
+			#{gssuserid},
 			#{email},
 			#{userpassword},
 			#{userphone},
@@ -18,9 +20,14 @@
 	</insert>
 	
 	<select id="checkEmail" parameterType="String" resultType="boolean">
-		select count(*) 
+		select count(*)
 		from gssusertab 
 		where email=#{email}
+	</select>
+	<select id="checkID" parameterType="String" resultType="boolean">
+		select count(*)
+		from gssusertab 
+		where gssuserid=#{userID}
 	</select>
 	
 	<select id="findByEmail" parameterType="String" resultType="com.gss.web.common.domain.Member">

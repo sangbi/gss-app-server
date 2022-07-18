@@ -1,45 +1,81 @@
 package com.gss.web.api.controller;
 
-import org.slf4j.Logger;
+import java.util.Map;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gss.web.api.dto.MemberCreateDto.MemberCreateRequest;
-import com.gss.web.common.domain.Member;
+import com.gss.web.api.dto.MemberCreateDto;
 import com.gss.web.common.service.MemberServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/singup")
+@RequestMapping("/member")
 public class MemberApi {
-	private Logger logger = org.slf4j.LoggerFactory.getLogger(MemberApi.class);
 
-	private final MemberServiceImpl memberServiceImpl;
-	
+	@Autowired
+	private MemberServiceImpl memberServiceImpl;
+
 	@GetMapping("/join")
-	public String joinPageTest(Model model) {
-		Member email= memberServiceImpl.findByEmail("test1@naver.com");
-		model.addAttribute("email", email);
-		return "join/singup";
+	public String joinPageTest(@ModelAttribute("MemberCreateDto") MemberCreateDto memberCreateDto) {
+		return "/join/singup";
 	}
-	
+
 	@PostMapping("/join")
-	public String joinMember(@RequestBody MemberCreateRequest dto) {
+	public String joinMember(@ModelAttribute("MemberCreateDto") @Valid MemberCreateDto MCRdto, BindingResult result, Model model) {
 		String path = "";
-		logger.info("[POST] :::: email : " + dto.getEmail());
-		if (memberServiceImpl.checkEmail(dto.getEmail())) {
-			path = "/singup/join";
-		} else {
-			memberServiceImpl.joinUp(dto);
-			path = "/login";
+		Map<String, String> validatorResult = memberServiceImpl.validateNullandEmptyCheck(MCRdto);
+		if (!validatorResult.isEmpty()) {
+			for (String key : validatorResult.keySet()) {
+				model.addAttribute(key, validatorResult.get(key));
+			}
+			if (result.hasErrors()) {
+				model.addAttribute("MCRdto", MCRdto);
+				validatorResult = memberServiceImpl.validateHandling(result);
+				for (String key : validatorResult.keySet()) {
+					if(model.getAttribute(key)==null) {
+						model.addAttribute(key, validatorResult.get(key));
+					}
+				}
+				path = "join/singup";
+			}
+		}else {
+			if (result.hasErrors()) {
+				model.addAttribute("MCRdto", MCRdto);
+				validatorResult = memberServiceImpl.validateHandling(result);
+				for (String key : validatorResult.keySet()) {
+					model.addAttribute(key, validatorResult.get(key));
+				}
+				path = "join/singup";
+			} else {
+				model.addAttribute("MCRdto", MCRdto);
+				validatorResult =memberServiceImpl.checkEmailandEmail(MCRdto);
+				if(!validatorResult.isEmpty()) {
+					for (String key : validatorResult.keySet()) {
+						model.addAttribute(key, validatorResult.get(key));
+					}
+					path = "join/singup";
+				}else {
+					memberServiceImpl.joinUp(MCRdto);
+					path="/login/login";
+				}
+			}
 		}
-		System.out.println("MemberApi::::::::"+path);
 		return path;
+	}
+
+	@GetMapping("/login")
+	public String loginMember() {
+		return "/login/login";
 	}
 }

@@ -8,4 +8,6 @@ public interface MemberDAO {
 	Member findByEmail(String email);
 	
 	boolean checkEmail(String email);
+	
+	boolean checkID(String userID);
 }
