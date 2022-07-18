@@ -53,7 +53,7 @@
 				</button>
 				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-0"
 						type="submit"
-						onclick="loction.href='#'">Login
+						onclick="loction.href='/member/login'">Login
 				</button>
 			</form>
 		</div>

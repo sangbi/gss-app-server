@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,27 +18,32 @@ import lombok.RequiredArgsConstructor;
 public class MainApi {
 	private final NoticeService noticeService;
 	
-	// gssNav.jsp È£Ãâ, °¢ ÆäÀÌÁö¸¶´Ù navÆÄÆ®¸¦ import ÇØÁÖ±â À§ÇØ »ç¿ë
+	// gssNav.jsp È£ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ navï¿½ï¿½Æ®ï¿½ï¿½ import ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@GetMapping("/nav")
-	public String navPage(Model model) {
+	public String GetNavPage(Model model) {
 		return "main/gssNav";
 	}
 	
-	// gssMain.jsp È£Ãâ, °¡Àå Ã³À½ È­¸é
+	@PostMapping("/nav")
+	public String PostNavPage(Model model) {
+		return "main/gssNav";
+	}
+	
+	// gssMain.jsp È£ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ È­ï¿½ï¿½
 	@GetMapping("/home")
 	public String mainPage(Model model) {
 		model.addAttribute("noticeList", noticeService.getNoticeList("1"));
 		return "main/gssMain";
 	}
 	
-	// gssMain.jsp È£Ãâ, ÆäÀÌÁö ¹øÈ£¿¡ µû¸¥ È­¸é È£Ãâ
+	// gssMain.jsp È£ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ È£ï¿½ï¿½
 	@GetMapping("/home/{page}")
 	public String mainPage(Model model, @PathVariable("page") String page) {
 		model.addAttribute("noticeList", noticeService.getNoticeList(page));
 		return "main/gssMain";
 	}
 	
-	// getNoticePage.jsp È£Ãâ, ¸ÞÀÎÈ­¸é¿¡¼­ ¼±ÅÃÇÑ ÆäÀÌÁö ºÒ·¯¿À±â
+	// getNoticePage.jsp È£ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½È­ï¿½é¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/notice")
 	public String getNoticePage(Model model, @RequestParam("address") String url) {
 		model.addAttribute("noticesrc", noticeService.getNoticeContents(url));
