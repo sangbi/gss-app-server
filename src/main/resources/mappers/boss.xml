@@ -14,13 +14,13 @@
 			#{bossGrade}
 		)
 	</insert>
-	<select id="selectByBoss" parameterType="String" resultType="com.gss.web.common.mapper.BossMapper">
+	<select id="selectByBoss" parameterType="Map" resultType="int">
 		select
 			bossnum,
 			bossname,
 			bossimagepath,
 			bossgrade
 		from bosstab
-		where bossname=#{bossName}
+		where bossname=#{bossName} and bossgrade=#{bossGrade}
 	</select>
 </mapper>
