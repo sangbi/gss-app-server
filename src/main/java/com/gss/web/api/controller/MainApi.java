@@ -24,22 +24,44 @@ public class MainApi {
 		return "main/gssNav";
 	}
 	
+	@GetMapping("/bottom")
+	public String bottomPage() {
+		return "main/gssBottom";
+	}
+	
+	@PostMapping("/bottom")
+	public String postBottomPage() {
+		return "main/gssBottom";
+	}
+  
 	@PostMapping("/nav")
 	public String PostNavPage(Model model) {
 		return "main/gssNav";
 	}
-	
-	// gssMain.jsp ȣ��, ���� ó�� ȭ��
+
 	@GetMapping("/home")
 	public String mainPage(Model model) {
+		int pageCount = 1;
+		int endPageCount = 510;
+		
 		model.addAttribute("noticeList", noticeService.getNoticeList("1"));
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("endPageCount", endPageCount);
+		
 		return "main/gssMain";
 	}
 	
-	// gssMain.jsp ȣ��, ������ ��ȣ�� ���� ȭ�� ȣ��
-	@GetMapping("/home/{page}")
+	@GetMapping("/home/page={page}")
 	public String mainPage(Model model, @PathVariable("page") String page) {
+		int pageCount = 1;
+		int endPageCount = 510;
+		pageCount = Integer.parseInt(page);
+
 		model.addAttribute("noticeList", noticeService.getNoticeList(page));
+		model.addAttribute("page", page);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("endPageCount", endPageCount);
+		
 		return "main/gssMain";
 	}
 	
