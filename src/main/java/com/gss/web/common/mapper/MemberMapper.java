@@ -9,6 +9,10 @@ public interface MemberMapper {
 	int joinUp(Member member);
 
 	boolean checkEmail(String email);
+	
+	boolean checkID(String userID);
 
 	Member findByEmail(String email);
+	
+	Member findByID(String userid);
 }

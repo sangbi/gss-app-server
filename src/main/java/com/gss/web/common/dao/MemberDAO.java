@@ -7,5 +7,9 @@ public interface MemberDAO {
 	
 	Member findByEmail(String email);
 	
+	Member findByID(String userid);
+	
 	boolean checkEmail(String email);
+	
+	boolean checkID(String userID);
 }
