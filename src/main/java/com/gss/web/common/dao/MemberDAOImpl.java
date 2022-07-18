@@ -11,13 +11,12 @@ import com.gss.web.common.mapper.MemberMapper;
 public class MemberDAOImpl implements MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
 	public int joinMember(Member member) {
 		return sqlSession.getMapper(MemberMapper.class).joinUp(member);
-		
 	}
-	
+
 	@Override
 	public Member findByEmail(String email) {
 		return sqlSession.getMapper(MemberMapper.class).findByEmail(email);
@@ -26,5 +25,10 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public boolean checkEmail(String email) {
 		return sqlSession.getMapper(MemberMapper.class).checkEmail(email);
+	}
+
+	@Override
+	public boolean checkID(String userID) {
+		return sqlSession.getMapper(MemberMapper.class).checkID(userID);
 	}
 }
