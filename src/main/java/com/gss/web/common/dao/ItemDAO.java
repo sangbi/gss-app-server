@@ -17,5 +17,8 @@ public interface ItemDAO {
 	public abstract ItemDto selectByItemName(String itemName);
 	
 	//해당 아이템 삭제
-	public abstract ItemDto deleteByItemName(String bossName);
+	public abstract ItemDto deleteByItemName(String itemName);
+	
+	//검색
+	public abstract List<ItemDto> selectSearchItem(ItemDto itemDto);
 }

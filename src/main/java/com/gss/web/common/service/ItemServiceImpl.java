@@ -37,4 +37,10 @@ public class ItemServiceImpl implements ItemService{
 		// TODO Auto-generated method stub
 		return itemDAO.deleteByItemName(itemName);
 	}
+
+	@Override
+	public List<ItemDto> searchItem(ItemDto itemDto) {
+		// TODO Auto-generated method stub
+		return itemDAO.selectSearchItem(itemDto);
+	}
 }
