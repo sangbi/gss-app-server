@@ -16,4 +16,7 @@ public interface ItemService {
 	
 	//아이템 삭제
 	public abstract ItemDto deleteByItemName(String itemName);
+	
+	//페이지 서비스
+	public abstract List<ItemDto> searchItem(ItemDto itemDto);
 }

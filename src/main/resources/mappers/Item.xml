@@ -17,10 +17,25 @@
 	<select id="selectByItem" parameterType="String" resultType="com.gss.web.common.mapper.ItemMapper">
 		select
 			itemnum,
-			classifiction,
+			classification,
 			itemimagepath,
 			itemname
 		from itemtab
 		where itemname=#{itemName}
+	</select>
+	<select id="selectSearchItem" parameterType="com.gss.web.api.dto.ItemDto" resultType="com.gss.web.api.dto.ItemDto">
+		select
+			classification,
+			itemname
+		from itemtab
+		where delete_yn="N"
+		<choose>
+			<when test="type !=null and type.equals('classification')">
+			and classification LIKE CONCAT('%', #{keyword}, '%')
+			</when>
+			<when test="itemname !=null and type.equals('itemname')">
+			and itemname LIKE CONCAT('%', #{keyword}, '%')
+			</when>
+		</choose>
 	</select>
 </mapper>
