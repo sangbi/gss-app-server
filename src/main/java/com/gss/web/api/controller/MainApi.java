@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class MainApi {
 	private final NoticeService noticeService;
 	
-	// gssNav.jsp ȣ��, �� ���������� nav��Ʈ�� import ���ֱ� ���� ���
 	@GetMapping("/nav")
 	public String GetNavPage(Model model) {
 		return "main/gssNav";
@@ -65,7 +64,6 @@ public class MainApi {
 		return "main/gssMain";
 	}
 	
-	// getNoticePage.jsp ȣ��, ����ȭ�鿡�� ������ ������ �ҷ�����
 	@GetMapping("/notice")
 	public String getNoticePage(Model model, @RequestParam("address") String url) {
 		model.addAttribute("noticesrc", noticeService.getNoticeContents(url));

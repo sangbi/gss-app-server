@@ -43,7 +43,7 @@
 					<a class="nav-link" href="#">파티</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">정산</a>
+					<a class="nav-link" href="/calculate/partyList?userId=ㅁ">정산</a>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gss.web.common.mapper.CalculateMapper">
+	<select id="selectByUserNumber" parameterType="int" resultType="com.gss.web.api.dto.CalculateMainDto">
+		select
+			p.partyname, m.charatername
+		from 
+			partytab as p 
+			join memberofpartytab as m
+		on
+			p.partynum = m.partynum 
+			and m.partyleader = true 
+			and m.gssusernum = #{userNum};
+	</select>
+	
+	<select id="selectByUserId" parameterType="String" resultType="int">
+		select 
+			distinct g.gssusernum 
+		from 
+			gssusertab as g 
+			join memberofpartytab as m
+		on 
+			g.gssusernum = m.gssusernum 
+			and g.gssuserid  = #{userId};
+	</select>
+</mapper>
