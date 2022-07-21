@@ -18,7 +18,6 @@ public class BossDAOImpl implements BossDAO{
 
 	@Override
 	public List<BossDto> list() {
-		// TODO Auto-generated method stub
 		return sqlSession.getMapper(BossMapper.class).list();
 	}
 
@@ -29,7 +28,7 @@ public class BossDAOImpl implements BossDAO{
 
 	@Override
 	public List<BossDto> selectAllBoss() {
-		return sqlSession.getMapper(BossMapper.class).list();
+		return sqlSession.getMapper(BossMapper.class).selectAllBoss();
 	}
 
 	@Override

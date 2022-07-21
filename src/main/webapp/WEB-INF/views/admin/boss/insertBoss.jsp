@@ -6,8 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bossAdd.js" async></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css" rel="stylesheet"type="text/css">
+	<link href="${pageContext.request.contextPath}/resources/assets/css/mainPage.css" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bossAdd.js" async></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bossImage"></script>
 <title>보스 추가페이지</title>
 </head>
 <body>

@@ -14,9 +14,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bossAdd.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bossImage"></script>
-<title>${bossList.bossName}정보</title>
+<title>${bossList.itemName}정보</title>
 </head>
 <body>
+<form:form modelAttribute="ItemDto" method="POST" enctype="multipart/form-data" onsubmit="return check()">
 		<table 
 		width="50%" 
 		height=200
@@ -25,14 +26,15 @@
 		<td rowspan="3"><div class="select_img"><img style=width:150px; id="preview-image"/></div></td>
 		
 		<tr>
-			<th>보스이름</th>
-			<td>${bossList.bossName}</td>
+			<th>아이템 이름</th>
+			<td>${bossList.itemName}</td>
 		</tr>
 		<tr>
-			<th>난이도</th>
-			<td>${bossList.bossGrade }</td>
+			<th>분류</th>
+			<td>${bossList.classification}</td>
 		</tr>
 		</table>
-		<a href="/admin/boss"><input type="button" value="목록"></a>
+		<a href="/admin/item"><input type="button" value="목록"></a>
+	</form:form>
 </body>
 </html>
