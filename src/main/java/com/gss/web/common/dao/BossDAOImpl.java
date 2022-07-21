@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gss.web.api.dto.BossDto;
 import com.gss.web.common.domain.Boss;
 import com.gss.web.common.mapper.BossMapper;
 
@@ -17,7 +16,7 @@ public class BossDAOImpl implements BossDAO{
 	private SqlSession sqlSession;
 
 	@Override
-	public List<BossDto> list() {
+	public List<Boss> list() {
 		return sqlSession.getMapper(BossMapper.class).list();
 	}
 
@@ -27,12 +26,12 @@ public class BossDAOImpl implements BossDAO{
 	}
 
 	@Override
-	public List<BossDto> selectAllBoss() {
+	public List<Boss> selectAllBoss() {
 		return sqlSession.getMapper(BossMapper.class).selectAllBoss();
 	}
 
 	@Override
-	public BossDto deleteByBossName(String bossName) {
+	public Boss deleteByBossName(String bossName) {
 		return sqlSession.getMapper(BossMapper.class).deleteByBossName(bossName);
 	}
 

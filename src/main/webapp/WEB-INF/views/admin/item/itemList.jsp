@@ -32,13 +32,13 @@
 					<td><a href=<c:url value="/admin/item/select?=${bossList.itemName}"/>>
 						${itemList.itemName}</a></td>
 					<td>${itemList.classification}</td>
-					<td><img src="resources/file/${itemList.itemImagepath}" width="50" height="50"></td>
+					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		</div>
 <a href="/admin/main"><input type="button" value="목록"></a>
 <a href="/admin/addItem"><input type="button" value="아이템정보 추가"></a>
+</div>
 </body>
 </html>

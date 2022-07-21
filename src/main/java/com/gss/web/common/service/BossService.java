@@ -7,15 +7,15 @@ import com.gss.web.api.dto.BossDto;
 import com.gss.web.common.domain.Boss;
 
 public interface BossService {
-	public  List<BossDto> list();
+	public  List<Boss> list();
 	
-	public  List<BossDto> selectAllBoss();
+	public  List<Boss> selectAllBoss();
 	
 	public Integer insertBoss(Boss boss);
 	
 	public  int selectByBoss(Map map);
 	
-	public  BossDto deleteByBossName(String bossName);
+	public  Boss deleteByBossName(String bossName);
 	
 	public String bossExistence(Boss boss);
 }

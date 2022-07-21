@@ -24,7 +24,7 @@ public class ItemServiceImpl implements ItemService{
 	private ReloadableResourceBundleMessageSource res;
 	
 	@Override
-	public List<ItemDto> list() {
+	public List<Item> list() {
 		return itemDAO.list();
 	}
 	
@@ -34,11 +34,11 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public ItemDto deleteByItemName(String itemName) {
+	public Item deleteByItemName(String itemName) {
 		return itemDAO.deleteByItemName(itemName);
 	}
 	@Override
-	public List<ItemDto> selectAllItem() {
+	public List<Item> selectAllItem() {
 		return itemDAO.selectAllItem();
 	}
 

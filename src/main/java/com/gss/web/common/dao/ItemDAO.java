@@ -10,13 +10,13 @@ public interface ItemDAO {
 
 	public  Integer insertItem(Item item);
 		
-	public  List<ItemDto> list();
+	public  List<Item> list();
 		
-	public  List<ItemDto> selectAllItem();
+	public  List<Item> selectAllItem();
 		
 	public  int selectByItem(Map map);
 		
-	public  ItemDto deleteByItemName(String itemName);
+	public  Item deleteByItemName(String itemName);
 		
 	public List<ItemDto> selectSearchItemName(String itemName);
 	

@@ -24,7 +24,7 @@ public class BossServiceImpl implements BossService{
 	private ReloadableResourceBundleMessageSource res;
 	
 	@Override
-	public List<BossDto> list() {
+	public List<Boss> list() {
 		return bossDAO.list();
 	}
 	
@@ -34,11 +34,11 @@ public class BossServiceImpl implements BossService{
 	}
 	
 	@Override
-	public BossDto deleteByBossName(String bossName) {
+	public Boss deleteByBossName(String bossName) {
 		return bossDAO.deleteByBossName(bossName);
 	}
 	@Override
-	public List<BossDto> selectAllBoss() {
+	public List<Boss> selectAllBoss() {
 		return bossDAO.selectAllBoss();
 	}
 

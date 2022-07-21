@@ -44,9 +44,10 @@ public class AdminApi {
 
 	@GetMapping("/boss")
 	public String adminBoss(Model model) {
-		List<BossDto> bossList = new ArrayList<>();
+		List<Boss> bossList = new ArrayList<>();
 		
 		bossList = bossService.selectAllBoss();
+		System.out.println(bossList.get(0).getBossImagepath());
 		model.addAttribute("bossList", bossList);
 		
 		return "/admin/boss/bossList";
@@ -90,7 +91,7 @@ public class AdminApi {
 
 	@GetMapping("/item")
 	public String adminItem(Model model) {
-		List<ItemDto> itemList = new ArrayList<>();
+		List<Item> itemList = new ArrayList<>();
 		
 		itemList = itemService.selectAllItem();
 		model.addAttribute("itemList", itemList);
@@ -106,7 +107,7 @@ public class AdminApi {
 	
 	@PostMapping("/addItem")
 	public String insertItemReq(@ModelAttribute("ItemDto") ItemDto itemDto, HttpServletRequest req,Model model) {		
-		String uploadPath = req.getSession().getServletContext().getRealPath("/").concat("resources"+"/"+"bossImage");
+		String uploadPath = req.getSession().getServletContext().getRealPath("/").concat("resources"+"/"+"itemImage");
 		String urlPath="";
 		MultipartFile file = itemDto.getItemImagepath();
 		String fileName=file.getOriginalFilename();
@@ -114,6 +115,7 @@ public class AdminApi {
 		Item item;
 		
 		if (!path.equals("")) {
+			path="resources/itemImage/"+fileName;
 				item=new Item(itemDto.getItemName(),path,itemDto.getClassification());
 				/* select 이름,난이도 => 중복 있으면 redirect admin/addbose */
 				urlPath=itemService.itemExistence(item);
@@ -127,7 +129,7 @@ public class AdminApi {
 	
 	@GetMapping("/bossAndDrop")
 	public String adminDrop(Model model,HttpServletRequest req) {
-		List<BossDto> bossList = new ArrayList<>();
+		List<Boss> bossList = new ArrayList<>();
 		
 		bossList = bossService.selectAllBoss();
 		model.addAttribute("bossList", bossList);

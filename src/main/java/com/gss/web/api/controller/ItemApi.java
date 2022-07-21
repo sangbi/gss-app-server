@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gss.web.api.dto.ItemDto;
+import com.gss.web.common.domain.Item;
 import com.gss.web.common.service.ItemService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class ItemApi {
 
 	@GetMapping("/itemList")
 	public String GetNavPage(Model model) {
-		List<ItemDto> itemList = new ArrayList<>();
+		List<Item> itemList = new ArrayList<>();
 		
 		itemList = itemService.selectAllItem();
 		model.addAttribute("itemList", itemList);

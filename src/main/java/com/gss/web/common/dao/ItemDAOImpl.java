@@ -17,7 +17,7 @@ public class ItemDAOImpl implements ItemDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ItemDto> list() {
+	public List<Item> list() {
 		return sqlSession.getMapper(ItemMapper.class).list();
 	}
 
@@ -27,12 +27,12 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public List<ItemDto> selectAllItem() {
+	public List<Item> selectAllItem() {
 		return sqlSession.getMapper(ItemMapper.class).selectAllItem();
 	}
 
 	@Override
-	public ItemDto deleteByItemName(String itemName) {
+	public Item deleteByItemName(String itemName) {
 		return sqlSession.getMapper(ItemMapper.class).deleteByItemName(itemName);
 	}
 

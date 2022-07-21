@@ -7,15 +7,15 @@ import com.gss.web.api.dto.ItemDto;
 import com.gss.web.common.domain.Item;
 
 public interface ItemService {
-	public List<ItemDto> list();
+	public List<Item> list();
 
-	public List<ItemDto> selectAllItem();
+	public List<Item> selectAllItem();
 
 	public Integer insertItem(Item item);
 
 	public int selectByItem(Map map);
 
-	public ItemDto deleteByItemName(String itemName);
+	public Item deleteByItemName(String itemName);
 
 	public String itemExistence(Item item);
 
