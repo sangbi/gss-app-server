@@ -5,20 +5,19 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.gss.web.api.dto.BossDto;
 import com.gss.web.common.domain.Boss;
 
 @Mapper
 public interface BossMapper {
 	int insertBoss(Boss boss);
 	
-	public abstract List<BossDto> list();
+	public abstract List<Boss> list();
 	
-	public abstract List<BossDto> selectAllBoss();
+	public abstract List<Boss> selectAllBoss();
 	
-	public abstract BossDto selectByBossName(String bossName);
+	public abstract Boss selectByBossName(String bossName);
 	
 	public int selectByBoss(Map map);
 	
-	public abstract BossDto deleteByBossName(String bossName);
+	public abstract Boss deleteByBossName(String bossName);
 }

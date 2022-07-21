@@ -12,15 +12,15 @@ import com.gss.web.common.domain.Item;
 public interface ItemMapper {
 	int insertItem(Item item);
 
-	public abstract List<ItemDto> list();
+	public abstract List<Item> list();
 
-	public abstract List<ItemDto> selectAllItem();
+	public abstract List<Item> selectAllItem();
 
-	public abstract ItemDto selectByItemName(String itemName);
+	public abstract Item selectByItemName(String itemName);
 
 	public int selectByItem(Map map);
 
-	public abstract ItemDto deleteByItemName(String itemName);
+	public abstract Item deleteByItemName(String itemName);
 
 	public List<ItemDto> selectSearchItemName(String itemName);
 

@@ -34,7 +34,7 @@
 		<a href=<c:url value="/admin/boss/select?=${bossList.bossName}"/>>
 			${bossList.bossName}</a></td>
 		<td>${bossList.bossGrade}</td>
-		<td><div class="select_img"><img src="/resources/bossImage/${bossList.bossImagepath}" width="50" height="50"></div></td>
+		<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
 	</tr>
 	</c:forEach>
 	</tbody>

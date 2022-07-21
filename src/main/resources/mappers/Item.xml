@@ -50,9 +50,7 @@
 			classification LIKE '%' || #{keyword} || '%'
 	</select>
 
-	<select id="selectAllItem"
-		parameterType="com.gss.web.api.dto.ItemDto"
-		resultType="com.gss.web.api.dto.ItemDto">
+	<select id="selectAllItem"	parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
 		select
 			classification,
 			itemimagepath,

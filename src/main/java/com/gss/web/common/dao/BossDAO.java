@@ -10,11 +10,11 @@ public interface BossDAO {
 
 	public  Integer insertBoss(Boss boss);
 	
-	public  List<BossDto> list();
+	public  List<Boss> list();
 	
-	public  List<BossDto> selectAllBoss();
+	public  List<Boss> selectAllBoss();
 	
 	public  int selectByBoss(Map map);
 	
-	public  BossDto deleteByBossName(String bossName);
+	public  Boss deleteByBossName(String bossName);
 }

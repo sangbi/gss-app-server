@@ -24,7 +24,7 @@
 			bossname=#{bossName} and bossgrade=#{bossGrade}
 	</select>
 	
-	<select id="selectAllBoss" parameterType="com.gss.web.api.dto.BossDto" resultType="com.gss.web.api.dto.BossDto">
+	<select id="selectAllBoss" parameterType="com.gss.web.common.domain.Boss" resultType="com.gss.web.common.domain.Boss">
 		select
 			bossname, 
 			bossimagepath,
