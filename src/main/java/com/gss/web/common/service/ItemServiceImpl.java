@@ -1,46 +1,77 @@
 package com.gss.web.common.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.stereotype.Service;
 
 import com.gss.web.api.dto.ItemDto;
 import com.gss.web.common.dao.ItemDAO;
+import com.gss.web.common.domain.Item;
 
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
 public class ItemServiceImpl implements ItemService{
 	@Autowired
-	private ItemDAO itemDAO;
+	private final ItemDAO itemDAO;
 	
-	//아이템 리스트
+	@Autowired
+	private ReloadableResourceBundleMessageSource res;
+	
 	@Override
 	public List<ItemDto> list() {
-		// TODO Auto-generated method stub
 		return itemDAO.list();
 	}
 	
-	//아이템 추가
 	@Override
-	public void insertItem(ItemDto itemDto) {
-		// TODO Auto-generated method stub
+	public Integer insertItem(Item item) {
+		return itemDAO.insertItem(item);
 	}
-
-	//해당 아이템 정보
-	@Override
-	public ItemDto selectByItemName(String itemName) {
-		// TODO Auto-generated method stub
-		return itemDAO.selectByItemName(itemName);
-	}
-
-	//해당 아이템 삭제
+	
 	@Override
 	public ItemDto deleteByItemName(String itemName) {
-		// TODO Auto-generated method stub
 		return itemDAO.deleteByItemName(itemName);
+	}
+	@Override
+	public List<ItemDto> selectAllItem() {
+		return itemDAO.selectAllItem();
 	}
 
 	@Override
-	public List<ItemDto> searchItem(ItemDto itemDto) {
-		// TODO Auto-generated method stub
-		return itemDAO.selectSearchItem(itemDto);
+	public int selectByItem(Map map) {
+		return itemDAO.selectByItem(map);
+	}
+	
+	@Override
+	public String itemExistence(Item item) {
+		String urlPath="";
+		Integer itemExistenceNum;
+		Map<String, String> map= new HashMap<String, String>();
+		
+		map.put("itemName", item.getItemName());
+		map.put("classification", item.getClassification());
+		itemExistenceNum=selectByItem(map);
+		if(itemExistenceNum.equals(0)) {
+			insertItem(item);
+			urlPath="redirect:/admin/item";
+		}else {
+			urlPath="/admin/boss/insertItem";
+		}
+		
+		return urlPath;
+	}
+	
+	@Override
+	public List<ItemDto> selectSearchItemName(String itemName){
+		return itemDAO.selectSearchItemName(itemName);
+	}
+
+	public List<ItemDto> selectSearchClassification(String classification){
+		return itemDAO.selectSearchClassification(classification);
 	}
 }

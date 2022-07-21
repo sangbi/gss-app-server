@@ -31,3 +31,10 @@ ul {
 	height:100px;
 	background-color:#343a40;
 }
+
+.div_item_list {
+	margin:auto;
+	margin-top:5%;
+	margin-bottom:5%;
+	height:500px;
+}

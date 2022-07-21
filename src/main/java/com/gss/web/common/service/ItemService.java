@@ -1,22 +1,25 @@
 package com.gss.web.common.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.gss.web.api.dto.ItemDto;
+import com.gss.web.common.domain.Item;
 
 public interface ItemService {
-	//아이템정보 리스트
-	public abstract List<ItemDto> list();
-	
-	//아이템 추가
-	public abstract void insertItem(ItemDto itemDto);
-	
-	//아이템 개인정보
-	public abstract ItemDto selectByItemName(String itemName);
-	
-	//아이템 삭제
-	public abstract ItemDto deleteByItemName(String itemName);
-	
-	//페이지 서비스
-	public abstract List<ItemDto> searchItem(ItemDto itemDto);
+	public List<ItemDto> list();
+
+	public List<ItemDto> selectAllItem();
+
+	public Integer insertItem(Item item);
+
+	public int selectByItem(Map map);
+
+	public ItemDto deleteByItemName(String itemName);
+
+	public String itemExistence(Item item);
+
+	public List<ItemDto> selectSearchItemName(String itemName);
+
+	public List<ItemDto> selectSearchClassification(String classification);
 }
