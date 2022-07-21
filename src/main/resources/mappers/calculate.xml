@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gss.web.common.mapper.CalculateMapper">
-	<select id="selectByUserNumber" parameterType="int" resultType="com.gss.web.api.dto.CalculateMainDto">
+	<select id="selectByUserNumber" parameterType="int" resultType="com.gss.web.common.domain.CalculateMain">
 		select
 			p.partyname, m.charatername
 		from 
@@ -24,5 +24,55 @@
 		on 
 			g.gssusernum = m.gssusernum 
 			and g.gssuserid  = #{userId};
+	</select>
+	
+	<select id="selectCountMember" parameterType="String" resultType="int">
+		select 
+			count(*) 
+		from 
+			partytab as p 
+			join memberofpartytab as m
+		on 
+			p.partynum = m.partynum 
+			and p.partyname = #{partyName};
+	</select>
+	
+	<select id="selectPartyLeader" parameterType="String" resultType="String">
+		select 
+			m.charatername
+		from 
+			partytab as p 
+			join memberofpartytab as m
+		on 
+			p.partynum = m.partynum 
+			and p.partyname = #{partyName} 
+			and m.partyleader = true;
+	</select>
+	
+	<select id="selectPartyMember" parameterType="String" resultType="com.gss.web.common.domain.Calculate">
+		select 
+			m.charatername 
+		from 
+			partytab as p 
+			join memberofpartytab as m
+		on 
+			p.partynum = m.partynum 
+			and p.partyname = #{partyName} 
+			and m.partyleader = false;
+	</select>
+	
+	<select id="selectBossNameAndGrade" parameterType="String" resultType="com.gss.web.common.domain.Calculate">
+		select 
+			b2.bossname, 
+			b2.bossgrade  
+		from 
+			partytab as p 
+			join bosshuntingatpartytab as b 
+		on 
+			(p.partynum = b.partynum 
+			 and p.partyname = #{partyName}) 
+			 join bosstab b2 
+		on 
+			(b.bossnum = b2.bossnum);
 	</select>
 </mapper>

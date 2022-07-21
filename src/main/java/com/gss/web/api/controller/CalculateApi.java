@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gss.web.api.dto.CalculateMainDto;
+import com.gss.web.common.domain.Calculate;
+import com.gss.web.common.domain.CalculateMain;
 import com.gss.web.common.service.CalculateService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,16 +21,35 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/calculate")
 public class CalculateApi {
 	@Autowired
-	private CalculateService calculateMainService;
+	private CalculateService calculateService;
 
 	@GetMapping("/partyList")
 	public String showMyPartyList(@RequestParam("userId") String userId, Model model) {
-		int userNum = calculateMainService.selectByUserId(userId);
+		int userNum = calculateService.selectByUserId(userId);
 
-		List<CalculateMainDto> userList = new ArrayList<CalculateMainDto>();
-		userList = calculateMainService.selectByUserNumber(userNum);
+		List<CalculateMain> userList = new ArrayList<CalculateMain>();
+		userList = calculateService.selectByUserNumber(userNum);
 		model.addAttribute("userList", userList);
 
 		return "calculate/calculateMain";
+	}
+	
+	@GetMapping("/calculateList")
+	public String showCalculateList(@RequestParam("partyName") String partyName, Model model) {
+		List<Calculate> calcMember = new ArrayList<Calculate>();
+		List<Calculate> calcBoss = new ArrayList<Calculate>();
+		
+		int count = calculateService.selectCountMember(partyName);
+		String partyLeader = calculateService.selectPartyLeader(partyName);
+		calcMember = calculateService.selectPartyMember(partyName);
+		calcBoss = calculateService.selectBossNameAndGrade(partyName);
+		
+		model.addAttribute("partyName", partyName);
+		model.addAttribute("count", count);
+		model.addAttribute("partyLeader", partyLeader);
+		model.addAttribute("calcMember", calcMember);
+		model.addAttribute("calcBoss", calcBoss);
+		
+		return "calculate/calculate";
 	}
 }
