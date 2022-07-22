@@ -18,16 +18,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<title>GSS</title>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/itemAdd.js"></script>
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 	<div class="div_main_mid">	
-		<table class="table table-striped table-hover" style="table-layout: fixed">
+		<form onsubmit="return priceList('${partyName}')" method="post" action="/calculate/calculateList?partyName=${partyName}">
+		<table class="table" id="modalItem" style="table-layout: fixed">
 			<ul class="list-group list-group-flush">
+				<thead class="table-dark">
 				<tr>
 					<th>파티이름</th><th>인원</th>
 				</tr>
+				</thead>
 				<tr>
 					<td>
 						<li class="list-group-item">${partyName}</li>
@@ -36,9 +41,11 @@
 						<li class="list-group-item">${count} 명</li>
 					</td>
 				</tr>
+				<thead class="table-dark">
 				<tr>
 					<th>보스</th><th>난이도</th>
 				</tr>
+				</thead>
 				<tr>
 					<td>
 						<c:forEach items="${calcBoss}" var="calcBoss" varStatus="loop">
@@ -51,17 +58,21 @@
 						</c:forEach>
 					</td>	
 				</tr>
+				<thead class="table-dark">
 				<tr>
 					<th colspan="2">파티장</th>
 				</tr>
+				</thead>
 				<tr>
 					<td colspan="2">
 						<li class="list-group-item"> ${partyLeader}</li>
 					</td>
 				</tr>
+				<thead class="table-dark">
 				<tr>
 					<th colspan="2">파티원</th>
 				</tr>
+				</thead>
 				<tr>
 					<td colspan="2">
 						<c:forEach items="${calcMember}" var="calcMember" varStatus="loop">
@@ -69,17 +80,39 @@
 						</c:forEach>
 					</td>
 				</tr>
+				<thead class="table-dark">
 				<tr>
 					<th>아이템</th>
 					<th>가격</th>
 				</tr>
+				</thead>
+				<tr>
+					<td>
+						<c:forEach items="${pgiList}" var="pgiList" varStatus="loop">
+							<li class="list-group-item list-group-item-action">
+								${pgiList.itemName}
+							</li>
+						</c:forEach>
+					</td>
+					<td>
+						<c:forEach items="${pgiList}" var="pgiList" varStatus="loop">
+							<li class="list-group-item list-group-item-action">
+								${pgiList.itemSalePrice}
+							</li>
+						</c:forEach>
+					</td>
+				</tr>
 				<tr>
 					<td colspan="2">
-						<li class="list-group-item btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">+</li>
+						<li class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+							<img src="${pageContext.request.contextPath}/resources/tagImage/plus.png" width="20px" height="20px">
+						</li>
 					</td>
 				</tr>
 			</ul>
 		</table>
+		<input type="submit" class="btn btn-dark" value="저장하기">
+		</form>
 	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -90,11 +123,31 @@
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-	      
+		      <form>
+		      	<div class="input-group mb-3">
+  					<input type="text" class="form-control" placeholder="검색" aria-label="Recipient's username" aria-describedby="button-addon2">
+  					<button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+				</div>
+		      	<table class="table table-hover" style="table-layout: fixed">
+		      		<thead class="table-light">
+			      		<tr>
+			      			<th>아이템 이름</th>
+			      			<th>분류</th>
+			      		</tr>
+		      		</thead>
+		      		<tbody>
+			      		<c:forEach items="${itemList}" var="itemList" varStatus="loop">
+				      		<tr onclick="addModalItem(this)" data-bs-dismiss="modal">
+				      			<td><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="20px" height="20px">${itemList.itemName}</td>
+				      			<td>${itemList.classification}</td>
+				      		</tr>
+			      		</c:forEach>
+		      		</tbody>
+		      	</table>
+		      </form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">INSERT</button>
 	      </div>
 	    </div>
 	  </div>
