@@ -31,12 +31,17 @@ public class BossDAOImpl implements BossDAO{
 	}
 
 	@Override
-	public Boss deleteByBossName(String bossName) {
-		return sqlSession.getMapper(BossMapper.class).deleteByBossName(bossName);
+	public int deleteByBossName(Map map) {
+		return sqlSession.getMapper(BossMapper.class).deleteByBossName(map);
 	}
 
 	@Override
 	public int selectByBoss(Map map) {
 		return sqlSession.getMapper(BossMapper.class).selectByBoss(map);
+	}
+	
+	@Override
+	public  Boss selectByBossNameAndGrade(Map map) {
+		return sqlSession.getMapper(BossMapper.class).selectByBossNameAndGrade(map);
 	}
 }

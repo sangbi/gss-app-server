@@ -6,39 +6,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css" rel="stylesheet"type="text/css">
 	<link href="${pageContext.request.contextPath}/resources/assets/css/mainPage.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.js"></script>
-<title>아이템정보등록 아이템리스트</title>
+	<title>보스</title>
 </head>
 <body>
-<h1>아이템정보 등록</h1>
-<div class="div_item_list">
+	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+	<h1>아이템</h1>
+	<div class="div_boss_list">		
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
-					<th>아이템 이름</th>
-					<th>분류</th>
-					<th>아이템 이미지</th>
+					<th>보스 이름</th>
+					<th>난이도</th>
+					<th>보스 이미지</th>
 				</tr>
 			</thead>
 				<tbody>
-				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
+				<c:forEach var="bossList" items="${bossList}" varStatus="loop">
 				<tr>
-					<td><a href=<c:url value="/admin/selectItem?itemName=${itemList.itemName}&classification=${itemList.classification}"/>>
-						${itemList.itemName}</a></td>
-					<td>${itemList.classification}</td>
-					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
+					<td>${bossList.bossName}</td>
+					<td>${bossList.bossGrade}</td>
+					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
 				</tr>
 				</c:forEach>
 			</tbody>
+	</div>
 		</table>
-	<a href="/admin/main"><input type="button" value="목록"></a>
-	<a href="/admin/addItem"><input type="button" value="아이템정보 추가"></a>
-</div>
+	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

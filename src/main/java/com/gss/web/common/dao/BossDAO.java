@@ -3,7 +3,6 @@ package com.gss.web.common.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.gss.web.api.dto.BossDto;
 import com.gss.web.common.domain.Boss;
 
 public interface BossDAO {
@@ -16,5 +15,7 @@ public interface BossDAO {
 	
 	public  int selectByBoss(Map map);
 	
-	public  Boss deleteByBossName(String bossName);
+	public  int deleteByBossName(Map map);
+	
+	public  Boss selectByBossNameAndGrade(Map map);
 }

@@ -1,4 +1,4 @@
-package com.gss.web.common.dao;
+	package com.gss.web.common.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gss.web.api.dto.ItemDto;
 import com.gss.web.common.domain.Item;
 import com.gss.web.common.mapper.ItemMapper;
 
@@ -42,12 +41,17 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public List<ItemDto> selectSearchItemName(String itemName) {
+	public List<Item> selectSearchItemName(String itemName) {
 		return sqlSession.getMapper(ItemMapper.class).selectSearchItemName(itemName);
 	}
 
 	@Override
-	public List<ItemDto> selectSearchClassification(String classification) {
+	public List<Item> selectSearchClassification(String classification) {
 		return sqlSession.getMapper(ItemMapper.class).selectSearchClassification(classification);
+	}
+	
+	@Override
+	public Item selectByItemNameAndClassification(Map map) {
+		return sqlSession.getMapper(ItemMapper.class).selectByItemNameAndClassification(map);
 	}
 }

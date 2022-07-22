@@ -26,8 +26,7 @@
 			classification=#{classification}
 	</select>
 
-	<select id="selectSearchItemName" parameterType="String"
-		resultType="com.gss.web.api.dto.ItemDto">
+	<select id="selectSearchItemName" parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
 		select 
 			classification,
 			itemimagepath,
@@ -38,8 +37,7 @@
 			itemname LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 
-	<select id="selectSearchClassification" parameterType="String"
-		resultType="com.gss.web.api.dto.ItemDto">
+	<select id="selectSearchClassification" parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
 		select
 			classification,
 			itemimagepath,
@@ -57,5 +55,17 @@
 			itemname
 		from 
 			itemtab
+	</select>
+	
+	<select id="selectByItemNameAndClassification" parameterType="Map" resultType="com.gss.web.common.domain.Item">
+		select
+			classification,
+			itemimagepath,
+			itemname
+		from
+			itemtab
+		where 
+			classification = #{classification} and
+			itemname = #{itemName}
 	</select>
 </mapper>

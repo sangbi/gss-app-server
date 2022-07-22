@@ -3,7 +3,6 @@ package com.gss.web.common.service;
 import java.util.List;
 import java.util.Map;
 
-import com.gss.web.api.dto.BossDto;
 import com.gss.web.common.domain.Boss;
 
 public interface BossService {
@@ -15,7 +14,9 @@ public interface BossService {
 	
 	public  int selectByBoss(Map map);
 	
-	public  Boss deleteByBossName(String bossName);
+	public  int deleteByBossName(Map map);
 	
 	public String bossExistence(Boss boss);
+
+	public Boss selectByBossNameAndGrade(Map map);
 }

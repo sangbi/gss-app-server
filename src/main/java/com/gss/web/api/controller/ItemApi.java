@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gss.web.api.dto.ItemDto;
 import com.gss.web.common.domain.Item;
 import com.gss.web.common.service.ItemService;
 
@@ -37,7 +36,7 @@ public class ItemApi {
 	@PostMapping("/itemList")
 	private String getSearchList(@RequestParam("type") String type,
 								 @RequestParam("keyword") String keyword, Model model) throws Exception{
-		List<ItemDto> itemList = new ArrayList<>();
+		List<Item> itemList = new ArrayList<>();
 		
 		if (type.equals("itemname")) {
 			itemList = itemService.selectSearchItemName(keyword);
@@ -49,5 +48,4 @@ public class ItemApi {
 		
 		return "item/gssItem";
 	}	
-
 }

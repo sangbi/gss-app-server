@@ -18,11 +18,11 @@
 </head>
 <body>
 		<table 
-		width="50%" 
+		width="30%"
 		height=200
 		border="1">
 		<tr>
-		<td rowspan="3"><div class="select_img"><img style=width:150px; id="preview-image"/></div></td>
+		<td rowspan="3"><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="100%" height="100%" /></div></td>
 		
 		<tr>
 			<th>보스이름</th>
@@ -34,5 +34,6 @@
 		</tr>
 		</table>
 		<a href="/admin/boss"><input type="button" value="목록"></a>
+		<a href="/admin/deleteBoss?bossName=${bossName}&bossGrade=${bossGrade}"><input type="button" value="삭제"></a>
 </body>
 </html>

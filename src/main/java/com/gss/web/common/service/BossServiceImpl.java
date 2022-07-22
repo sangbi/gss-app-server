@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
 
-import com.gss.web.api.dto.BossDto;
 import com.gss.web.common.dao.BossDAO;
 import com.gss.web.common.domain.Boss;
 
@@ -34,9 +33,10 @@ public class BossServiceImpl implements BossService{
 	}
 	
 	@Override
-	public Boss deleteByBossName(String bossName) {
-		return bossDAO.deleteByBossName(bossName);
+	public int deleteByBossName(Map map) {
+		return bossDAO.deleteByBossName(map);
 	}
+		
 	@Override
 	public List<Boss> selectAllBoss() {
 		return bossDAO.selectAllBoss();
@@ -64,5 +64,10 @@ public class BossServiceImpl implements BossService{
 		}
 		
 		return urlPath;
+	}
+	
+	@Override
+	public Boss selectByBossNameAndGrade(Map map) {
+		return bossDAO.selectByBossNameAndGrade(map);
 	}
 }
