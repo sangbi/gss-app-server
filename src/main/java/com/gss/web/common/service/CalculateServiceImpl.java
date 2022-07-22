@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gss.web.api.dto.PartyGetItemDto;
 import com.gss.web.common.dao.CalculateDao;
 import com.gss.web.common.domain.Calculate;
 import com.gss.web.common.domain.CalculateMain;
+import com.gss.web.common.domain.PartyGetItem;
 
 @Service
 public class CalculateServiceImpl implements CalculateService {
@@ -42,5 +44,15 @@ public class CalculateServiceImpl implements CalculateService {
 	@Override
 	public List<Calculate> selectBossNameAndGrade(String partyName) {
 		return calculateDao.selectBossNameAndGrade(partyName);
+	}
+	
+	@Override
+	public List<PartyGetItem> selectItemNameAndPrice(String partyName) {
+		return calculateDao.selectItemNameAndPrice(partyName);
+	}
+	
+	@Override
+	public int insertItemNameAndPrice(PartyGetItemDto pgiDto) {
+		return calculateDao.insertItemNameAndPrice(pgiDto);
 	}
 }

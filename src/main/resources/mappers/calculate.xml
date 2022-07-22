@@ -75,4 +75,46 @@
 		on 
 			(b.bossnum = b2.bossnum);
 	</select>
+	
+	<select id="selectItemNameAndPrice" parameterType="String" resultType="com.gss.web.common.domain.PartyGetItem">
+		select 
+			p.itemsaleprice, 
+			i.itemname
+		from 
+			partygetitemtab as p 
+			join partytab p2 
+			on (p.partynum = p2.partynum and p2.partyname = #{partyName})
+			join itemtab i 
+		on 
+			p.itemnum = i.itemnum;
+	</select>
+	
+	<insert id="insertItemNameAndPrice" parameterType="com.gss.web.api.dto.PartyGetItemDto">
+		INSERT INTO 
+			partygetitemtab
+			(partynum, 
+			 resultdate, 
+			 itemsaleprice, 
+			 resultstat, 
+			 itemnum)
+		VALUES(
+			(SELECT 
+					partynum 
+			FROM 
+					partytab 
+			where 
+			partyname = #{partyName}
+			), 
+			now(), 
+			#{itemPrice}, 
+			false, 
+			(SELECT 
+				itemnum 
+			from 
+				itemtab 
+			where 
+				itemname = #{itemName}
+			)
+		);
+	</insert>
 </mapper>
