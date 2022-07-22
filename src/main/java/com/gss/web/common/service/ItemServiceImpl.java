@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
 
-import com.gss.web.api.dto.ItemDto;
 import com.gss.web.common.dao.ItemDAO;
 import com.gss.web.common.domain.Item;
 
@@ -67,11 +66,17 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public List<ItemDto> selectSearchItemName(String itemName){
+	public List<Item> selectSearchItemName(String itemName){
 		return itemDAO.selectSearchItemName(itemName);
 	}
-
-	public List<ItemDto> selectSearchClassification(String classification){
+	
+	@Override
+	public List<Item> selectSearchClassification(String classification){
 		return itemDAO.selectSearchClassification(classification);
+	}
+	
+	@Override
+	public Item selectByItemNameAndClassification(Map map) {
+		return itemDAO.selectByItemNameAndClassification(map);
 	}
 }

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +18,8 @@
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 	<h1>아이템</h1>
-	<div class="div_item_list">
-		<div>
+	<div class="div_item_list">		
+	<div>
 			<form name="search-form" method="post" action="/item/itemList">
 				<select name="type">
 					<option selected value="">검색 내용 선택</option>
@@ -40,14 +41,15 @@
 				<tbody>
 				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
 				<tr>
-					<td>${itemList.itemName}</td>
+					<td><a href=<c:url value="/admin/selectItem?itemName=${itemList.itemName}&classification=${itemList.classification}"/>>
+						${itemList.itemName}</a></td>
 					<td>${itemList.classification}</td>
-					<td><img src="resources/itemImage/${itemList.itemImagepath}" width="50" height="50"></td>
+					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
 				</tr>
 				</c:forEach>
 			</tbody>
-		</table>
 	</div>
+		</table>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

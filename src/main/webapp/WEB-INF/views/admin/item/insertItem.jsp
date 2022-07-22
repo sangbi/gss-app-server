@@ -25,7 +25,13 @@
 		</tr>
 		<tr>
 			<th>분류</th>
-			<td><input type="text" name="classification"></td>
+			<td><select name="classification">
+					<option value="">분류 선택</option>
+					<option value="장비">장비</option>
+					<option value="소비">소비</option>
+					<option value="기타">기타</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<th>아이템 이미지</th>
@@ -33,6 +39,6 @@
 		</tr>
 		</table>
 		<input type="submit" value="등록">
-	</form:form>
+</form:form>
 </body>
 </html>

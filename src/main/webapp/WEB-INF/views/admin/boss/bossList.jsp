@@ -19,28 +19,28 @@
 <body>
 <h1>보스정보 등록</h1>
 <div class="div_item_list">
-<table class="table">
-			<thead class="table-dark">
-	<tr>
-		<th>보스 이름</th>
-		<th>난이도</th>
-		<th>보스 이미지</th>
-	</tr>
-	</thead>
-	<tbody>
-	<c:forEach var="bossList" items="${bossList}" varStatus="loop">
-	<tr>
-		<td>
-		<a href=<c:url value="/admin/boss/select?=${bossList.bossName}"/>>
-			${bossList.bossName}</a></td>
-		<td>${bossList.bossGrade}</td>
-		<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
-	</tr>
-	</c:forEach>
-	</tbody>
-</table>
-<a href="/admin/main"><input type="button" value="목록"></a>
-<a href="/admin/addBoss"><input type="button" value="보스정보 추가"></a>
+	<table class="table">
+				<thead class="table-dark">
+		<tr>
+			<th>보스 이름</th>
+			<th>난이도</th>
+			<th>보스 이미지</th>
+		</tr>
+		</thead>
+		<tbody>
+		<c:forEach var="bossList" items="${bossList}" varStatus="loop">
+		<tr>
+			<td>
+			<a href=<c:url value="/admin/selectBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
+				${bossList.bossName}</a></td>
+			<td>${bossList.bossGrade}</td>
+			<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
+		</tr>
+		</c:forEach>
+		</tbody>
+	</table>
+	<a href="/admin/main"><input type="button" value="목록"></a>
+	<a href="/admin/addBoss"><input type="button" value="보스정보 추가"></a>
 </div>
 </body>
 </html>

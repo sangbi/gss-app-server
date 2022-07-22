@@ -33,12 +33,22 @@
 			bosstab
 	</select>
 	
-	<delete id="deleteByBoss" parameterType="com.gss.web.common.domain.Boss">
+	<delete id="deleteByBossName" parameterType="Map">
 		delete
-			count(*)
 		from 
 			bosstab
 		where 
-			bossnum=#{bossNum}
+			bossname=#{bossName} and bossgrade = #{bossGrade}
 	</delete>
+	
+	<select id="selectByBossNameAndGrade" parameterType="Map" resultType="com.gss.web.common.domain.Boss">
+		select
+			bossname, 
+			bossimagepath,
+			bossgrade
+		from
+			bosstab
+		where 
+			bossname=#{bossName} and bossgrade = #{bossGrade}
+	</select>
 </mapper>

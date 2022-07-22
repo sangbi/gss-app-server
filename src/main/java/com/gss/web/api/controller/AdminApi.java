@@ -1,7 +1,9 @@
 package com.gss.web.api.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gss.web.api.dto.BossDto;
@@ -47,7 +50,6 @@ public class AdminApi {
 		List<Boss> bossList = new ArrayList<>();
 		
 		bossList = bossService.selectAllBoss();
-		System.out.println(bossList.get(0).getBossImagepath());
 		model.addAttribute("bossList", bossList);
 		
 		return "/admin/boss/bossList";
@@ -79,16 +81,31 @@ public class AdminApi {
 		return urlPath;
 	}
 
-	@GetMapping("/boss/select")
-	public String readBoss( Model model, HttpServletRequest req) {
-		BossDto bossDto = new BossDto();
+	@GetMapping("/selectBoss")
+	public String readBoss( Model model, @RequestParam("bossName") String bossName, @RequestParam("bossGrade") String bossGrade) {
+		Map<String, String> map= new HashMap<String, String>();
+		map.put("bossName", bossName);
+		map.put("bossGrade", bossGrade);
 		
-		bossDto.setBossName(req.getParameter("bossName"));
-		model.addAttribute("bossDto",bossService);
+		Boss boss = bossService.selectByBossNameAndGrade(map);
+		model.addAttribute("bossName", bossName);
+		model.addAttribute("bossGrade", bossGrade);
+		model.addAttribute("bossList",boss);
 		
 		return "/admin/boss/selectByBoss";
 	}
 
+	@GetMapping("/deleteBoss")
+	public String deleteByBoss(Model model,@RequestParam("bossName") String bossName,
+							@RequestParam("bossGrade") String bossGrade) {
+		Map<String, String> map= new HashMap<String, String>();
+		map.put("bossName", bossName);
+		map.put("bossGrade", bossGrade);
+		int result = bossService.deleteByBossName(map);
+		
+		return "redirect:/admin/boss";
+	}
+	
 	@GetMapping("/item")
 	public String adminItem(Model model) {
 		List<Item> itemList = new ArrayList<>();
@@ -117,13 +134,12 @@ public class AdminApi {
 		if (!path.equals("")) {
 			path="resources/itemImage/"+fileName;
 				item=new Item(itemDto.getItemName(),path,itemDto.getClassification());
-				/* select 이름,난이도 => 중복 있으면 redirect admin/addbose */
 				urlPath=itemService.itemExistence(item);
 				itemService.itemExistence(item);
-			   System.out.println("1111111111111111111"+urlPath);
 			   } else {
 				 urlPath = "/admin/item/itemList";
 			   }		
+		
 		return urlPath;
 	}
 	
@@ -134,16 +150,19 @@ public class AdminApi {
 		bossList = bossService.selectAllBoss();
 		model.addAttribute("bossList", bossList);
 		
-		return "/admin/bossAndDrop/dropBossList";
+		return "/admin/bossForDrop/dropBossList";
 	}
 	
-		@GetMapping("/item/select")
-		public String readItem( Model model, HttpServletRequest req) {
-			ItemDto itemDto = new ItemDto();
-			
-			itemDto.setItemName(req.getParameter("itemName"));
-			model.addAttribute("itemDto",itemService);
-			
-			return "/admin/item/selectByItem";
-		}
+	@GetMapping("/selectItem")
+	public String readItem(Model model,HttpServletRequest req, @RequestParam("itemName") String itemName,
+							@RequestParam("classification") String classification) {
+		Map<String, String> map= new HashMap<String, String>();
+		
+		map.put(""+"classification", classification);
+		map.put(""+"itemName", itemName);
+		Item item= itemService.selectByItemNameAndClassification(map);
+		model.addAttribute("itemList"+"",item);
+		
+		return "/admin/item/selectByItem";
+	}
 }

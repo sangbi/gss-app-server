@@ -34,7 +34,7 @@
 					<a class="nav-link" href="#">내정보</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">보스</a>
+					<a class="nav-link" href="/boss/bossList">보스</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/item/itemList">아이템</a>

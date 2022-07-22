@@ -15,9 +15,9 @@ public interface BossMapper {
 	
 	public abstract List<Boss> selectAllBoss();
 	
-	public abstract Boss selectByBossName(String bossName);
-	
 	public int selectByBoss(Map map);
 	
-	public abstract Boss deleteByBossName(String bossName);
+	public int deleteByBossName(Map map);
+	
+	public abstract Boss selectByBossNameAndGrade(Map map);
 }

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.gss.web.api.dto.ItemDto;
 import com.gss.web.common.domain.Item;
 
 @Mapper
@@ -22,7 +21,9 @@ public interface ItemMapper {
 
 	public abstract Item deleteByItemName(String itemName);
 
-	public List<ItemDto> selectSearchItemName(String itemName);
+	public List<Item> selectSearchItemName(String itemName);
 
-	public List<ItemDto> selectSearchClassification(String classification);
+	public List<Item> selectSearchClassification(String classification);
+	
+	public Item selectByItemNameAndClassification(Map map);
 }

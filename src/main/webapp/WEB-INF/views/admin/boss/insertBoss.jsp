@@ -31,7 +31,13 @@
 		</tr>
 		<tr>
 			<th>난이도</th>
-			<td><input type="text" name="bossGrade"></td>
+			<td><select name="bossGrade">
+					<option value="">난이도 선택</option>
+					<option value="카오스">카오스</option>
+					<option value="하드">하드</option>
+					<option value="노멀">노멀</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<th>보스 이미지</th>

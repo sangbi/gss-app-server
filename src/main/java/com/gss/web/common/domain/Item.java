@@ -12,6 +12,9 @@ public class Item {
 	private String classification;	
 	private String itemImagepath;	
 	
+	private String type;
+	private String keyword;
+	
 	public Item(String itemName,String itemImagepath,String classification) {
 		this.itemName=itemName;
 		this.itemImagepath=itemImagepath;
