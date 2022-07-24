@@ -1,11 +1,15 @@
 package com.gss.web.common.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gss.web.common.domain.Member;
 import com.gss.web.common.mapper.MemberMapper;
+import com.gss.web.common.mapper.UserSEQMapper;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -35,5 +39,10 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public Member findByID(String userid) {
 		return sqlSession.getMapper(MemberMapper.class).findByID(userid);
+	}
+
+	@Override
+	public int selectLastUserSEQ() {
+		return sqlSession.getMapper(UserSEQMapper.class).selectLastUserSEQ();
 	}
 }

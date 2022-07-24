@@ -1,5 +1,8 @@
 package com.gss.web.common.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gss.web.common.domain.Member;
@@ -15,4 +18,13 @@ public interface MemberMapper {
 	Member findByEmail(String email);
 	
 	Member findByID(String userid);
+	
+	List<Map<String, Object>> getMenu(Member member);
+	
+	void insertLoginHist(Map<String, Object> param);
+
+	List<Map<String, Object>> getAccountAuth(Member member);
+	
+	
+	
 }

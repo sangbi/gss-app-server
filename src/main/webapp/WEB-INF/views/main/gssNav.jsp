@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -46,16 +47,25 @@
 					<a class="nav-link" href="/calculate/partyList?userId=ㅁ">정산</a>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-0" 
-						type="submit" 
-						onclick="loction.href='#'">Sign Up
-				</button>
+			<sec:authorize access="!isAuthenticated()">
+				<form class="form-inline my-2 my-lg-0">
+					<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-0" 
+							type="submit" 
+							onclick="loction.href='#'">Sign Up
+					</button>
+					<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-0"
+							type="submit"
+							onclick="loction.href='/member/login'">Login
+					</button>
+				</form>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.username"/>님 어서오세요.
 				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-0"
-						type="submit"
-						onclick="loction.href='/member/login'">Login
-				</button>
-			</form>
+							type="submit"
+							onclick="loction.href='/member/logout'">Logout
+					</button>
+			</sec:authorize>
 		</div>
 	</nav>
 </body>

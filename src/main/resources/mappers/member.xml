@@ -9,13 +9,15 @@
 			email, 
 			userpassword, 
 			userphone,
-			privilge
+			privilge,
+			username
 		) values(
-			#{gssuserid},
+			#{gssuserId},
 			#{email},
-			#{userpassword},
-			#{userphone},
-			#{privilge}
+			#{userPassword},
+			#{userPhone},
+			#{privilge},
+			#{userName}
 		)
 	</insert>
 	
@@ -35,7 +37,8 @@
 			email, 
 			userpassword, 
 			userphone,
-			privilge
+			privilge,
+			username
 		from gssusertab
 		where email = #{email} 
 	</select>
@@ -45,8 +48,9 @@
 			email, 
 			userpassword, 
 			userphone,
-			privilge
+			privilge,
+			username
 		from gssusertab
-		where gssuserid= #{userid} 
+		where gssuserid= #{userId} 
 	</select>
 </mapper>
