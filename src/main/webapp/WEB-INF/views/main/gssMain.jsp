@@ -35,7 +35,7 @@
 	</div>
 	<div class="div_main_botnav">
 		<nav aria-label="Page navigation example">
-			<ul class="pagination">
+			<ul class="pagination container-fluid justify-content-center">
 				<c:choose>
 					<c:when test="${page > 1}">
 						<c:choose>
@@ -56,7 +56,7 @@
 				      	</c:choose>
 				      	<li class="page-item">
 							<a class="page-link" href="/main/home/page=${page-1}" aria-label="Previous">
-							    <span aria-hidden="true">&laquo;</span>
+							    <span aria-hidden="true">&lt;</span>
 							</a>
 						</li>
 			      	</c:when>
@@ -68,7 +68,7 @@
 			      		</li>
 			      		<li class="page-item">
 							<a class="page-link" href="#" aria-label="Previous">
-					        	<span aria-hidden="true">&laquo;</span>
+					        	<span aria-hidden="true">&lt;</span>
 					      	</a>
 			      		</li>
 			      	</c:otherwise>
@@ -97,14 +97,14 @@
 					<c:when test="${pageCount != 1}">
 						<li class="page-item">
 							<a class="page-link" href="/main/home/page=${page+1}" aria-label="Next">
-			        			<span aria-hidden="true">&raquo;</span>
+			        			<span aria-hidden="true">&gt;</span>
 			      			</a>
 			      		</li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item">
 							<a class="page-link" href="/main/home/page=2" aria-label="Next">
-			        			<span aria-hidden="true">&raquo;</span>
+			        			<span aria-hidden="true">&gt;</span>
 			      			</a>
 			      		</li>
 					</c:otherwise>

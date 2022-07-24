@@ -17,7 +17,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">GSS</a>
+		<a class="navbar-brand" href="/main/home">GSS</a>
 		<button class="navbar-toggler" type="button"
 				data-toggle="collapse"
 				data-target="#navbarTogglerDemo02"
@@ -29,22 +29,22 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="/main/home">Home<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">내정보</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">보스</a>
+					<a class="nav-link" href="/boss/bossList">보스</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/main/nav/item">아이템</a>
+					<a class="nav-link" href="/item/itemList">아이템</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">파티</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">정산</a>
+					<a class="nav-link" href="/calculate/partyList?userId=ㅁ">정산</a>
 				</li>
 			</ul>
 			<sec:authorize access="!isAuthenticated()">

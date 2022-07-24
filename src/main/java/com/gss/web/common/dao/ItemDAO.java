@@ -1,24 +1,25 @@
 package com.gss.web.common.dao;
 
 import java.util.List;
+import java.util.Map;
 
-import com.gss.web.api.dto.ItemDto;
+import com.gss.web.common.domain.Item;
 
 public interface ItemDAO {
-	public abstract List<ItemDto> list();
+
+	public  Integer insertItem(Item item);
+		
+	public  List<Item> list();
+		
+	public  List<Item> selectAllItem();
+		
+	public  int selectByItem(Map map);
+		
+	public  Item deleteByItemName(String itemName);
+		
+	public List<Item> selectSearchItemName(String itemName);
 	
-	//아이템 추가
-	public abstract int insertItem(ItemDto itemDto);
+	public List<Item> selectSearchClassification(String classification);
 	
-	//아이템 리스트
-	public abstract List<ItemDto> selectAllItem();
-	
-	//해당 아이템 정보
-	public abstract ItemDto selectByItemName(String itemName);
-	
-	//해당 아이템 삭제
-	public abstract ItemDto deleteByItemName(String itemName);
-	
-	//검색
-	public abstract List<ItemDto> selectSearchItem(ItemDto itemDto);
+	public Item selectByItemNameAndClassification(Map map);
 }

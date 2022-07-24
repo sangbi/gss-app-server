@@ -3,9 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gss.web.common.mapper.ItemMapper">
-	<insert id="insertItem" parameterType="com.gss.web.common.domain.Item">
-		INSERT INTO itemtab ( 
-			classification, 
+	<insert id="insertItem"
+		parameterType="com.gss.web.common.domain.Item">
+		INSERT INTO itemtab (
+			classification,
 			itemimagepath,
 			itemname
 		) values(
@@ -14,28 +15,57 @@
 			#{itemName}
 		)
 	</insert>
-	<select id="selectByItem" parameterType="String" resultType="com.gss.web.common.mapper.ItemMapper">
+
+	<select id="selectByItem" parameterType="Map" resultType="int">
 		select
-			itemnum,
+			count(*)
+		from 
+			itemtab
+		where 
+			itemname=#{itemName} and
+			classification=#{classification}
+	</select>
+
+	<select id="selectSearchItemName" parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
+		select 
 			classification,
 			itemimagepath,
 			itemname
-		from itemtab
-		where itemname=#{itemName}
+		from 
+			itemtab
+		where 
+			itemname LIKE CONCAT('%', #{keyword}, '%')
 	</select>
-	<select id="selectSearchItem" parameterType="com.gss.web.api.dto.ItemDto" resultType="com.gss.web.api.dto.ItemDto">
+
+	<select id="selectSearchClassification" parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
 		select
 			classification,
+			itemimagepath,
 			itemname
-		from itemtab
-		where delete_yn="N"
-		<choose>
-			<when test="type !=null and type.equals('classification')">
-			and classification LIKE CONCAT('%', #{keyword}, '%')
-			</when>
-			<when test="itemname !=null and type.equals('itemname')">
-			and itemname LIKE CONCAT('%', #{keyword}, '%')
-			</when>
-		</choose>
+		from 
+			itemtab
+		where 
+			classification LIKE '%' || #{keyword} || '%'
+	</select>
+
+	<select id="selectAllItem"	parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
+		select
+			classification,
+			itemimagepath,
+			itemname
+		from 
+			itemtab
+	</select>
+	
+	<select id="selectByItemNameAndClassification" parameterType="Map" resultType="com.gss.web.common.domain.Item">
+		select
+			classification,
+			itemimagepath,
+			itemname
+		from
+			itemtab
+		where 
+			classification = #{classification} and
+			itemname = #{itemName}
 	</select>
 </mapper>
