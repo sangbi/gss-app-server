@@ -1,5 +1,8 @@
 package com.gss.web.common.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.gss.web.common.domain.Member;
 
 public interface MemberDAO {
@@ -12,4 +15,6 @@ public interface MemberDAO {
 	boolean checkEmail(String email);
 	
 	boolean checkID(String userID);
+	
+	int selectLastUserSEQ();
 }

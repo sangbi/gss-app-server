@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -27,7 +28,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int joinUp(MemberCreateDto dto) {
-		Member member = new Member(dto.getUserid(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber());
+		Member member = new Member(dto.getUserid(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber(),dto.getName());
+		System.out.println(member.getGssuserId());
+		System.out.println(member.getUserName());
 		int result;
 		if (memberDAO.checkEmail(dto.getEmail()) && memberDAO.checkID(dto.getUserid())) {
 			throw new IllegalStateException();
@@ -36,11 +39,11 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
- 
+	
 	@Override
 	public Member findByEmail(String email) {
 		Member member = memberDAO.findByEmail(email);
-		return member;
+		return  member;
 	}
 
 	@Override
@@ -51,6 +54,17 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean checkID(String userid) {
 		return memberDAO.checkID(userid);
+	}
+
+	@Override
+	public int selectLastUserSEQ() {
+		return memberDAO.selectLastUserSEQ();
+	}
+	
+	@Override
+	public Member findByID(String userid) {
+		Member member=memberDAO.findByID(userid);
+		return member; 
 	}
 	
 	public Map<String, String> validateNullandEmptyCheck(MemberCreateDto MCRdto){
@@ -79,6 +93,10 @@ public class MemberServiceImpl implements MemberService {
 		if(!MCRdto.getPassword().equals(MCRdto.getConfirmPassword())) {
 			String validKeyName ="valid_confirmPasswordNot";
 			validatorResult.put(validKeyName, res.getMessage("Notequal.passwordtoconfirm", null, null));
+		}
+		if(MCRdto.getName().isBlank()){
+			String validKeyName ="valid_name";
+			validatorResult.put(validKeyName, res.getMessage("Blank.name", null, null));
 		}
 		
 		return validatorResult;

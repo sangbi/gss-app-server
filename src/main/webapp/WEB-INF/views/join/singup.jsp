@@ -31,6 +31,15 @@
 			<label>${valid_email}</label>
 		</c:if>
 		<br>
+		<div>
+			<label>이름</label>
+		</div>
+		<form:input path="name" type="text" />
+		<br>
+		<c:if test="${not empty valid_name}">
+			<label>${valid_name}</label>
+		</c:if>
+		<br>
 		<label>password</label>
 		<div>
 			<form:input path="password" type="password" />

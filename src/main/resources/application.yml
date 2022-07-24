@@ -30,3 +30,9 @@ mybatis:
     
 spring.mvc.view.prefix: /WEB-INF/views/
 spring.mvc.view.suffix: .jsp
+
+#security:
+#  oauth2:
+#    client:
+#      registration:
+        

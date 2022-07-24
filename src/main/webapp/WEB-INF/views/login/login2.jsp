@@ -21,7 +21,7 @@
 		<form:errors />
 		<p>
 			<label> <spring:message code="username" /><br> <form:input
-					path="userid" /> <form:errors path="userid" />
+					path="username" /> <form:errors path="username" />
 			</label>
 		</p>
 		<p>
@@ -41,6 +41,10 @@
 		<input type="submit" value="<spring:message code="login.btn"/>">
 	</form:form>
 	<br>
-	<!-- <div><button onclick="showLoginPopup();">네이버</button></div> -->
+	<div><button onclick="showLoginPopup();">네이버</button></div>
+	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION }">
+	<p style="color:red; font-weight:bold;"> login Failed : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</p>
+	<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
+</c:if>
 </body>
 </html>
