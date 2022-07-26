@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gss.web.common.mapper.PartyMapper">
+
+	<select id="getArticleCountNum" resultType="int">
+		select count(partyname)
+		from bosstab b
+		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
+		join memberofpartytab m on b2.partynum = m.partynum
+		join partytab p on p.partynum = m.partynum
+		join gssusertab g on g.gssusernum = m.gssusernum
+		where g.gssuserid ='testk'
+		and m.partyleader is true
+	</select>
+
+	<select id="getMyPartyInfo"
+		resultType="com.gss.web.api.dto.MyPartyDto">
+		select partyname, bossname, bossgrade, gssuserid, charatername
+		from bosstab b
+		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
+		join memberofpartytab m on b2.partynum = m.partynum
+		join partytab p on p.partynum=m.partynum
+		join gssusertab g on g.gssusernum=m.gssusernum
+		where g.gssuserid =#{gssUserId}
+		and p.partynum=#{partyNum} and m.partyleader is true 
+	</select>
+
+	<select id="getIenterParty"
+		resultType="com.gss.web.api.dto.MyPartyDto">
+		select partyname, bossname, bossgrade, gssuserid, charatername
+		from bosstab b
+		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
+		join memberofpartytab m on b2.partynum = m.partynum
+		join partytab p on p.partynum=m.partynum
+		join gssusertab g on g.gssusernum=m.gssusernum
+		where g.gssuserid =#{gssUserId}
+		and p.partynum=#{partyNum} and m.partyleader is true ;
+	</select>
+
+	<select id="getIenterNumByName" parameterType="String"
+		resultType="int">
+		select partynum
+		from partytab
+		where partyname=#{partyName}
+	</select>
+
+	<select id="getBossName" resultType="String">
+		select bossname
+		from bosstab
+	</select>
+
+	<select id="getBossGrade" resultType="String">
+		select bossgrade
+		from bosstab
+		group by bossgrade
+	</select>
+
+	<select id="getPartyNumByName" parameterType="String" resultType="int">
+		select partynum
+		from partytab
+		where partyname=#{partyName}
+	</select>
+
+	<insert id="bossHunting" parameterType="int">
+		INSERT INTO bosshuntingatpartytab (
+		bossnum,
+		partynum
+
+		) values(
+		#{bossNum},
+		#{partyNum}
+		)
+	</insert>
+
+	<insert id="createParty"
+		parameterType="com.gss.web.common.domain.Party">
+		INSERT INTO partytab (
+		partyname
+		
+		) values(
+		#{partyName}
+		)
+	</insert>
+
+	<select id="getUserNum" resultType="int">
+		select gssusernum
+		from gssusertab
+		where gssuserid=#{gssUserId}
+	</select>
+
+	<select id="getBossNum" parameterType="String" resultType="int">
+		select bossnum
+		from bosstab
+		where bossname=#{bossName}
+		and bossgrade=#{bossGrade}
+	</select>
+
+	<select id="getPartyNum" resultType="int">
+		select max(partynum)
+		from partytab
+	</select>
+
+	<select id="showMain"
+		parameterType="com.gss.web.api.dto.PartyPageDto"
+		resultType="com.gss.web.api.dto.PartyMainDto1">
+		select gssuserid, partyname, bossname, bossgrade
+		from bosstab b
+		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
+		join memberofpartytab m on b2.partynum = m.partynum
+		join partytab p on p.partynum = m.partynum
+		join gssusertab g on g.gssusernum = m.gssusernum
+		where g.gssuserid ='testk'
+		and m.partyleader is true
+		order by partyname desc
+		limit #{counterPage} offset #{pageStart}
+	</select>
+
+	<select id="showMain2"
+		parameterType="com.gss.web.api.dto.PartyPageDto"
+		resultType="com.gss.web.api.dto.PartyMainDto2">
+		select gssuserid, partyname, bossname, bossgrade
+		from bosstab b
+		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
+		join memberofpartytab m on b2.partynum = m.partynum
+		join partytab p on p.partynum = m.partynum
+		join gssusertab g on g.gssusernum = m.gssusernum
+		where g.gssuserid ='testk'
+		and m.partyleader is false order by partyname desc
+		limit #{counterPage} offset #{pageStart}
+	</select>
+
+	<insert id="insert"
+		parameterType="com.gss.web.common.domain.MemberOfPartyTab">
+		INSERT INTO memberofpartytab (
+		partynum,
+		gssusernum,
+		charatername,
+		partyleader
+
+		) values(
+		#{partyNum},
+		#{gssUserNum},
+		#{charaterName},
+		#{partyLeader}
+		)
+	</insert>
+
+</mapper>
