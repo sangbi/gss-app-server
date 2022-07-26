@@ -26,7 +26,7 @@
 			classification=#{classification}
 	</select>
 
-	<select id="selectSearchItemName" parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
+	<select id="selectSearchItemName" parameterType="String" resultType="com.gss.web.common.domain.Item">
 		select 
 			classification,
 			itemimagepath,
@@ -37,7 +37,7 @@
 			itemname LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 
-	<select id="selectSearchClassification" parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
+	<select id="selectSearchClassification" parameterType="String" resultType="com.gss.web.common.domain.Item">
 		select
 			classification,
 			itemimagepath,
@@ -68,4 +68,17 @@
 			classification = #{classification} and
 			itemname = #{itemName}
 	</select>
+	
+	<delete id="deleteByItemName" parameterType="Map">
+		delete
+		from 
+			itemtab
+		where 
+			itemname=#{itemName} and classification = #{classification}
+	</delete>
+	<!-- 
+	<update id="updateByItem" parameterType="">
+	
+	</update>
+	 -->
 </mapper>

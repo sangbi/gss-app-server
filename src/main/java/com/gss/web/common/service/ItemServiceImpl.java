@@ -33,10 +33,6 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public Item deleteByItemName(String itemName) {
-		return itemDAO.deleteByItemName(itemName);
-	}
-	@Override
 	public List<Item> selectAllItem() {
 		return itemDAO.selectAllItem();
 	}
@@ -78,5 +74,10 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public Item selectByItemNameAndClassification(Map map) {
 		return itemDAO.selectByItemNameAndClassification(map);
+	}
+	
+	@Override
+	public int deleteByItemName(Map map) {
+		return itemDAO.deleteByItemName(map);
 	}
 }

@@ -12,34 +12,33 @@
 	<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css" rel="stylesheet"type="text/css">
 	<link href="${pageContext.request.contextPath}/resources/assets/css/mainPage.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bossAdd.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bossImage"></script>
-<title>보스별드랍 보스리스트</title>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.js"></script>
+<title>${bossName} 드랍아이템</title>
 </head>
 <body>
-<h1>보스정보</h1>
+ <h1></h1>
 <div class="div_item_list">
-<table class="table">
+		<table class="table">
 			<thead class="table-dark">
-	<tr>
-		<th>보스 이름</th>
-		<th>난이도</th>
-		<th>보스 이미지</th>
-	</tr>
-	</thead>
-	<tbody>
-	<c:forEach var="bossList" items="${bossList}" varStatus="loop">
-	<tr>
-		<td>
-		<a href=<c:url value="/admin/bossDropItem?dropName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
-			${bossList.bossName}</a></td>
-		<td>${bossList.bossGrade}</td>
-		<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
-	</tr>
-	</c:forEach>
-	</tbody>
-</table>
-<a href="/admin/main"><input type="button" value="목록"></a>
+				<tr>
+					<th>아이템 이름</th>
+					<th>분류</th>
+					<th>아이템 이미지</th>
+				</tr>
+			</thead>
+				<tbody>
+				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
+				<tr>
+					<td>
+					${itemList.itemName}</td>
+					<td>${itemList.classification}</td>
+					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	<a href="/admin/bossAndDrop"><input type="button" value="목록"></a>
+	<a href="/admin/addItem"><input type="button" value="아이템정보 추가"></a>
 </div>
 </body>
 </html>

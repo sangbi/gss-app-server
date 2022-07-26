@@ -17,27 +17,28 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<h1>보스</h1>
-	<div class="div_boss_list">		
+	<h1>아이템</h1>
+	<div class="div_item_list">
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
-					<th>보스 이름</th>
-					<th>난이도</th>
-					<th>보스 이미지</th>
+					<th>아이템 이름</th>
+					<th>분류</th>
+					<th>아이템 이미지</th>
 				</tr>
 			</thead>
 				<tbody>
-				<c:forEach var="bossList" items="${bossList}" varStatus="loop">
+				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
 				<tr>
-					<td><a href=<c:url value="/boss/selectBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
-					${bossList.bossName}</a></td>
-					<td>${bossList.bossGrade}</td>
-					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
+					<td>
+					${itemList.itemName}</td>
+					<td>${itemList.classification}</td>
+					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+	<a href="/boss/bossList"><input type="button" value="목록"></a>
 	</div>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>

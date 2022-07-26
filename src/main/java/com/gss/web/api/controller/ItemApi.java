@@ -1,7 +1,11 @@
 package com.gss.web.api.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +28,7 @@ public class ItemApi {
 	private ItemService itemService;
 
 	@GetMapping("/itemList")
-	public String GetNavPage(Model model) {
+	public String itemPage(Model model) {
 		List<Item> itemList = new ArrayList<>();
 		
 		itemList = itemService.selectAllItem();
@@ -48,4 +52,17 @@ public class ItemApi {
 		
 		return "item/gssItem";
 	}	
+	
+	@GetMapping("/gssSelectItem")
+	public String readItem(Model model,HttpServletRequest req, @RequestParam("itemName") String itemName,
+							@RequestParam("classification") String classification) {
+		Map<String, String> map= new HashMap<String, String>();
+		
+		map.put(""+"classification", classification);
+		map.put(""+"itemName", itemName);
+		Item item= itemService.selectByItemNameAndClassification(map);
+		model.addAttribute("itemList"+"",item);
+		
+		return "/item/gssSelectByItem";
+	}
 }

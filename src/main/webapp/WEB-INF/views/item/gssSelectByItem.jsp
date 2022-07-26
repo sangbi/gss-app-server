@@ -13,32 +13,31 @@
 	<link href="${pageContext.request.contextPath}/resources/assets/css/mainPage.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.js"></script>
-	<title>보스</title>
+	<title>아이템</title>
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<h1>보스</h1>
-	<div class="div_boss_list">		
-		<table class="table">
-			<thead class="table-dark">
-				<tr>
-					<th>보스 이름</th>
-					<th>난이도</th>
-					<th>보스 이미지</th>
-				</tr>
-			</thead>
-				<tbody>
-				<c:forEach var="bossList" items="${bossList}" varStatus="loop">
-				<tr>
-					<td><a href=<c:url value="/boss/selectBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
-					${bossList.bossName}</a></td>
-					<td>${bossList.bossGrade}</td>
-					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
-				</tr>
-				</c:forEach>
-			</tbody>
+	<h1>아이템</h1>
+	<div class="div_item_list">		
+		<table 
+		width="30%"
+		height=200
+		border="1">
+		<tr>
+		<td rowspan="3"><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="100%" height="100%" /></div></td>
+		
+		<tr>
+			<th>아이템 이름</th>
+			<td>${itemList.itemName}</td>
+		</tr>
+		<tr>
+			<th>분류</th>
+			<td>${itemList.classification}</td>
+		</tr>
 		</table>
 	</div>
+	<a href="/item/itemList"><input type="button" value="목록"></a>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
+</body>
 </body>
 </html>

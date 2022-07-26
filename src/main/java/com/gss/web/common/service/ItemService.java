@@ -14,8 +14,6 @@ public interface ItemService {
 
 	public int selectByItem(Map map);
 
-	public Item deleteByItemName(String itemName);
-
 	public String itemExistence(Item item);
 
 	public List<Item> selectSearchItemName(String itemName);
@@ -23,4 +21,6 @@ public interface ItemService {
 	public List<Item> selectSearchClassification(String classification);
 	
 	public Item selectByItemNameAndClassification(Map map);
+	
+	public int deleteByItemName(Map map);
 }

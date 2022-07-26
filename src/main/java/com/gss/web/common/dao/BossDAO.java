@@ -6,7 +6,6 @@ import java.util.Map;
 import com.gss.web.common.domain.Boss;
 
 public interface BossDAO {
-
 	public  Integer insertBoss(Boss boss);
 	
 	public  List<Boss> list();
