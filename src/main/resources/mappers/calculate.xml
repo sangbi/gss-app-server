@@ -37,9 +37,10 @@
 			and p.partyname = #{partyName};
 	</select>
 	
-	<select id="selectPartyLeader" parameterType="String" resultType="String">
+	<select id="selectPartyLeader" parameterType="String" resultType="com.gss.web.common.domain.Calculate">
 		select 
-			m.charatername
+			m.charatername,
+			m.divisionpercent
 		from 
 			partytab as p 
 			join memberofpartytab as m
@@ -51,7 +52,8 @@
 	
 	<select id="selectPartyMember" parameterType="String" resultType="com.gss.web.common.domain.Calculate">
 		select 
-			m.charatername 
+			m.charatername,
+			m.divisionpercent 
 		from 
 			partytab as p 
 			join memberofpartytab as m
@@ -86,7 +88,8 @@
 			on (p.partynum = p2.partynum and p2.partyname = #{partyName})
 			join itemtab i 
 		on 
-			p.itemnum = i.itemnum;
+			p.itemnum = i.itemnum
+			and p.resultstat = false;
 	</select>
 	
 	<insert id="insertItemNameAndPrice" parameterType="com.gss.web.api.dto.PartyGetItemDto">
@@ -117,4 +120,123 @@
 			)
 		);
 	</insert>
+	
+	<select id="selectMemberAll" parameterType="String" resultType="com.gss.web.common.domain.Calculate">
+		select 
+			m.charatername 
+		from 
+			partytab as p 
+			join memberofpartytab as m
+		on 
+			p.partynum = m.partynum 
+			and p.partyname = #{partyName} 
+	</select>
+	
+	<update id="updateMemberOfPricePercent" parameterType="com.gss.web.api.dto.PriceRatioDto">
+		update 
+			memberofpartytab
+		set 
+			divisionpercent = #{divisionPercent}
+		where 
+			partynum = (select partynum from partytab where partyname = #{partyName}) 
+			and 
+			charatername = #{charaterName};	
+	</update>
+	
+	<update id="updateResultState" parameterType="String">
+		update 
+			partygetitemtab
+		set  
+			resultstat = true
+		where 
+			partynum = (select partynum from partytab where partyname = #{partyName}) 
+			and resultstat = false;
+	</update>
+	
+	<select id="selectPartyNum" parameterType="String" resultType="int">
+		select 
+			partynum
+		from
+			partytab
+		where partyname = #{partyName}
+	</select>
+	
+	<select id="selectMemberOfPartyNum" parameterType="com.gss.web.common.domain.UserRatioInfo" resultType="int">
+		select 
+			memberofpartynum 
+		from 
+			memberofpartytab 
+		where 
+			partynum = #{partyNum}
+		 	and gssusernum = #{gssUserNum};
+	</select>
+	
+	<select id="selectPartyGetItemNumber" parameterType="String" resultType="int">
+		select 
+			pg.pgikey 
+		from 
+			partygetitemtab as pg 
+			join partytab as pt 
+		on 
+			pg.partynum = pt.partynum 
+			and pt.partyname = #{partyName}
+	</select>
+	
+	<select id="selectUserRatioInfo" parameterType="String" resultType="com.gss.web.common.domain.UserRatioInfo">
+		select 
+			divisionpercent, 
+			gssusernum,
+			partynum 
+		from 
+			memberofpartytab 
+		where 
+			partynum = 
+			(select partynum from partytab where partyname = #{partyName});
+	</select>
+	
+	<insert id="insertResultTab" parameterType="com.gss.web.api.dto.ResultTabDto">
+		INSERT INTO resulttab
+			(gssusernum, 
+			memberofpartynum, 
+			pgikey, 
+			resultdate, 
+			partymembercount, 
+			resultprice)
+		VALUES(#{gssUserNum}, #{memberOfPartyNum}, #{pgiKey}, now(), #{partyMemberCount}, #{resultPrice});
+	</insert>
+	
+	<select id="selectCalculateCompletList" parameterType="String" resultType="com.gss.web.common.domain.CalculateComplete">
+		select distinct 
+			pa.partyname, 
+			me.charatername, 
+			re.resultprice, 
+			re.resultdate 
+		from 
+			resulttab as re 
+			join gssusertab as gs 
+		on 
+			gs.gssusernum = re.gssusernum 
+			and gs.gssuserid = #{userId} 
+			join memberofpartytab as me 
+			on 
+				me.gssusernum = re.gssusernum 
+				join partytab as pa 
+				on 
+					pa.partynum = me.partynum 
+					and me.memberofpartynum = re.memberofpartynum;
+	</select>
+	
+	<select id="selectCalculateCompleteItemList" parameterType="String" resultType="com.gss.web.common.domain.PartyGetItem">
+		select 
+			p.itemsaleprice, 
+			i.itemname
+		from 
+			partygetitemtab as p 
+			join partytab p2 
+			on (p.partynum = p2.partynum and p2.partyname = #{partyName})
+			join itemtab i 
+		on 
+			p.itemnum = i.itemnum
+			and p.resultstat = true;
+	</select>
 </mapper>

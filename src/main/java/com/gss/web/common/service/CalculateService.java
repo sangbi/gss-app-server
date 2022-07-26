@@ -3,9 +3,13 @@ package com.gss.web.common.service;
 import java.util.List;
 
 import com.gss.web.api.dto.PartyGetItemDto;
+import com.gss.web.api.dto.PriceRatioDto;
+import com.gss.web.api.dto.ResultTabDto;
 import com.gss.web.common.domain.Calculate;
+import com.gss.web.common.domain.CalculateComplete;
 import com.gss.web.common.domain.CalculateMain;
 import com.gss.web.common.domain.PartyGetItem;
+import com.gss.web.common.domain.UserRatioInfo;
 
 public interface CalculateService {
 	public List<CalculateMain> selectByUserNumber(int userNum);
@@ -14,7 +18,7 @@ public interface CalculateService {
 
 	public int selectCountMember(String partyName);
 	
-	public String selectPartyLeader(String partyName);
+	public Calculate selectPartyLeader(String partyName);
 	
 	public List<Calculate> selectPartyMember(String partyName);
 	
@@ -23,4 +27,24 @@ public interface CalculateService {
 	public List<PartyGetItem> selectItemNameAndPrice(String partyName);
 	
 	public int insertItemNameAndPrice(PartyGetItemDto pgiDto);
+	
+	public List<Calculate> selectMemberAll(String partyName);
+	
+	public int updateMemberOfPricePercent(PriceRatioDto priceRatioDto);
+	
+	public int updateResultState(String partyName);
+	
+	public int selectPartyNum(String partyName);
+	
+	public int selectMemberOfPartyNum (UserRatioInfo userRatioInfo);
+	
+	public List<Integer> selectPartyGetItemNumber (String partyName);
+	
+	public List<UserRatioInfo> selectUserRatioInfo (String partyName);
+	
+	public int insertResultTab (ResultTabDto resultTabDto);
+	
+	public List<CalculateComplete> selectCalculateCompletList (String userId);
+	
+	public List<PartyGetItem> selectCalculateCompleteItemList(String partyName);
 }

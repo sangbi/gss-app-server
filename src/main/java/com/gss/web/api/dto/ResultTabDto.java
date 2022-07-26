@@ -9,8 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CalculateMainDto {
-	private String partyName;
-	private String charaterName;
-	private String divisionPercent;
+public class ResultTabDto {
+	private int gssUserNum;
+	private int memberOfPartyNum;
+	private int pgiKey;
+	private int partyMemberCount;
+	private long resultPrice;
 }

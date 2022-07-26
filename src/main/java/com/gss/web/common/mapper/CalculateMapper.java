@@ -5,9 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gss.web.api.dto.PartyGetItemDto;
+import com.gss.web.api.dto.PriceRatioDto;
+import com.gss.web.api.dto.ResultTabDto;
 import com.gss.web.common.domain.Calculate;
+import com.gss.web.common.domain.CalculateComplete;
 import com.gss.web.common.domain.CalculateMain;
 import com.gss.web.common.domain.PartyGetItem;
+import com.gss.web.common.domain.UserRatioInfo;
 
 @Mapper
 public interface CalculateMapper {
@@ -17,7 +21,7 @@ public interface CalculateMapper {
 	
 	public int selectCountMember(String partyName);
 	
-	public String selectPartyLeader(String partyName);
+	public Calculate selectPartyLeader(String partyName);
 	
 	public List<Calculate> selectPartyMember(String partyName);
 	
@@ -26,4 +30,24 @@ public interface CalculateMapper {
 	public List<PartyGetItem> selectItemNameAndPrice(String partyName);
 	
 	public int insertItemNameAndPrice(PartyGetItemDto pgiDto);
+	
+	public List<Calculate> selectMemberAll(String partyName);
+	
+	public int updateMemberOfPricePercent(PriceRatioDto priceRatioDto);
+	
+	public int updateResultState(String partyName);
+	
+	public int selectPartyNum(String partyName);
+	
+	public int selectMemberOfPartyNum (UserRatioInfo userRatioInfo);
+	
+	public List<Integer> selectPartyGetItemNumber (String partyName);
+	
+	public List<UserRatioInfo> selectUserRatioInfo (String partyName);
+	
+	public int insertResultTab (ResultTabDto resultTabDto);
+	
+	public List<CalculateComplete> selectCalculateCompletList (String userId);
+
+	public List<PartyGetItem> selectCalculateCompleteItemList(String partyName);
 }
