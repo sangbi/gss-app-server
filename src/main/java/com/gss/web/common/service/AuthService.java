@@ -30,7 +30,8 @@ public class AuthService {
 			throw new IdPasswordNotMatchingException("dddd");
 		}
 
-		return new AuthInfo(String.valueOf(member.getGssuserNum()),member.getGssuserId());
+		return new AuthInfo(member.getGssuserNum(),member.getGssuserId());
+		//return new AuthInfo(String.valueOf(member.getGssuserNum()),member.getGssuserId());
 	}
 	
 	public AuthInfo authenticateEmail(String email) {
@@ -40,7 +41,7 @@ public class AuthService {
 			throw new IdPasswordNotMatchingException("{IdPasswordNotMatching}");
 		}
 
-		return new AuthInfo(member.getGssuserId(), member.getEmail());
+		return new AuthInfo(Integer.valueOf(member.getGssuserId()), member.getEmail());
 	}
 	
 	public Map<String, String> validateHandling(BindingResult errors) {

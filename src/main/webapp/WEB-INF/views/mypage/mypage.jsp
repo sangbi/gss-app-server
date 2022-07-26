@@ -6,44 +6,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css"
-	rel="stylesheet" type="text/css">
+<meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.js"></script>
-<script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/assets/js/mypage.js"></script>
-<meta charset="UTF-8">
-<title>회원가입</title>
+<title>GSS My Page</title>
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 	<div class="container">
-		<form:form modelAttribute="MemberCreateDto" method="POST">
-			<div class="form-group col-lg-12">
-				<h2>회원가입</h2>
-				<br> <label for="userid" style="text-align: left"
-					class="font-weight-bolder  col-lg-6">ID</label>
-				<form:input class="form-control-lg col-lg-12" path="userid"
-					type="text" placeholder="ID 영문 8글자 이내 입력"
-					onfocus="this.placeholder=''"
-					onblur="this.placeholder='ID 영문 8글자 이내 입력'" />
-			</div>
-			<c:if test="${not empty valid_userid}">
-				<label class="text-danger">${valid_userid}</label>
-			</c:if>
-			<c:if test="${not empty valid_alreadyuserid}">
-				<label class="text-danger">${valid_alreadyuserid}</label>
-			</c:if>
+		<br> <br> <br>
+		<form:form modelAttribute="MemberCreateDto">
+			<h2>정보 수정</h2>
+			<br>
+			<form:input path="userid" type="hidden" value="${member.gssuserId}" />
 			<div class="form-group col-lg-12">
 				<label for="email" style="text-align: left"
 					class="font-weight-bolder  col-lg-6">E-MAIL</label>
 				<form:input class="form-control-lg col-lg-12" path="email"
-					type="text" placeholder="e-mail 입력" onfocus="this.placeholder=''"
-					onblur="this.placeholder='e-mail 입력'" />
+					type="text" value="${member.email}" placeholder="e-mail 입력"
+					onfocus="this.placeholder=''" onblur="this.placeholder='e-mail 입력'" />
 			</div>
 			<div class="form-group col-lg-12">
 				<input class="form-control-lg col-lg-5" id="certificationNumber"
@@ -74,8 +57,8 @@
 				<label for="name" style="text-align: left"
 					class="font-weight-bolder  col-lg-6">NAME</label>
 				<form:input class="form-control-lg col-lg-12" path="name"
-					type="text" placeholder="이름 입력" onfocus="this.placeholder=''"
-					onblur="this.placeholder='이름 입력'" />
+					value="${member.userName}" type="text" placeholder="이름 입력"
+					onfocus="this.placeholder=''" onblur="this.placeholder='이름 입력'" />
 			</div>
 			<c:if test="${not empty valid_name}">
 				<label class="text-danger">${valid_name}</label>
@@ -91,6 +74,7 @@
 			<c:if test="${not empty valid_password}">
 				<label class="text-danger">${valid_password}</label>
 			</c:if>
+
 			<div class="form-group col-lg-12">
 				<label for="confirmPassword" style="text-align: left"
 					style="text-align:left" class="font-weight-bolder  col-lg-6">CONFIRM
@@ -117,7 +101,8 @@
 					class="font-weight-bolder  col-lg-6">PHONE NUMBER</label>
 
 				<form:input class="form-control-lg col-lg-12" path="phoneNumber"
-					type="text" placeholder="-를 포함하여 입력. EX)010-1234-5678"
+					value="${member.userPhone}" type="text"
+					placeholder="-를 포함하여 입력. EX)010-1234-5678"
 					onfocus="this.placeholder=''"
 					onblur="this.placeholder='-를 포함하여 입력. EX)010-1234-5678'" />
 			</div>
@@ -133,14 +118,15 @@
 				</c:when>
 			</c:choose>
 			<br>
+			<br>
+			<form:input type="hidden" path="certificationFlag" />
 			<div class="row justify-content-center">
 				<br> <input
 					class="btn btn-outline-success btn btn-dark btn-lg col-3 "
-					type="submit" value="회원 가입"> <input
+					id="submit" type="submit" value="정보 수정"> <input
 					class="btn btn-outline-success btn btn-dark btn-lg col-3 "
 					type="button" value="취소">
 			</div>
-			<form:input type="hidden" path="certificationFlag" />
 		</form:form>
 	</div>
 </body>

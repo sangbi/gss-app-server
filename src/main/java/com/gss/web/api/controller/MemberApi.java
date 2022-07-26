@@ -18,13 +18,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gss.web.api.dto.AuthInfo;
 import com.gss.web.api.dto.LoginDto;
 import com.gss.web.api.dto.MemberCreateDto;
 import com.gss.web.api.vo.NaverLoginProfile;
 import com.gss.web.api.vo.NaverLoginVo;
+import com.gss.web.common.domain.Member;
 import com.gss.web.common.service.AuthService;
+import com.gss.web.common.service.MailService;
 import com.gss.web.common.service.MemberServiceImpl;
 import com.gss.web.common.service.NaverLoginService;
 
@@ -42,6 +45,11 @@ public class MemberApi {
 	
 	@Autowired
 	private AuthService authService ;
+	
+	@Autowired
+	private MailService mailService;
+	
+	private String randomNumber;
 	
 	private static final String SESSION_COOKIE_NAME = "userSessionId";
 
@@ -143,7 +151,7 @@ public class MemberApi {
 		} else {
 			try {
 				authiInfo = authService.authenticate(loginDto.getUserid(), loginDto.getPassword());
-				session.setAttribute("authInfo", authiInfo.getId());
+				session.setAttribute("authInfo", authiInfo);
 				Cookie rememberCookie = new Cookie("REMEBER", loginDto.getUserid());
 				rememberCookie.setPath("/");
 				if (loginDto.isRememberUserid()) {
@@ -160,9 +168,97 @@ public class MemberApi {
 		}
 		return path;
 	}
+	
+	@GetMapping("/mypage")
+	public String myPage(@ModelAttribute("MemberCreateDto")MemberCreateDto MCDto,HttpSession session,Model model) {
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}
+		AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+		Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+		model.addAttribute(member);
+		return "/mypage/mypage";
+	}
+	
+	@PostMapping("/mypage")
+	public String PostMyPage(@ModelAttribute("MemberCreateDto") @Valid MemberCreateDto MCRdto, BindingResult result,
+			Model model) {
+		String path = "";
+		Map<String, String> validatorResult = memberServiceImpl.validateNullandEmptyCheck(MCRdto);
+		if (!validatorResult.isEmpty()) {
+			for (String key : validatorResult.keySet()) {
+				model.addAttribute(key, validatorResult.get(key));
+			}
+			if (result.hasErrors()) {
+				model.addAttribute("MCRdto", MCRdto);
+				validatorResult = memberServiceImpl.validateHandling(result);
+				//validatorResult = memberServiceImpl.checkEmailandIDandPhoneNum(MCRdto);
+				for (String key : validatorResult.keySet()) {
+					if (model.getAttribute(key) == null) {
+						model.addAttribute(key, validatorResult.get(key));
+					}
+				}
+				validatorResult = memberServiceImpl.checkIDandPhoneNum(MCRdto);
+				for (String key : validatorResult.keySet()) {
+					if (model.getAttribute(key) == null) {
+						model.addAttribute(key, validatorResult.get(key));
+					}
+				}
+				path = "/mypage/mypage";
+			}
+			path = "/mypage/mypage";
+		} else {
+			if (result.hasErrors()) {
+				model.addAttribute("MCRdto", MCRdto);
+				validatorResult = memberServiceImpl.validateHandling(result);
+				for (String key : validatorResult.keySet()) {
+					model.addAttribute(key, validatorResult.get(key));
+				}
+				path = "/mypage/mypage";
+			} else {
+				model.addAttribute("MCRdto", MCRdto);
+				validatorResult = memberServiceImpl.checkIDandPhoneNum(MCRdto);
+				if (!validatorResult.isEmpty()) {
+					for (String key : validatorResult.keySet()) {
+						model.addAttribute(key, validatorResult.get(key));
+					}
+					path = "/mypage/mypage";
+				} else {
+					memberServiceImpl.editUserInfo(MCRdto);
+					path="redirect:/member/editEnd";
+				}
+			}
+		}
+		return path;
+	}
+	
+	@GetMapping("/editEnd")
+	public String editEnd(HttpSession session) {
+		session.invalidate();
+		return "/mypage/editmyinfoend";
+	}
+	
+	@PostMapping("/email")
+	@ResponseBody
+	public void confirmEmail(String userEmail) {
+		randomNumber=mailService.sendMail(userEmail);
+	}
+	
+	@PostMapping("/cerEmail")
+	@ResponseBody
+	public String certificationEmail(String cerNumber) {
+		String result="";
+		if(randomNumber.equals(cerNumber)) {
+			result="true";
+		}else {
+			result="false"; 
+		}
+		return result;
+	}
+	
+	
 	@GetMapping("/logout")
 	public String logOut(HttpSession session) {
-		System.out.println(session.getAttribute("authInfo"));
 		session.invalidate();
 		return "redirect:/main/home";
 	}
@@ -203,7 +299,6 @@ public class MemberApi {
 		for (int i = 0; i < 8; i++) {
 
 			idx = (int) (charSet.length * Math.random()); // 36 * 생성된 난수를 Int로 추출 (소숫점제거)
-			System.out.println("idx :::: " + idx);
 			sb.append(charSet[idx]);
 		}
 

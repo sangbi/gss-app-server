@@ -6,6 +6,10 @@ import com.gss.web.common.domain.Member;
 public interface MemberService {
 	int joinUp(MemberCreateDto dto);
 	
+	int editUserInfo(MemberCreateDto dto);
+	
+	Member findByUserPK(int userKey); 
+	
 	Member findByEmail(String email);
 	
 	Member findByID(String userid);

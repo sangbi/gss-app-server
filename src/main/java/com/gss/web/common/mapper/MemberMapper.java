@@ -10,12 +10,16 @@ import com.gss.web.common.domain.Member;
 @Mapper
 public interface MemberMapper {
 	int joinUp(Member member);
-
+	
+	int editUserInfo(Member member);
+	
 	boolean checkEmail(String email);
 	
 	boolean checkID(String userID);
 
 	boolean checkPhoneNum(String phoneNumber);
+	
+	Member findByUserPK(int userKey);
 	
 	Member findByEmail(String email);
 	
