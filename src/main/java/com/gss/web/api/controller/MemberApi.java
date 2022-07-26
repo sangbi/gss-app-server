@@ -42,6 +42,8 @@ public class MemberApi {
 	
 	@Autowired
 	private AuthService authService ;
+	
+	private static final String SESSION_COOKIE_NAME = "userSessionId";
 
 	// 회원가입 GET요청
 	@GetMapping("/join")
@@ -62,12 +64,21 @@ public class MemberApi {
 			if (result.hasErrors()) {
 				model.addAttribute("MCRdto", MCRdto);
 				validatorResult = memberServiceImpl.validateHandling(result);
+				//validatorResult = memberServiceImpl.checkEmailandIDandPhoneNum(MCRdto);
+				for (String key : validatorResult.keySet()) {
+					if (model.getAttribute(key) == null) {
+						model.addAttribute(key, validatorResult.get(key));
+					}
+				}
+				validatorResult = memberServiceImpl.checkEmailandIDandPhoneNum(MCRdto);
 				for (String key : validatorResult.keySet()) {
 					if (model.getAttribute(key) == null) {
 						model.addAttribute(key, validatorResult.get(key));
 					}
 				}
 				path = "/join/singup";
+			}else {
+				
 			}
 			path = "/join/singup";
 		} else {
@@ -80,7 +91,7 @@ public class MemberApi {
 				path = "/join/singup";
 			} else {
 				model.addAttribute("MCRdto", MCRdto);
-				validatorResult = memberServiceImpl.checkEmailandEmail(MCRdto);
+				validatorResult = memberServiceImpl.checkEmailandIDandPhoneNum(MCRdto);
 				if (!validatorResult.isEmpty()) {
 					for (String key : validatorResult.keySet()) {
 						model.addAttribute(key, validatorResult.get(key));
@@ -88,17 +99,26 @@ public class MemberApi {
 					path = "/join/singup";
 				} else {
 					memberServiceImpl.joinUp(MCRdto);
-					path = "/join/singupend";
+					path="/join/singupend";
+					//path = "redirect:/member/joinend";
 				}
 			}
 		}
 		return path;
 	}
+	
+	@GetMapping("/joinend")
+	public String joinEnd() {
+		return "/join/singupend";
+	}
 
 	// 로그인 페이지
 	@GetMapping("/login")
 	public String loginMemberGet(@ModelAttribute("LoginDto") LoginDto loginDto,
-			@CookieValue(value = "REMEBER", required = false) Cookie cookie) {
+			@CookieValue(value = "REMEBER", required = false) Cookie cookie,HttpSession session) {
+		if(session.getAttribute("authInfo")!=null) {
+			return "redirect:../main/home";
+		}
 		if (cookie != null) {
 			loginDto.setUserid(cookie.getValue());
 			loginDto.setRememberUserid(true);
@@ -110,6 +130,10 @@ public class MemberApi {
 	public String loginMemberPost(Principal principal, @ModelAttribute("LoginDto") @Valid LoginDto loginDto,
 			BindingResult result, HttpSession session, HttpServletResponse response, Model model) {
 		String path = "";
+		AuthInfo authiInfo;
+		if(session.getAttribute("authiInfo")!=null) {
+			return "/main/home";
+		}
 		if (result.hasErrors()) {
 			Map<String, String> validatorResult = memberServiceImpl.validateHandling(result);
 			for (String key : validatorResult.keySet()) {
@@ -118,11 +142,10 @@ public class MemberApi {
 			path = "/login/login";
 		} else {
 			try {
-				AuthInfo authiInfo = authService.authenticate(loginDto.getUserid(), loginDto.getPassword());
-				session.setAttribute("authInfo", authiInfo);
+				authiInfo = authService.authenticate(loginDto.getUserid(), loginDto.getPassword());
+				session.setAttribute("authInfo", authiInfo.getId());
 				Cookie rememberCookie = new Cookie("REMEBER", loginDto.getUserid());
 				rememberCookie.setPath("/");
-
 				if (loginDto.isRememberUserid()) {
 					rememberCookie.setMaxAge(60 * 60 * 24 * 30);
 				} else {
@@ -136,6 +159,12 @@ public class MemberApi {
 			}
 		}
 		return path;
+	}
+	@GetMapping("/logout")
+	public String logOut(HttpSession session) {
+		System.out.println(session.getAttribute("authInfo"));
+		session.invalidate();
+		return "redirect:/main/home";
 	}
 
 	@GetMapping("/login/oauth2/code/naver")
@@ -171,9 +200,6 @@ public class MemberApi {
 
 		int idx = 0;
 		StringBuffer sb = new StringBuffer();
-
-		System.out.println("charSet.length :::: " + charSet.length);
-
 		for (int i = 0; i < 8; i++) {
 
 			idx = (int) (charSet.length * Math.random()); // 36 * 생성된 난수를 Int로 추출 (소숫점제거)
