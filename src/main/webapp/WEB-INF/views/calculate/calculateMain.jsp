@@ -26,7 +26,8 @@
 			</thead>
 			<tbody>	
 				<tr>
-					<td><a href="/calculate/calculateList?partyName=${userList.partyName}">${userList.partyName}</a></td><td>${userList.charaterName}</td>	
+					<td><a href="/calculate/calculateList?partyName=${userList.partyName}">${userList.partyName}</a></td>
+					<td>${userList.charaterName}</td>	
 				</tr>
 			</tbody>
 		</table>

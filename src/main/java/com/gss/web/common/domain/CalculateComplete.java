@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Calculate {
+public class CalculateComplete {
+	private String partyName;
 	private String charaterName;
-	private int divisionPercent;
-	private String bossName;
-	private String bossGrade;
+	private String resultprice;
+	private String resultDate;
 }

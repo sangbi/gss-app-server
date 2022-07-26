@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gss.web.api.dto.PartyGetItemDto;
+import com.gss.web.api.dto.PriceRatioDto;
+import com.gss.web.api.dto.ResultTabDto;
 import com.gss.web.common.domain.Calculate;
+import com.gss.web.common.domain.CalculateComplete;
 import com.gss.web.common.domain.CalculateMain;
 import com.gss.web.common.domain.PartyGetItem;
+import com.gss.web.common.domain.UserRatioInfo;
 import com.gss.web.common.mapper.CalculateMapper;
 
 @Repository
@@ -33,7 +37,7 @@ public class CalculateDaoImpl implements CalculateDao {
 	}
 	
 	@Override
-	public String selectPartyLeader(String partyName) {
+	public Calculate selectPartyLeader(String partyName) {
 		return sqlSession.getMapper(CalculateMapper.class).selectPartyLeader(partyName);
 	}
 	
@@ -55,5 +59,55 @@ public class CalculateDaoImpl implements CalculateDao {
 	@Override
 	public int insertItemNameAndPrice(PartyGetItemDto pgiDto) {
 		return sqlSession.getMapper(CalculateMapper.class).insertItemNameAndPrice(pgiDto);
+	}
+	
+	@Override
+	public List<Calculate> selectMemberAll(String partyName) {
+		return sqlSession.getMapper(CalculateMapper.class).selectMemberAll(partyName);
+	}
+	
+	@Override
+	public int updateMemberOfPricePercent(PriceRatioDto priceRatioDto) {
+		return sqlSession.getMapper(CalculateMapper.class).updateMemberOfPricePercent(priceRatioDto);
+	}
+	
+	@Override
+	public int updateResultState(String partyName) {
+		return sqlSession.getMapper(CalculateMapper.class).updateResultState(partyName);
+	}
+	
+	@Override
+	public int selectPartyNum(String partyName) {
+		return sqlSession.getMapper(CalculateMapper.class).selectPartyNum(partyName);
+	}
+	
+	@Override
+	public int selectMemberOfPartyNum(UserRatioInfo userRatioInfo) {
+		return sqlSession.getMapper(CalculateMapper.class).selectMemberOfPartyNum(userRatioInfo);
+	}
+	
+	@Override
+	public List<Integer> selectPartyGetItemNumber(String partyName) {
+		return sqlSession.getMapper(CalculateMapper.class).selectPartyGetItemNumber(partyName);
+	}
+	
+	@Override
+	public List<UserRatioInfo> selectUserRatioInfo(String partyName) {
+		return sqlSession.getMapper(CalculateMapper.class).selectUserRatioInfo(partyName);
+	}
+	
+	@Override
+	public int insertResultTab(ResultTabDto resultTabDto) {
+		return sqlSession.getMapper(CalculateMapper.class).insertResultTab(resultTabDto);
+	}
+	
+	@Override
+	public List<CalculateComplete> selectCalculateCompletList(String userId) {
+		return sqlSession.getMapper(CalculateMapper.class).selectCalculateCompletList(userId);
+	}
+	
+	@Override
+	public List<PartyGetItem> selectCalculateCompleteItemList(String partyName) {
+		return sqlSession.getMapper(CalculateMapper.class).selectCalculateCompleteItemList(partyName);
 	}
 }

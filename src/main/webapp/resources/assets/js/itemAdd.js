@@ -65,3 +65,40 @@ function priceList(partyName){
         }
     });
 }
+
+function checkRatio(form){
+    var ratioList = form.ratio
+    var sum = 0;
+    for (var i = 0; i<ratioList.length;i++){
+        sum += parseInt(ratioList[i].value)
+    }
+    console.log(sum)
+
+    if (sum != 100){ 
+        $("#errorMessage").css("font-size", "20px")   
+        $("#errorMessage").css("display", "block")
+        $("#errorMessage").text("비율 합이 100이 아닙니다")
+    } else {
+        form.submit()
+    }
+}
+
+function searchItem(form){
+    var itemName = form.itemName.value
+
+    $.ajax({
+        url:'http://localhost:8080/calculate/itemSearch',
+        type:'post',
+        traditional: true,
+        data:{itemName : itemName
+        },
+        success:function(data){
+            console.log(data)
+            if(data>0){
+                return data
+            }else{
+                return data
+            }
+        }
+    });
+}
