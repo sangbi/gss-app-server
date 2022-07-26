@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.gss.web.common.domain.Member;
 import com.gss.web.common.mapper.MemberMapper;
+import com.gss.web.common.mapper.UserSEQMapper;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -17,6 +18,16 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.getMapper(MemberMapper.class).joinUp(member);
 	}
 
+	@Override
+	public int editUserInfo(Member member) {
+		return sqlSession.getMapper(MemberMapper.class).editUserInfo(member);
+	}
+	
+	@Override
+	public Member findByUserPK(int userKey) {
+		return sqlSession.getMapper(MemberMapper.class).findByUserPK(userKey);
+	}
+	
 	@Override
 	public Member findByEmail(String email) {
 		return sqlSession.getMapper(MemberMapper.class).findByEmail(email);
@@ -33,7 +44,16 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public boolean checkPhoneNum(String phoneNumber) {
+		return sqlSession.getMapper(MemberMapper.class).checkPhoneNum(phoneNumber);
+	}
+	@Override
 	public Member findByID(String userid) {
 		return sqlSession.getMapper(MemberMapper.class).findByID(userid);
+	}
+
+	@Override
+	public int selectLastUserSEQ() {
+		return sqlSession.getMapper(UserSEQMapper.class).selectLastUserSEQ();
 	}
 }

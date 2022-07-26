@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gss.web.common.mapper.ItemOfBossMapper">
+	<insert id="insertItemOfBoss" parameterType="com.gss.web.common.domain.ItemOfBoss">
+	INSERT INTO itemofbosstab (
+		itemnum,
+		bossnum
+	) VALUES (
+		(select 
+			itemnum 
+		from 
+			itemtab 
+		where 
+			itemname = #{itemName}),
+		(select 
+			bossnum 
+		from 
+			bosstab 
+		where 
+			bossname= #{bossName} and bossgrade= #{bossGrade})
+	)
+	</insert>
+	
+	<select id="selectAllItemOfBoss" parameterType="Map" resultType="int">
+		select
+			itemnum
+		from 
+			itemofbosstab
+		where 
+			bossnum = (
+				select 
+					bossnum 
+				from 
+					bosstab 
+				where 
+					bossname = #{bossName} and bossgrade= #{bossGrade})
+	</select>
+	
+	<select id="selectByBossItem" parameterType="int" resultType="com.gss.web.common.domain.Item">
+		select 
+			itemname, 
+			itemimagepath, 
+			classification 
+		from 
+			itemtab 
+		where 
+			itemnum = #{itemNum}
+	</select>
+</mapper>

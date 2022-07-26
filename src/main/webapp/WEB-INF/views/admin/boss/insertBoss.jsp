@@ -6,8 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bossAdd.js" async></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css" rel="stylesheet"type="text/css">
+	<link href="${pageContext.request.contextPath}/resources/assets/css/mainPage.css" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bossAdd.js" async></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bossImage"></script>
 <title>보스 추가페이지</title>
 </head>
 <body>
@@ -25,7 +31,13 @@
 		</tr>
 		<tr>
 			<th>난이도</th>
-			<td><input type="text" name="bossGrade"></td>
+			<td><select name="bossGrade">
+					<option value="">난이도 선택</option>
+					<option value="카오스">카오스</option>
+					<option value="하드">하드</option>
+					<option value="노멀">노멀</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<th>보스 이미지</th>
@@ -33,6 +45,7 @@
 		</tr>
 		</table>
 		<input type="submit" value="등록">
+		<a href="/admin/boss"><input type="button" value="뒤로가기"></a>
 	</form:form>
 </body>
 </html>

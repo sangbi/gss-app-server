@@ -5,26 +5,27 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.gss.web.api.dto.ItemDto;
+import com.gss.web.common.domain.Item;
 
 @Mapper
 public interface ItemMapper {
-	//보스 추가
-	int insertItem(ItemDto ItemDto);
-		
-	public abstract List<ItemDto> list();
-		
-	//보스 리스트
-	public abstract List<ItemDto> selectAllItem();
-		
-	//해당보스 정보
-	public abstract ItemDto selectByItemName(String itemName);
-		
+	int insertItem(Item item);
+
+	public abstract List<Item> list();
+
+	public abstract List<Item> selectAllItem();
+
+	public abstract Item selectByItemName(String itemName);
+
 	public int selectByItem(Map map);
-		
-	//해당보스 삭제
-	public abstract ItemDto deleteByItemName(String itemName);
+
+	public abstract Item deleteByItemName(String itemName);
+
+	public List<Item> selectSearchItemName(String itemName);
+
+	public List<Item> selectSearchClassification(String classification);
 	
-	//페이징
-	public abstract List<ItemDto> selectSearchItem(ItemDto itemDto);
+	public Item selectByItemNameAndClassification(Map map);
+	
+	public int deleteByItemName(Map map);
 }

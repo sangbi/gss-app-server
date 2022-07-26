@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
 
-import com.gss.web.api.dto.BossDto;
 import com.gss.web.common.dao.BossDAO;
 import com.gss.web.common.domain.Boss;
 
@@ -19,28 +19,27 @@ public class BossServiceImpl implements BossService{
 	@Autowired
 	private final BossDAO bossDAO;
 	
-	//보스정보 리스트
+	@Autowired
+	private ReloadableResourceBundleMessageSource res;
+	
 	@Override
-	public List<BossDto> list() {
-		// TODO Auto-generated method stub
+	public List<Boss> list() {
 		return bossDAO.list();
 	}
 	
-	//보스 추가
 	@Override
 	public Integer insertBoss(Boss boss) {
 		return bossDAO.insertBoss(boss);
 	}
 	
-	//해당 보스 삭제
 	@Override
-	public BossDto deleteByBossName(String bossName) {
-		// TODO Auto-generated method stub
-		return bossDAO.deleteByBossName(bossName);
+	public int deleteByBossName(Map map) {
+		return bossDAO.deleteByBossName(map);
 	}
+		
 	@Override
-	public List<BossDto> selectAllBoss() {
-		return null;
+	public List<Boss> selectAllBoss() {
+		return bossDAO.selectAllBoss();
 	}
 
 	@Override
@@ -48,19 +47,27 @@ public class BossServiceImpl implements BossService{
 		return bossDAO.selectByBoss(map);
 	}
 	
+	@Override
 	public String bossExistence(Boss boss) {
 		String urlPath="";
 		Integer bossExistenceNum;
 		Map<String, String> map= new HashMap<String, String>();
+		
 		map.put("bossName", boss.getBossName());
 		map.put("bossGrade", boss.getBossGrade());
 		bossExistenceNum=selectByBoss(map);
 		if(bossExistenceNum.equals(0)) {
 			insertBoss(boss);
-			urlPath="/admin/boss/bossList";
+			urlPath="redirect:/admin/boss";
 		}else {
 			urlPath="/admin/boss/insertBoss";
 		}
+		
 		return urlPath;
+	}
+	
+	@Override
+	public Boss selectByBossNameAndGrade(Map map) {
+		return bossDAO.selectByBossNameAndGrade(map);
 	}
 }

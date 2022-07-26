@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class MainApi {
 	private final NoticeService noticeService;
 	
-	// gssNav.jsp ȣ��, �� ���������� nav��Ʈ�� import ���ֱ� ���� ���
 	@GetMapping("/nav")
 	public String GetNavPage(Model model) {
 		return "main/gssNav";
@@ -50,7 +49,17 @@ public class MainApi {
 		
 		return "main/gssMain";
 	}
-	
+	@PostMapping("/home")
+	public String PostMainPage(Model model) {
+		int pageCount = 1;
+		int endPageCount = 510;
+		
+		model.addAttribute("noticeList", noticeService.getNoticeList("1"));
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("endPageCount", endPageCount);
+		
+		return "main/gssMain";
+	}
 	@GetMapping("/home/page={page}")
 	public String mainPage(Model model, @PathVariable("page") String page) {
 		int pageCount = 1;
@@ -65,7 +74,6 @@ public class MainApi {
 		return "main/gssMain";
 	}
 	
-	// getNoticePage.jsp ȣ��, ����ȭ�鿡�� ������ ������ �ҷ�����
 	@GetMapping("/notice")
 	public String getNoticePage(Model model, @RequestParam("address") String url) {
 		model.addAttribute("noticesrc", noticeService.getNoticeContents(url));

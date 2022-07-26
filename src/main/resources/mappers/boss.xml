@@ -14,10 +14,41 @@
 			#{bossGrade}
 		)
 	</insert>
+	
 	<select id="selectByBoss" parameterType="Map" resultType="int">
 		select
 			count(*)
-		from bosstab
-		where bossname=#{bossName} and bossgrade=#{bossGrade}
+		from
+			bosstab
+		where 
+			bossname=#{bossName} and bossgrade=#{bossGrade}
+	</select>
+	
+	<select id="selectAllBoss" parameterType="com.gss.web.common.domain.Boss" resultType="com.gss.web.common.domain.Boss">
+		select
+			bossname, 
+			bossimagepath,
+			bossgrade
+		from 
+			bosstab
+	</select>
+	
+	<delete id="deleteByBossName" parameterType="Map">
+		delete
+		from 
+			bosstab
+		where 
+			bossname=#{bossName} and bossgrade = #{bossGrade}
+	</delete>
+	
+	<select id="selectByBossNameAndGrade" parameterType="Map" resultType="com.gss.web.common.domain.Boss">
+		select
+			bossname, 
+			bossimagepath,
+			bossgrade
+		from
+			bosstab
+		where 
+			bossname=#{bossName} and bossgrade = #{bossGrade}
 	</select>
 </mapper>
