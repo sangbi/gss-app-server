@@ -1,8 +1,5 @@
 package com.gss.web.common.dao;
 
-import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,6 +33,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.getMapper(MemberMapper.class).checkID(userID);
 	}
 
+	@Override
+	public boolean checkPhoneNum(String phoneNumber) {
+		return sqlSession.getMapper(MemberMapper.class).checkPhoneNum(phoneNumber);
+	}
 	@Override
 	public Member findByID(String userid) {
 		return sqlSession.getMapper(MemberMapper.class).findByID(userid);

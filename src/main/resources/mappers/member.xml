@@ -26,14 +26,23 @@
 		from gssusertab 
 		where email=#{email}
 	</select>
+	
 	<select id="checkID" parameterType="String" resultType="boolean">
 		select count(*)
 		from gssusertab 
 		where gssuserid=#{userID}
 	</select>
 	
+	<select id="checkPhoneNum" parameterType="String" resultType="boolean">
+		select count(*)
+		from gssusertab 
+		where userphone=#{phoneNumber}
+	</select>
+	
 	<select id="findByEmail" parameterType="String" resultType="com.gss.web.common.domain.Member">
 		select
+			gssusernum,
+			gssuserid,
 			email, 
 			userpassword, 
 			userphone,
@@ -45,6 +54,8 @@
 	
 	<select id="findByID" parameterType="String" resultType="com.gss.web.common.domain.Member">
 		select
+			gssusernum,
+			gssuserid,
 			email, 
 			userpassword, 
 			userphone,

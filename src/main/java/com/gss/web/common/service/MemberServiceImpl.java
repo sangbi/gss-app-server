@@ -29,8 +29,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int joinUp(MemberCreateDto dto) {
 		Member member = new Member(dto.getUserid(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber(),dto.getName());
-		System.out.println(member.getGssuserId());
-		System.out.println(member.getUserName());
 		int result;
 		if (memberDAO.checkEmail(dto.getEmail()) && memberDAO.checkID(dto.getUserid())) {
 			throw new IllegalStateException();
@@ -57,6 +55,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public boolean checkPhoneNum(String phoneNumber) {
+		return memberDAO.checkPhoneNum(phoneNumber);
+	}
+	@Override
 	public int selectLastUserSEQ() {
 		return memberDAO.selectLastUserSEQ();
 	}
@@ -72,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		if(MCRdto.getPhoneNumber().isBlank()) {
 			String validKeyName = String.format("valid_phoneNumber" );
-			validatorResult.put(validKeyName, res.getMessage("Blank.password", null, null));
+			validatorResult.put(validKeyName, res.getMessage("Blank.phone", null, null));
 		}
 		if(MCRdto.getUserid().isBlank()) {
 			String validKeyName = String.format("valid_userid" );
@@ -90,10 +92,15 @@ public class MemberServiceImpl implements MemberService {
 			String validKeyName = String.format("valid_confirmPassword" );
 			validatorResult.put(validKeyName, res.getMessage("Blank.password", null, null));
 		}
+		if(MCRdto.getConfirmPassword().isBlank()) {
+			String validKeyName = String.format("valid_confirmPassword" );
+			validatorResult.put(validKeyName, res.getMessage("Blank.password", null, null));
+		}
 		if(!MCRdto.getPassword().equals(MCRdto.getConfirmPassword())) {
 			String validKeyName ="valid_confirmPasswordNot";
 			validatorResult.put(validKeyName, res.getMessage("Notequal.passwordtoconfirm", null, null));
 		}
+		
 		if(MCRdto.getName().isBlank()){
 			String validKeyName ="valid_name";
 			validatorResult.put(validKeyName, res.getMessage("Blank.name", null, null));
@@ -109,18 +116,21 @@ public class MemberServiceImpl implements MemberService {
 			String validKeyName = String.format("valid_%s", error.getField());
 			validatorResult.put(validKeyName, error.getDefaultMessage());
 		}
-		
 		return validatorResult;
 	}
-	public Map<String, String> checkEmailandEmail(MemberCreateDto MCRdto){
+	public Map<String, String> checkEmailandIDandPhoneNum(MemberCreateDto MCRdto){
 		Map<String, String> validatorResult = new HashMap<>();
 		if (checkEmail(MCRdto.getEmail())) {
-			String validKeyName ="valid_email";
+			String validKeyName ="valid_alreadyemail";
 			validatorResult.put(validKeyName, res.getMessage("already.email", null, null));
 		}
 		if (checkID(MCRdto.getUserid())) {
-			String validKeyName ="valid_userid";
+			String validKeyName ="valid_alreadyuserid";
 			validatorResult.put(validKeyName, res.getMessage("already.userid", null, null));
+		}
+		if(checkPhoneNum(MCRdto.getPhoneNumber())) {
+			String validKeyName ="valid_alreadyPhoneNumber";
+			validatorResult.put(validKeyName, res.getMessage("already.phonenumber", null, null));
 		}
 		return validatorResult;
 	}

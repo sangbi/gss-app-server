@@ -15,6 +15,8 @@ public interface MemberMapper {
 	
 	boolean checkID(String userID);
 
+	boolean checkPhoneNum(String phoneNumber);
+	
 	Member findByEmail(String email);
 	
 	Member findByID(String userid);
@@ -24,7 +26,4 @@ public interface MemberMapper {
 	void insertLoginHist(Map<String, Object> param);
 
 	List<Map<String, Object>> getAccountAuth(Member member);
-	
-	
-	
 }

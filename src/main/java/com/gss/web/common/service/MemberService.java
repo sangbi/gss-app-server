@@ -14,5 +14,7 @@ public interface MemberService {
 	
 	boolean checkID(String userid);
 	
+	boolean checkPhoneNum(String phoneNumber);
+	
 	int selectLastUserSEQ();
 }

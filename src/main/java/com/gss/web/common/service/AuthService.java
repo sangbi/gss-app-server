@@ -30,7 +30,7 @@ public class AuthService {
 			throw new IdPasswordNotMatchingException("dddd");
 		}
 
-		return new AuthInfo(member.getGssuserId(), member.getEmail());
+		return new AuthInfo(String.valueOf(member.getGssuserNum()),member.getGssuserId());
 	}
 	
 	public AuthInfo authenticateEmail(String email) {

@@ -1,71 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css" rel="stylesheet"
-		type="text/css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.js"></script>
-	<title>GSS</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css"
+	rel="stylesheet" type="text/css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+<title>GSS</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
 		<a class="navbar-brand" href="/main/home">GSS</a>
-		<button class="navbar-toggler" type="button"
-				data-toggle="collapse"
-				data-target="#navbarTogglerDemo02"
-				aria-controls="navbarTogglerDemo02"
-				aria-expanded="false"
-				aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarTogglerDemo02"
+			aria-controls="navbarTogglerDemo02" aria-expanded="false"
+			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item active">
-					<a class="nav-link" href="/main/home">Home<span class="sr-only">(current)</span></a>
+				<li class="nav-item active"><a class="nav-link"
+					href="/main/home">Home<span class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="#">내정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="/boss/bossList">보스</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">내정보</a>
+				<li class="nav-item"><a class="nav-link" href="/item/itemList">아이템</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/boss/bossList">보스</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/item/itemList">아이템</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">파티</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/calculate/partyList?userId=ㅁ">정산</a>
-				</li>
+				<li class="nav-item"><a class="nav-link" href="#">파티</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/calculate/partyList?userId=ㅁ">정산</a></li>
 			</ul>
-			<sec:authorize access="!isAuthenticated()">
-				<form class="form-inline my-2 my-lg-0">
-					<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-0" 
-							type="submit" 
-							onclick="loction.href='#'">Sign Up
-					</button>
-					<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-0"
-							type="submit"
-							onclick="loction.href='/member/login'">Login
-					</button>
-				</form>
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal.username"/>님 어서오세요.
-				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-0"
-							type="submit"
-							onclick="loction.href='/member/logout'">Logout
-					</button>
-			</sec:authorize>
+			<c:if test="${empty authInfo}">
+				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 col-2"
+					onclick="moveJoin()">SignUp</button>
+				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 col-2"
+					onclick="moveLogin()">Login</button>
+			</c:if>
+			<c:if test="${!empty authInfo }">
+				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 col-2"
+					onclick="logOut()">${authInfo }님,환영합니다.</button>
+			</c:if>
+			<c:if test="${!empty authInfo }">
+				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 col-2"
+					onclick="logOut()">Log Out</button>
+			</c:if>
 		</div>
 	</nav>
 </body>

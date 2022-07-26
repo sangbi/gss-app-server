@@ -49,7 +49,17 @@ public class MainApi {
 		
 		return "main/gssMain";
 	}
-	
+	@PostMapping("/home")
+	public String PostMainPage(Model model) {
+		int pageCount = 1;
+		int endPageCount = 510;
+		
+		model.addAttribute("noticeList", noticeService.getNoticeList("1"));
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("endPageCount", endPageCount);
+		
+		return "main/gssMain";
+	}
 	@GetMapping("/home/page={page}")
 	public String mainPage(Model model, @PathVariable("page") String page) {
 		int pageCount = 1;

@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthInfo {
+	private String userKey;
 	private String id;
-	private String email;
 }
