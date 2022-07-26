@@ -27,6 +27,8 @@ public class MemberCreateDto {
 	private String confirmPassword;
 	@Pattern(regexp="^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$",message="{Pattern.phone}")
 	private String phoneNumber;
+	@NotBlank
+	private String certificationFlag;
 	
 	public MemberCreateDto(String name, String userid, String email, String password, String phoneNumber) {
 		this.name=name;

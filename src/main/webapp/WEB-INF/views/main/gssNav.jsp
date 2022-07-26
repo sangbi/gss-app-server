@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 	
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
 					href="/main/home">Home<span class="sr-only">(current)</span></a></li>
-				<li class="nav-item"><a class="nav-link" href="#">내정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="/member/mypage">내정보</a></li>
 				<li class="nav-item"><a class="nav-link" href="/boss/bossList">보스</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/item/itemList">아이템</a>
@@ -40,17 +41,17 @@
 					href="/calculate/partyList?userId=ㅁ">정산</a></li>
 			</ul>
 			<c:if test="${empty authInfo}">
-				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 col-2"
+				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 "
 					onclick="moveJoin()">SignUp</button>
-				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 col-2"
+				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 "
 					onclick="moveLogin()">Login</button>
 			</c:if>
 			<c:if test="${!empty authInfo }">
-				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 col-2"
-					onclick="logOut()">${authInfo }님,환영합니다.</button>
+				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 "
+					onclick="moveMyPage()">Hello!<br>${authInfo.id }</button>
 			</c:if>
 			<c:if test="${!empty authInfo }">
-				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 col-2"
+				<button class="mr-sm-2 btn btn-outline-success my-2 my-sm-1 "
 					onclick="logOut()">Log Out</button>
 			</c:if>
 		</div>

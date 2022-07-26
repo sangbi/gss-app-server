@@ -21,6 +21,15 @@
 		)
 	</insert>
 	
+	<update id="editUserInfo" parameterType="com.gss.web.common.domain.Member">
+		update gssusertab 
+		set email=#{email},
+			userpassword=#{userPassword},
+			userphone=#{userPhone},
+			username=#{userName}
+		where gssuserid=#{gssuserId}	
+	</update>
+	
 	<select id="checkEmail" parameterType="String" resultType="boolean">
 		select count(*)
 		from gssusertab 
@@ -37,6 +46,19 @@
 		select count(*)
 		from gssusertab 
 		where userphone=#{phoneNumber}
+	</select>
+	
+	<select id="findByUserPK" parameterType="int" resultType="com.gss.web.common.domain.Member">
+		select
+			gssusernum,
+			gssuserid,
+			email, 
+			userpassword, 
+			userphone,
+			privilge,
+			username
+		from gssusertab
+		where gssusernum = #{userKey} 
 	</select>
 	
 	<select id="findByEmail" parameterType="String" resultType="com.gss.web.common.domain.Member">
