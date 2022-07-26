@@ -28,7 +28,7 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="/main/home">Home<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">내정보</a>
@@ -40,7 +40,7 @@
 					<a class="nav-link" href="/main/nav/item">아이템</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">파티</a>
+					<a class="nav-link" href="/party/main">파티</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">정산</a>
