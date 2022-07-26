@@ -34,5 +34,6 @@
 		</tr>
 		</table>
 		<a href="/admin/item"><input type="button" value="목록"></a>
+		<a href="/admin/deleteItem?itemName=${itemList.itemName}&classification=${itemList.classification}"><input type="button" value="삭제"></a>
 </body>
 </html>

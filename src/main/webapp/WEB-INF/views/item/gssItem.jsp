@@ -41,7 +41,7 @@
 				<tbody>
 				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
 				<tr>
-					<td><a href=<c:url value="/admin/selectItem?itemName=${itemList.itemName}&classification=${itemList.classification}"/>>
+					<td><a href=<c:url value="/item/gssSelectItem?itemName=${itemList.itemName}&classification=${itemList.classification}"/>>
 						${itemList.itemName}</a></td>
 					<td>${itemList.classification}</td>
 					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>

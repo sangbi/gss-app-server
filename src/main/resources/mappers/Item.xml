@@ -68,4 +68,17 @@
 			classification = #{classification} and
 			itemname = #{itemName}
 	</select>
+	
+	<delete id="deleteByItemName" parameterType="Map">
+		delete
+		from 
+			itemtab
+		where 
+			itemname=#{itemName} and classification = #{classification}
+	</delete>
+	<!-- 
+	<update id="updateByItem" parameterType="">
+	
+	</update>
+	 -->
 </mapper>

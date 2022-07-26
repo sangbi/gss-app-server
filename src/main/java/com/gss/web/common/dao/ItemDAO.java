@@ -15,7 +15,7 @@ public interface ItemDAO {
 		
 	public  int selectByItem(Map map);
 		
-	public  Item deleteByItemName(String itemName);
+	public  int deleteByItemName(Map map);
 		
 	public List<Item> selectSearchItemName(String itemName);
 	

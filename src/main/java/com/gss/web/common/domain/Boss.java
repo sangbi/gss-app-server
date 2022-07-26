@@ -11,10 +11,9 @@ public class Boss {
 	private String bossImagepath;	
 	private String bossGrade;	
 	
-	public Boss(String boossName,String bossImagepath,String bossGrade) {
-		this.bossName=boossName;
+	public Boss(String bossName,String bossImagepath,String bossGrade) {
+		this.bossName=bossName;
 		this.bossImagepath=bossImagepath;
 		this.bossGrade=bossGrade;
 	}
-	
 }

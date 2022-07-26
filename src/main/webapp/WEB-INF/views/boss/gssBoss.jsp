@@ -17,7 +17,7 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<h1>아이템</h1>
+	<h1>보스</h1>
 	<div class="div_boss_list">		
 		<table class="table">
 			<thead class="table-dark">
@@ -30,14 +30,15 @@
 				<tbody>
 				<c:forEach var="bossList" items="${bossList}" varStatus="loop">
 				<tr>
-					<td>${bossList.bossName}</td>
+					<td><a href=<c:url value="/boss/selectBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
+					${bossList.bossName}</a></td>
 					<td>${bossList.bossGrade}</td>
 					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
 				</tr>
 				</c:forEach>
 			</tbody>
-	</div>
 		</table>
+	</div>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

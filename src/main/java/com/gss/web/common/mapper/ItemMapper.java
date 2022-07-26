@@ -26,4 +26,6 @@ public interface ItemMapper {
 	public List<Item> selectSearchClassification(String classification);
 	
 	public Item selectByItemNameAndClassification(Map map);
+	
+	public int deleteByItemName(Map map);
 }

@@ -14,10 +14,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bossAdd.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/bossImage"></script>
-<title>보스정보등록 보스리스트</title>
+<title>보스별드랍 보스리스트</title>
 </head>
 <body>
-<h1>보스정보 등록</h1>
+<h1>보스정보</h1>
 <div class="div_item_list">
 <table class="table">
 			<thead class="table-dark">
@@ -31,7 +31,7 @@
 	<c:forEach var="bossList" items="${bossList}" varStatus="loop">
 	<tr>
 		<td>
-		<a href=<c:url value="/admin/boss/select?=${bossList.bossName}"/>>
+		<a href=<c:url value="/admin/bossDropItem?dropName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
 			${bossList.bossName}</a></td>
 		<td>${bossList.bossGrade}</td>
 		<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>

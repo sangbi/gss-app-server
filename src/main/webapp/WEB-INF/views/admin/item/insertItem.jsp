@@ -39,6 +39,7 @@
 		</tr>
 		</table>
 		<input type="submit" value="등록">
+		<a href="/admin/item"><input type="button" value="뒤로가기"></a>
 </form:form>
 </body>
 </html>

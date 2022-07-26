@@ -31,8 +31,8 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public Item deleteByItemName(String itemName) {
-		return sqlSession.getMapper(ItemMapper.class).deleteByItemName(itemName);
+	public int deleteByItemName(Map map) {
+		return sqlSession.getMapper(ItemMapper.class).deleteByItemName(map);
 	}
 
 	@Override
