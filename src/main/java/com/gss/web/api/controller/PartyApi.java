@@ -1,5 +1,7 @@
 package com.gss.web.api.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,14 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gss.web.api.dto.AuthInfo;
 import com.gss.web.api.dto.PartyCreateDto;
 import com.gss.web.api.dto.PartyPageDto;
+import com.gss.web.common.domain.Member;
+import com.gss.web.common.service.MemberServiceImpl;
 import com.gss.web.common.service.PartyPageCreatorService;
 import com.gss.web.common.service.PartyServiceImpl;
 
 @Controller
 public class PartyApi {
 	private PartyServiceImpl partyServiceImpl;
+	@Autowired
+	private MemberServiceImpl memberServiceImpl;
 
 	@Autowired
 	public void setPartyService(PartyServiceImpl partyserviceimpl) {
@@ -23,7 +30,13 @@ public class PartyApi {
 	}
 
 	@RequestMapping(value = "party/main", method = RequestMethod.GET)
-	public String main(Model model, PartyPageDto page, PartyPageCreatorService pc) {
+	public String main(Model model, PartyPageDto page, PartyPageCreatorService pc, HttpSession session,String authInfo) {
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}
+		AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+		Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+		page.setId(member.getGssuserId());
 		pc.setPaging(page);
 		pc.setArticleCount(partyServiceImpl.getArticleCountNum());
 		model.addAttribute("pc", pc);

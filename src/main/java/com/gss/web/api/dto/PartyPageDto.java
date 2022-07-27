@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class PartyPageDto {
+	private String id;
 	private int page;
 	private int counterPage;
 
