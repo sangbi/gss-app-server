@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gss.web.common.domain.Boss;
 import com.gss.web.common.domain.Item;
 import com.gss.web.common.domain.ItemOfBoss;
 
@@ -15,4 +16,8 @@ public interface ItemOfBossMapper {
 	public List<Integer> selectAllItemOfBoss(Map map);
 	
 	public Item selectByBossItem(int itemNum);
+	
+	public Boss selectByBoss(int bossNum);
+	
+	public Item selectInsertItemList(ItemOfBoss itemOfBoss);
 }

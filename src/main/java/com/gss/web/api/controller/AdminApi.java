@@ -21,6 +21,7 @@ import com.gss.web.api.dto.BossDto;
 import com.gss.web.api.dto.ItemDto;
 import com.gss.web.common.domain.Boss;
 import com.gss.web.common.domain.Item;
+import com.gss.web.common.domain.ItemOfBoss;
 import com.gss.web.common.service.BossService;
 import com.gss.web.common.service.FileService;
 import com.gss.web.common.service.ItemOfBossService;
@@ -86,7 +87,8 @@ public class AdminApi {
 	}
 
 	@GetMapping("/selectBoss")
-	public String readBoss( Model model, @RequestParam("bossName") String bossName, @RequestParam("bossGrade") String bossGrade) {
+	public String readBoss( Model model, @RequestParam("bossName") String bossName, 
+							@RequestParam("bossGrade") String bossGrade) {
 		Map<String, String> map= new HashMap<String, String>();
 		map.put("bossName", bossName);
 		map.put("bossGrade", bossGrade);
@@ -192,7 +194,6 @@ public class AdminApi {
 		List<Integer> result= itemOfBossService.selectAllItemOfBoss(map);
 		Item[] itemList = new Item[result.size()];
 		
-		
 		for (int i = 0; i < result.size(); i++) {
 			itemList[i] =  itemOfBossService.selectByBossItem(result.get(i));
 			System.out.println(itemList[i].getItemName() + " : " + itemList[i].getClassification() + " : " + itemList[i].getItemImagepath() );
@@ -200,6 +201,23 @@ public class AdminApi {
 		
 		model.addAttribute("itemList", itemList);
 		
+		
 		return "/admin/bossForDrop/bossDropForItem";
+	}
+	
+	@GetMapping("/addDropItem")
+	public String addDropItem(Model model,@RequestParam("dropName") String bossName, 
+			@RequestParam("bossGrade") String bossGrade) {
+		Map<String, String> map= new HashMap<String, String>();
+		map.put("bossName", bossName);
+		map.put("bossGrade", bossGrade);
+		List<Integer> result= itemOfBossService.selectAllItemOfBoss(map);
+		Item[] itemList = new Item[result.size()];
+		
+		for (int i = 0; i < result.size(); i++) {
+			itemList[i] =  itemOfBossService.selectByBossItem(result.get(i));
+		}
+		
+		return "/admin/bossForDrop/insertDropItem";
 	}
 }

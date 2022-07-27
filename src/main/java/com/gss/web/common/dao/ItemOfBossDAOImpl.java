@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gss.web.common.domain.Boss;
 import com.gss.web.common.domain.Item;
 import com.gss.web.common.domain.ItemOfBoss;
 import com.gss.web.common.mapper.ItemOfBossMapper;
@@ -29,5 +30,15 @@ public class ItemOfBossDAOImpl implements ItemOfBossDAO{
 	@Override
 	public Item selectByBossItem(int itemNum){
 		return sqlSession.getMapper(ItemOfBossMapper.class).selectByBossItem(itemNum);
+	}
+	
+	@Override
+	public Boss selectByBoss(int bossNum) {
+		return sqlSession.getMapper(ItemOfBossMapper.class).selectByBoss(bossNum);
+	}
+	
+	@Override
+	public Item selectInsertItemList(ItemOfBoss itemOfBoss) {
+		return sqlSession.getMapper(ItemOfBossMapper.class).selectInsertItemList(itemOfBoss);
 	}
 }
