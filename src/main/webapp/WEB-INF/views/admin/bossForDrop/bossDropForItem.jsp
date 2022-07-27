@@ -38,7 +38,7 @@
 			</tbody>
 		</table>
 	<a href="/admin/bossAndDrop"><input type="button" value="목록"></a>
-	<a href=<c:url value="/admin/addDropItem?dropName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>><input type="button" value="아이템정보 추가"></a>
+	<a href=<c:url value="/admin/addDropItem?bossName=${bossName}&bossGrade=${bossGrade }"/>><input type="button" value="아이템정보 추가"></a>
 </div>
 </body>
 </html>

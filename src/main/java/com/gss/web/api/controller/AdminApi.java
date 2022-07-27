@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,22 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gss.web.api.dto.AuthInfo;
 import com.gss.web.api.dto.BossDto;
 import com.gss.web.api.dto.ItemDto;
 import com.gss.web.common.domain.Boss;
 import com.gss.web.common.domain.Item;
 import com.gss.web.common.domain.ItemOfBoss;
+import com.gss.web.common.domain.Member;
 import com.gss.web.common.service.BossService;
 import com.gss.web.common.service.FileService;
 import com.gss.web.common.service.ItemOfBossService;
 import com.gss.web.common.service.ItemService;
+import com.gss.web.common.service.MemberServiceImpl;
 
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/admin")
 public class AdminApi {
+	
 	@Autowired
 	private FileService fileService;
 	
@@ -45,9 +49,23 @@ public class AdminApi {
 	@Autowired
 	private ItemOfBossService itemOfBossService;
 
-	@GetMapping("/main")
-	public String adminMain() {		
-		return "admin/adminMain";
+	@Autowired
+	private MemberServiceImpl memberServiceImpl;
+
+	@GetMapping("/admin/main")
+	public String adminMain(HttpSession session) {	
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}else {
+			AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+			Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+			if(member.getPrivilge().equals("ADMIN")) {
+				return "admin/adminMain";
+			}
+			else {
+				return "redirect:/main/home";
+			}
+		}
 	}
 
 	@GetMapping("/boss")
@@ -200,14 +218,17 @@ public class AdminApi {
 		}
 		
 		model.addAttribute("itemList", itemList);
+		model.addAttribute("bossName",bossName);
+		model.addAttribute("bossGrade",bossGrade);
 		
 		
 		return "/admin/bossForDrop/bossDropForItem";
 	}
 	
 	@GetMapping("/addDropItem")
-	public String addDropItem(Model model,@RequestParam("dropName") String bossName, 
+	public String addDropItem(Model model,@RequestParam("bossName") String bossName, 
 			@RequestParam("bossGrade") String bossGrade) {
+		System.out.println(bossName);
 		Map<String, String> map= new HashMap<String, String>();
 		map.put("bossName", bossName);
 		map.put("bossGrade", bossGrade);
