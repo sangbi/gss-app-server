@@ -36,7 +36,7 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/item/itemList">아이템</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">파티</a></li>
+				<li class="nav-item"><a class="nav-link" href="/party/main">파티</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="/calculate/partyList?userId=ㅁ">정산</a></li>
 			</ul>

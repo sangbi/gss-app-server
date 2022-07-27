@@ -104,6 +104,7 @@
 
 	<select id="showMain"
 		parameterType="com.gss.web.api.dto.PartyPageDto"
+		
 		resultType="com.gss.web.api.dto.PartyMainDto1">
 		select gssuserid, partyname, bossname, bossgrade
 		from bosstab b
@@ -111,7 +112,7 @@
 		join memberofpartytab m on b2.partynum = m.partynum
 		join partytab p on p.partynum = m.partynum
 		join gssusertab g on g.gssusernum = m.gssusernum
-		where g.gssuserid ='testk'
+		where g.gssuserid =#{id}
 		and m.partyleader is true
 		order by partyname desc
 		limit #{counterPage} offset #{pageStart}
@@ -126,7 +127,7 @@
 		join memberofpartytab m on b2.partynum = m.partynum
 		join partytab p on p.partynum = m.partynum
 		join gssusertab g on g.gssusernum = m.gssusernum
-		where g.gssuserid ='testk'
+		where g.gssuserid =#{id}
 		and m.partyleader is false order by partyname desc
 		limit #{counterPage} offset #{pageStart}
 	</select>
