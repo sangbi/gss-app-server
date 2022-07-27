@@ -1,5 +1,6 @@
 package com.gss.web.api.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import com.gss.web.common.domain.Calculate;
 import com.gss.web.common.domain.CalculateComplete;
 import com.gss.web.common.domain.CalculateMain;
 import com.gss.web.common.domain.Item;
+import com.gss.web.common.domain.ItemInfo;
 import com.gss.web.common.domain.PartyGetItem;
 import com.gss.web.common.domain.UserRatioInfo;
 import com.gss.web.common.service.CalculateService;
@@ -29,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/calculate")
+@RequestMapping(value="/calculate")
 public class CalculateApi {
 	@Autowired
 	private CalculateService calculateService;
@@ -37,11 +39,11 @@ public class CalculateApi {
 	@Autowired
 	private ItemService itemService;
 
-	@GetMapping("/partyList")
+	@PostMapping("/partyList")
 	public String showMyPartyList(@RequestParam("userId") String userId, Model model) {
 		int userNum = calculateService.selectByUserId(userId);
-
 		List<CalculateMain> userList = new ArrayList<CalculateMain>();
+		
 		userList = calculateService.selectByUserNumber(userNum);
 		model.addAttribute("userList", userList);
 
@@ -55,7 +57,14 @@ public class CalculateApi {
 		List<Calculate> calcAllMember = new ArrayList<Calculate>();
 		List<Item> itemList = new ArrayList<Item>(); 
 		List<PartyGetItem> pgiList = new ArrayList<PartyGetItem>();
-		long price = 0;
+		long price = 0;	
+		List<Integer> bossNum = calculateService.selectBossNumByPartyName(partyName);
+		List<ItemInfo> itemInfo = new ArrayList<ItemInfo>();
+		for(int boss : bossNum) {
+			for(ItemInfo item : calculateService.selectItemByItemNumber(boss)) {
+				itemInfo.add(item);
+			}
+		}
 		
 		int count = calculateService.selectCountMember(partyName);
 		Calculate partyLeader = calculateService.selectPartyLeader(partyName);
@@ -69,7 +78,9 @@ public class CalculateApi {
 			price += pgiList.get(i).getItemSalePrice()  ;
 		}
 		
-		price = price - (price * 5) / 100 ;		
+		price = price - (price * 5) / 100 ;
+		DecimalFormat df = new DecimalFormat("###,###,###,###,###");
+		String money = df.format(price);
 		
 		model.addAttribute("partyName", partyName);
 		model.addAttribute("count", count);
@@ -80,6 +91,8 @@ public class CalculateApi {
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pgiList", pgiList);
 		model.addAttribute("price", price);
+		model.addAttribute("money", money);
+		model.addAttribute("bossItemList", itemInfo);
 		
 		return "calculate/calculate";
 	}
@@ -162,7 +175,7 @@ public class CalculateApi {
 		return "redirect:/main/home";
 	}
 	
-	@GetMapping("/calculateComplete")
+	@PostMapping("/calculateComplete")
 	public String calculateComplete(@RequestParam("userId") String userId, Model model) {
 		List<CalculateComplete> calculateComplet = calculateService.selectCalculateCompletList(userId);
 		model.addAttribute("calculateComplete", calculateComplet);

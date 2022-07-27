@@ -12,6 +12,7 @@ import com.gss.web.api.dto.ResultTabDto;
 import com.gss.web.common.domain.Calculate;
 import com.gss.web.common.domain.CalculateComplete;
 import com.gss.web.common.domain.CalculateMain;
+import com.gss.web.common.domain.ItemInfo;
 import com.gss.web.common.domain.PartyGetItem;
 import com.gss.web.common.domain.UserRatioInfo;
 import com.gss.web.common.mapper.CalculateMapper;
@@ -109,5 +110,20 @@ public class CalculateDaoImpl implements CalculateDao {
 	@Override
 	public List<PartyGetItem> selectCalculateCompleteItemList(String partyName) {
 		return sqlSession.getMapper(CalculateMapper.class).selectCalculateCompleteItemList(partyName);
+	}
+	
+	@Override
+	public List<Integer> selectBossNumByPartyName(String partyName) {
+		return sqlSession.getMapper(CalculateMapper.class).selectBossNumByPartyName(partyName);
+	}
+	
+	@Override
+	public List<ItemInfo> selectItemByItemNumber(int bossNum) {
+		return sqlSession.getMapper(CalculateMapper.class).selectItemByItemNumber(bossNum);
+	}
+	
+	@Override
+	public int selectItemNumByBossNumber(int bossNum) {
+		return sqlSession.getMapper(CalculateMapper.class).selectItemNumByBossNumber(bossNum);
 	}
 }

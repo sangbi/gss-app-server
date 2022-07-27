@@ -1,5 +1,8 @@
 package com.gss.web.api.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gss.web.api.dto.AuthInfo;
+import com.gss.web.common.domain.Member;
+import com.gss.web.common.service.MemberServiceImpl;
 import com.gss.web.common.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -16,10 +22,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/main")
 public class MainApi {
+	@Autowired
+	private final MemberServiceImpl memberServiceImpl;
+	
 	private final NoticeService noticeService;
 	
 	@GetMapping("/nav")
-	public String GetNavPage(Model model) {
+	public String GetNavPage(Model model, HttpSession session) {
+
 		return "main/gssNav";
 	}
 	

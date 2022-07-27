@@ -12,25 +12,28 @@
 	<link href="${pageContext.request.contextPath}/resources/assets/css/mainPage.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/itemAdd.js"></script>
 	<title>GSS</title>
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div class="div_main_mid">
+	<div class="div_calculate_main">
 		<c:forEach items="${userList}" var="userList" varStatus="loop">
-		<table class="table table-hover table-bordered" style="table-layout: fixed">
-			<thead>
-				<tr>
-					<th>파티 이름</th><th>캐릭터 이름</th>
-				</tr>
-			</thead>
-			<tbody>	
-				<tr>
-					<td><a href="/calculate/calculateList?partyName=${userList.partyName}">${userList.partyName}</a></td>
-					<td>${userList.charaterName}</td>	
-				</tr>
-			</tbody>
-		</table>
+		<form action="/calculate/calculateList" method="get">
+			<table class="table table-hover table-bordered" style="table-layout: fixed">
+				<thead>
+					<tr>
+						<th>파티 이름</th><th>캐릭터 이름</th>
+					</tr>
+				</thead>
+				<tbody>	
+					<tr>
+						<td><input type="submit" name="partyName" value="${userList.partyName}" class="btn btn-link" style="color: black;" onclick="moveCalculateList(this.form)"></td>
+						<td>${userList.charaterName}</td>	
+					</tr>
+				</tbody>
+			</table>
+		</form>
 		<br>
 	</c:forEach>
 	</div>
