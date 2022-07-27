@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gss.web.common.dao.ItemOfBossDAO;
+import com.gss.web.common.domain.Boss;
 import com.gss.web.common.domain.Item;
 import com.gss.web.common.domain.ItemOfBoss;
 
@@ -28,5 +29,15 @@ public class ItemOfBossServiceImpl implements ItemOfBossService{
 	@Override
 	public Item selectByBossItem(int itemNum){
 		return itemOfBossDAO.selectByBossItem(itemNum);
+	}
+	
+	@Override
+	public Boss selectByBoss(int bossNum) {
+		return itemOfBossDAO.selectByBoss(bossNum);
+	}
+	
+	@Override
+	public Item selectInsertItemList(ItemOfBoss itemOfBoss) {
+		return itemOfBossDAO.selectInsertItemList(itemOfBoss);
 	}
 }

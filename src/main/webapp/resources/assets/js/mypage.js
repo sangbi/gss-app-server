@@ -23,13 +23,14 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('#certificationEmailConfirm').click(function(){
  var certificationNumber=$('#certificationNumber').val();
+ var userinputemail=$('#email').val();
  if(certificationNumber == ""){
 	alert("인증번호를 입력해주세요");
 }else{
 	$.ajax({
 		type:"POST",
 		url :"/member/cerEmail",
-		data :{cerNumber: certificationNumber},
+		data :{cerNumber: certificationNumber, inputEmail: userinputemail},
 		dataType : "html",
 		success : function(result){
 			if(result == "true"){
