@@ -8,6 +8,7 @@ import com.gss.web.api.dto.ResultTabDto;
 import com.gss.web.common.domain.Calculate;
 import com.gss.web.common.domain.CalculateComplete;
 import com.gss.web.common.domain.CalculateMain;
+import com.gss.web.common.domain.ItemInfo;
 import com.gss.web.common.domain.PartyGetItem;
 import com.gss.web.common.domain.UserRatioInfo;
 
@@ -47,4 +48,10 @@ public interface CalculateDao {
 	public List<CalculateComplete> selectCalculateCompletList (String userId);
 	
 	public List<PartyGetItem> selectCalculateCompleteItemList(String partyName);
+	
+	public List<Integer> selectBossNumByPartyName(String partyName);
+	
+	public List<ItemInfo> selectItemByItemNumber(int bossNum);
+	
+	public int selectItemNumByBossNumber (int bossNum);
 }

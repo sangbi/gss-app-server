@@ -239,4 +239,34 @@
 			p.itemnum = i.itemnum
 			and p.resultstat = true;
 	</select>
+	
+	<select id="selectBossNumByPartyName" parameterType="String" resultType="int">
+		select distinct  
+			bossnum 
+		from
+			bosshuntingatpartytab 
+		where 
+			partynum = 
+			(select 
+				partynum 
+			from 
+				partytab
+			where
+				partyname = #{partyName}); 
+	</select>
+	
+	<select id="selectItemNumByBossNumber" parameterType="int" resultType="int">
+		select 
+			itemnum 
+		from 
+			itemofbosstab
+		where 
+			bossnum = #{bossNum};	
+	</select>
+	
+	<select id="selectItemByItemNumber" parameterType="int" resultType="com.gss.web.common.domain.ItemInfo">
+		select itemname, itemimagepath, classification  
+		from itemtab as it join itemofbosstab as ib
+		on it.itemnum = ib.itemnum and ib.bossnum = #{bossNum};	
+	</select>
 </mapper>

@@ -6,6 +6,16 @@ html, body {
     height: 100%;
 }
 
+.div_calculate_main {
+	margin:auto;
+	width:50%;
+	overflow:hidden;
+	height:100%;
+	margin-top:5%;
+	margin-bottom:5%;
+	text-align:center;
+}
+
 .div_main_mid {
 	margin:auto;
 	width:50%;
@@ -38,4 +48,12 @@ html, body {
 
 .modal{
 	text-align:center;
+}
+
+.nav-link_right{
+	margin-left:50%;
+}
+
+.div_login{
+	float: left;
 }

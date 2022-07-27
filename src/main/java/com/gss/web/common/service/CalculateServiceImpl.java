@@ -12,6 +12,7 @@ import com.gss.web.common.dao.CalculateDao;
 import com.gss.web.common.domain.Calculate;
 import com.gss.web.common.domain.CalculateComplete;
 import com.gss.web.common.domain.CalculateMain;
+import com.gss.web.common.domain.ItemInfo;
 import com.gss.web.common.domain.PartyGetItem;
 import com.gss.web.common.domain.UserRatioInfo;
 
@@ -108,5 +109,20 @@ public class CalculateServiceImpl implements CalculateService {
 	@Override
 	public List<PartyGetItem> selectCalculateCompleteItemList(String partyName) {
 		return calculateDao.selectCalculateCompleteItemList(partyName);
+	}
+	
+	@Override
+	public List<Integer> selectBossNumByPartyName(String partyName) {
+		return calculateDao.selectBossNumByPartyName(partyName);
+	}
+	
+	@Override
+	public List<ItemInfo> selectItemByItemNumber(int bossNum) {
+		return calculateDao.selectItemByItemNumber(bossNum);
+	}
+	
+	@Override
+	public int selectItemNumByBossNumber(int bossNum) {
+		return calculateDao.selectItemNumByBossNumber(bossNum);
 	}
 }
