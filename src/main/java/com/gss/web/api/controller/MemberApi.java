@@ -1,6 +1,9 @@
 package com.gss.web.api.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -49,7 +52,9 @@ public class MemberApi {
 	@Autowired
 	private MailService mailService;
 	
-	private String randomNumber;
+	private List<Map<String, String>> certifyCationEmailPass = new ArrayList<Map<String, String>>();
+	
+
 	
 	private static final String SESSION_COOKIE_NAME = "userSessionId";
 
@@ -241,18 +246,28 @@ public class MemberApi {
 	@PostMapping("/email")
 	@ResponseBody
 	public void confirmEmail(String userEmail) {
-		randomNumber=mailService.sendMail(userEmail);
+		String randomNumber=mailService.sendMail(userEmail);
+		Map<String, String>map= new HashMap<String, String>();
+		map.put(userEmail, randomNumber);
+		certifyCationEmailPass.add(map);
 	}
 	
 	@PostMapping("/cerEmail")
 	@ResponseBody
-	public String certificationEmail(String cerNumber) {
+	public String certificationEmail(String cerNumber, String inputEmail) {
 		String result="";
-		if(randomNumber.equals(cerNumber)) {
-			result="true";
-		}else {
-			result="false"; 
-		}
+		 for(int i=0; i<certifyCationEmailPass.size(); i++) {
+			 Map<String, String>tempMap=certifyCationEmailPass.get(i);
+			 Map<String, String>insertValueMap= new HashMap<String, String>();
+			 insertValueMap.put(inputEmail, cerNumber);
+			 if(tempMap.equals(insertValueMap)) {
+				 result="true";
+				 certifyCationEmailPass.remove(i);
+				 break;
+			 }else {
+				 result="false"; 
+			 }
+		 }
 		return result;
 	}
 	

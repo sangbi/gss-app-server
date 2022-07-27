@@ -31,7 +31,7 @@
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
 					href="/main/home">Home<span class="sr-only">(current)</span></a></li>
-				<li class="nav-item"><a class="nav-link" href="/member/mypage">내정보</a></li>
+				<c:if test="${!empty authInfo }"><li class="nav-item"><a class="nav-link" href="/member/mypage">내정보</a></li></c:if>		
 				<li class="nav-item"><a class="nav-link" href="/boss/bossList">보스</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/item/itemList">아이템</a>
