@@ -47,4 +47,6 @@ public interface PartyMapper {
 	public List<String> getBossGrade();
 	
 	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto);
+	
+	public List<String> getBossGradeList(String choiceBossName);
 }
