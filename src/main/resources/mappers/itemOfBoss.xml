@@ -13,7 +13,7 @@
 		from 
 			itemtab 
 		where 
-			itemname = #{itemName}),
+			itemnum = #{itemNum}),
 		(select 
 			bossnum 
 		from 
@@ -40,6 +40,7 @@
 	
 	<select id="selectByBossItem" parameterType="int" resultType="com.gss.web.common.domain.Item">
 		select 
+			itemnum,
 			itemname, 
 			itemimagepath, 
 			classification 
@@ -59,33 +60,47 @@
 			bossnum = #{bossNum}
 	</select>
 	
-	<select id="selectInsertItemList" parameterType="com.gss.web.common.domain.ItemOfBoss" resultType="com.gss.web.common.domain.Item">
+	<select id="selectInsertItemList" parameterType="Map" resultType="int">
+		select 
+			it.itemnum 
+		from 
+			itemtab as it 
+			join itemofbosstab as io
+		on 
+			it.itemnum = io.itemnum 
+			and io.bossnum = 
+			(select 
+				bossnum 
+			from 
+				bosstab 
+			where 
+				bossname = #{bossName} and bossgrade=#{bossGrade});
+	</select>
+	
+	<select id="selectItemListByItemNum" parameterType="int" resultType="com.gss.web.common.domain.Item">
 		select 
 			itemname, 
 			itemimagepath, 
-			classification 
+			classification  
 		from 
 			itemtab 
 		where not 
-			itemnum in(
-				(select 
+			itemnum = #{itemNum};
+	</select>
+	
+	<delete id="deleteItemListByItemNum" parameterType="com.gss.web.common.domain.ItemOfBoss">
+		delete
+		from
+			itemofbosstab
+		where
+			bossnum= (
+				select 
 					bossnum 
 				from 
 					bosstab 
 				where 
-					bossname= #{bossName} and bossgrade= #{bossGrade}),
-				(select
-					itemnum
-				from
-					itemifbobsstab
-				where
+					bossname = #{bossName} and bossgrade = #{bossGrade}) 
+				and 
 					itemnum = #{itemNum}
-				))
-	</select>
-	
-	<!-- select itemname, itemimagepath, classification 
-		from itemtab where not itemnum in((
-		select bossnum from bosstab where 
-			bossname= '자쿰' and bossgrade= '노멀'),
-				(select itemnum from itemofbosstab where itemnum =8)); -->
+	</delete>
 </mapper>

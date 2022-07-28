@@ -37,7 +37,17 @@ public class ItemOfBossServiceImpl implements ItemOfBossService{
 	}
 	
 	@Override
-	public Item selectInsertItemList(ItemOfBoss itemOfBoss) {
-		return itemOfBossDAO.selectInsertItemList(itemOfBoss);
+	public List<Integer> selectInsertItemList(Map map) {
+		return itemOfBossDAO.selectInsertItemList(map);
+	}
+	
+	@Override
+	public List<Item> selectItemListByItemNum(int itemNum) {
+		return itemOfBossDAO.selectItemListByItemNum(itemNum);
+	}
+	
+	@Override
+	public int deleteItemListByItemNum (ItemOfBoss itemOfBoss) {
+		return itemOfBossDAO.deleteItemListByItemNum(itemOfBoss);
 	}
 }

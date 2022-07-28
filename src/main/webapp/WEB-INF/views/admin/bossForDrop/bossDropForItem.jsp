@@ -24,6 +24,7 @@
 					<th>아이템 이름</th>
 					<th>분류</th>
 					<th>아이템 이미지</th>
+					<th>비고</th>
 				</tr>
 			</thead>
 				<tbody>
@@ -33,10 +34,14 @@
 					${itemList.itemName}</td>
 					<td>${itemList.classification}</td>
 					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
+					<td><a href=<c:url value="/admin/deleteDropItem?bossNum=${bossList.bossnum}&itemNum=${itemList.itemNum}&bossName=${bossName}&bossGrade=${bossGrade}"/>><input type="button" value="삭제"></a></td>
 				</tr>
+				<input type="hidden" value="${itemList.itemNum}">
+				<input type="hidden" value="${bossList.bossNum}">
 				</c:forEach>
 			</tbody>
 		</table>
+		
 	<a href="/admin/bossAndDrop"><input type="button" value="목록"></a>
 	<a href=<c:url value="/admin/addDropItem?bossName=${bossName}&bossGrade=${bossGrade }"/>><input type="button" value="아이템정보 추가"></a>
 </div>

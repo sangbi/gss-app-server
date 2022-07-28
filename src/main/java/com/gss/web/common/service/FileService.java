@@ -14,7 +14,7 @@ public class FileService {
 		String imagePath=filePath;
 		System.out.println(filePath);
 		String fileExtension=fileName.substring(fileName.lastIndexOf("."));
-		if(fileExtension.equals(".PNG") || fileExtension.equals(".JPEG")|| fileExtension.equals(".jpg")) {
+		if(fileExtension.equalsIgnoreCase(".png") || fileExtension.equalsIgnoreCase(".jpeg")|| fileExtension.equalsIgnoreCase(".jpg")) {
 			try {
 				mul.transferTo(new File(filePath,fileName));
 			} catch (IllegalStateException | IOException e) {

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gss.web.api.dto.AuthInfo;
 import com.gss.web.api.dto.BossDto;
@@ -35,6 +36,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/admin")
 public class AdminApi {
 	
 	@Autowired
@@ -52,7 +54,7 @@ public class AdminApi {
 	@Autowired
 	private MemberServiceImpl memberServiceImpl;
 
-	@GetMapping("/admin/main")
+	@GetMapping("/main")
 	public String adminMain(HttpSession session) {	
 		if(session.getAttribute("authInfo")==null) {
 			return "redirect:/main/home";
@@ -136,7 +138,6 @@ public class AdminApi {
 		
 		itemList = itemService.selectAllItem();
 		model.addAttribute("itemList", itemList);
-		System.out.println("아이템 페이지");
 		
 		return "/admin/item/itemList";
 	}
@@ -147,7 +148,7 @@ public class AdminApi {
 	}
 	
 	@PostMapping("/addItem")
-	public String insertItemReq(@ModelAttribute("ItemDto") ItemDto itemDto, HttpServletRequest req,Model model) {		
+	public String insertItemReq(@ModelAttribute("ItemDto") ItemDto itemDto, HttpServletRequest req,Model model) {	
 		String uploadPath = req.getSession().getServletContext().getRealPath("/").concat("resources"+"/"+"itemImage");
 		String urlPath="";
 		MultipartFile file = itemDto.getItemImagepath();
@@ -186,7 +187,6 @@ public class AdminApi {
 		Map<String, String> map= new HashMap<String, String>();
 		map.put("itemName", itemName);
 		map.put("classification", classification);
-		System.out.println(itemName + " : " + classification);
 		
 		int result = itemService.deleteByItemName(map);
 		
@@ -204,41 +204,78 @@ public class AdminApi {
 	}
 	
 	@GetMapping("/bossDropItem")
-	public String bossDropItem(Model model,@RequestParam("dropName") String bossName, 
+	public String bossDropItem(Model model,@RequestParam("bossName") String bossName, 
 							@RequestParam("bossGrade") String bossGrade) {
 		Map<String, String> map= new HashMap<String, String>();
 		map.put("bossName", bossName);
 		map.put("bossGrade", bossGrade);
-		List<Integer> result= itemOfBossService.selectAllItemOfBoss(map);
+		List<Integer> result= itemOfBossService.selectAllItemOfBoss(map);	
 		Item[] itemList = new Item[result.size()];
 		
 		for (int i = 0; i < result.size(); i++) {
 			itemList[i] =  itemOfBossService.selectByBossItem(result.get(i));
-			System.out.println(itemList[i].getItemName() + " : " + itemList[i].getClassification() + " : " + itemList[i].getItemImagepath() );
 		}
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("bossName",bossName);
 		model.addAttribute("bossGrade",bossGrade);
 		
-		
 		return "/admin/bossForDrop/bossDropForItem";
 	}
 	
 	@GetMapping("/addDropItem")
-	public String addDropItem(Model model,@RequestParam("bossName") String bossName, 
+	public String showDropItem(Model model,@RequestParam("bossName") String bossName, 
 			@RequestParam("bossGrade") String bossGrade) {
-		System.out.println(bossName);
+		
 		Map<String, String> map= new HashMap<String, String>();
 		map.put("bossName", bossName);
 		map.put("bossGrade", bossGrade);
-		List<Integer> result= itemOfBossService.selectAllItemOfBoss(map);
-		Item[] itemList = new Item[result.size()];
 		
-		for (int i = 0; i < result.size(); i++) {
-			itemList[i] =  itemOfBossService.selectByBossItem(result.get(i));
-		}
+		List<Integer> result= itemOfBossService.selectInsertItemList(map);
+		List<Item> allItemList=itemService.selectAllItem();
+		for(int i=0; i<allItemList.size(); i++) {
+			for(int j=0; j<result.size(); j++) {
+				if(allItemList.get(i).getItemNum() == result.get(j)) {
+					allItemList.remove(i);
+					i--;
+				}
+			}
+		}	
+		model.addAttribute("item",allItemList);
+		model.addAttribute("bossName", bossName);
+		model.addAttribute("bossGrade", bossGrade);
 		
 		return "/admin/bossForDrop/insertDropItem";
+	}
+	
+	@GetMapping("/insertDropItem")
+	public String insertDropItem(Model model,@RequestParam("itemNum") int itemNum, 
+										@RequestParam("bossName") String bossName, 
+										@RequestParam("bossGrade") String bossGrade,
+										RedirectAttributes redirectAttribute) {
+		
+		System.out.println(itemNum + " :" + bossName + " : " + bossGrade);
+		ItemOfBoss itemOfBoss = new ItemOfBoss(itemNum,bossName,bossGrade);
+		int result = itemOfBossService.insertItemOfBoss(itemOfBoss);
+		
+		model.addAttribute("itemList", result);
+		redirectAttribute.addAttribute("bossName", bossName);
+		redirectAttribute.addAttribute("bossGrade", bossGrade);
+		
+		return "redirect:/admin/bossDropItem";
+	}
+	
+	@GetMapping("/deleteDropItem")
+	public String deleteDropItem(@RequestParam("itemNum") int itemNum, 
+									@RequestParam("bossName") String bossName,
+									@RequestParam("bossGrade") String bossGrade,
+									RedirectAttributes redirectAttribute) {
+		ItemOfBoss itemOfBoss = new ItemOfBoss(itemNum, bossName, bossGrade);
+		int del = itemOfBossService.deleteItemListByItemNum(itemOfBoss);
+		
+		redirectAttribute.addAttribute("bossName", bossName);
+		redirectAttribute.addAttribute("bossGrade", bossGrade);
+		
+		return "redirect:/admin/bossDropItem";
 	}
 }
