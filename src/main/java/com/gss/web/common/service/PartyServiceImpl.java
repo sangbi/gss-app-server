@@ -10,6 +10,7 @@ import com.gss.web.api.dto.PartyCreateDto;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
+import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.dao.PartyDAOImpl;
 import com.gss.web.common.domain.MemberOfPartyTab;
 import com.gss.web.common.domain.Party;
@@ -23,11 +24,10 @@ public class PartyServiceImpl implements PartyService {
 	@Override
 	public int createParty(PartyCreateDto dto) {
 		boolean leader = true;
-		Party party = new Party(dto.getBossName());
+		Party party = new Party(dto.getPartyName());
 		partyDaoImpl.createParty(party);
 		partyDaoImpl.bossHunting(partyDaoImpl.getBossNum(dto.getBossName(), dto.getLevel()),
 				partyDaoImpl.getPartyNum());
-
 		MemberOfPartyTab memberOfPartyTab = new MemberOfPartyTab(partyDaoImpl.getPartyNum(),
 				partyDaoImpl.getUserNum(dto.getId()), dto.getCharaterName(), leader);
 
@@ -69,4 +69,10 @@ public class PartyServiceImpl implements PartyService {
 	public int getArticleCountNum() {
 		return partyDaoImpl.getArticleCountNum();
 	}
+
+	@Override
+	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto) {
+		return partyDaoImpl.getSearch(partySearchDto);
+	}
+
 }

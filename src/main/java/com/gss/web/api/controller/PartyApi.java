@@ -1,5 +1,7 @@
 package com.gss.web.api.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gss.web.api.dto.AuthInfo;
 import com.gss.web.api.dto.PartyCreateDto;
 import com.gss.web.api.dto.PartyPageDto;
+import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.domain.Member;
 import com.gss.web.common.service.MemberServiceImpl;
 import com.gss.web.common.service.PartyPageCreatorService;
@@ -42,13 +46,11 @@ public class PartyApi {
 		model.addAttribute("pc", pc);
 		model.addAttribute("myParty", partyServiceImpl.showMain(page));
 		model.addAttribute("myParty2", partyServiceImpl.showMain2(page));
-		System.out.println("메인이상무");
 		return "party/main";
 	}
 
 	@RequestMapping(value = "party/createparty", method = RequestMethod.GET)
 	public String createParty(Model model) {
-		System.out.println("파티생성 이상무 ");
 		model.addAttribute("getBossName",partyServiceImpl.getBossName());
 		model.addAttribute("getBossGrade",partyServiceImpl.getBossGrade());
 		return "party/createparty";
@@ -79,5 +81,16 @@ public class PartyApi {
 		System.out.println("참여한파티 이상무 ");
 		model.addAttribute("ienterParty", partyServiceImpl.getIenterInfo(partyName, gssUserId));
 		return "party/ienterParty";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/getSearchList", method = RequestMethod.GET)
+	public List<PartySearchDto> getSearchList(@RequestParam("choice") String choice, @RequestParam("keyWord") String keyWord){
+		PartySearchDto partySearchDto = new PartySearchDto();
+		partySearchDto.setChoice(choice);
+		partySearchDto.setKeyWord(keyWord);
+		
+		return partyServiceImpl.getSearch(partySearchDto);
+		
+		
 	}
 }

@@ -4,6 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gss.web.common.mapper.PartyMapper">
 
+	<select id="getSearch" parameterType="com.gss.web.api.dto.PartySearchDto" 
+						   resultType="com.gss.web.api.dto.PartySearchDto">
+		select g.gssuserid, g.email	
+		from gssusertab g 
+		where gssUserId like CONCAT('%',#[keyWord],'%')
+		
+	</select>
+
 	<select id="getArticleCountNum" resultType="int">
 		select count(partyname)
 		from bosstab b
@@ -104,9 +112,8 @@
 
 	<select id="showMain"
 		parameterType="com.gss.web.api.dto.PartyPageDto"
-		
 		resultType="com.gss.web.api.dto.PartyMainDto1">
-		select gssuserid, partyname, bossname, bossgrade
+		select g.gssuserid, p.partyname, b.bossname, b.bossgrade
 		from bosstab b
 		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
 		join memberofpartytab m on b2.partynum = m.partynum
@@ -114,7 +121,7 @@
 		join gssusertab g on g.gssusernum = m.gssusernum
 		where g.gssuserid =#{id}
 		and m.partyleader is true
-		order by partyname desc
+		order by p.partynum desc
 		limit #{counterPage} offset #{pageStart}
 	</select>
 

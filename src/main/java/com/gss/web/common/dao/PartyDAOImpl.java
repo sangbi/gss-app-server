@@ -11,6 +11,7 @@ import com.gss.web.api.dto.MyPartyDto;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
+import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.domain.MemberOfPartyTab;
 import com.gss.web.common.domain.Party;
 import com.gss.web.common.mapper.PartyMapper;
@@ -93,6 +94,11 @@ public class PartyDAOImpl implements PartyDAO {
 	@Override
 	public int getArticleCountNum() {
 		return sqlsession.getMapper(PartyMapper.class).getArticleCountNum();
+	}
+
+	@Override
+	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto) {
+		return sqlsession.getMapper(PartyMapper.class).getSearch(partySearchDto);
 	}
 
 }
