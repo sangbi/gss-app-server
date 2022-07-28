@@ -57,4 +57,6 @@ public interface CalculateMapper {
 	public List<ItemInfo> selectItemByItemNumber(int itemNum);
 	
 	public int selectItemNumByBossNumber (int bossNum);
+	
+	public int deletePartyGetItem (int pgiKey);
 }

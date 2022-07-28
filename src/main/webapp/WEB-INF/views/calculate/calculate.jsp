@@ -95,6 +95,9 @@
 						<c:forEach items="${pgiList}" var="pgiList" varStatus="loop">
 							<li class="list-group-item list-group-item-action">
 								${pgiList.itemSalePrice}
+								<div class="div_td_img">
+									<a data-bs-toggle="modal" data-bs-target="#staticBackdrop4${pgiList.pgiKey}"><img src="${pageContext.request.contextPath}/resources/tagImage/delete.png" width="20px" height="20px"></a>
+								</div>
 							</li>
 						</c:forEach>
 					</td>
@@ -214,6 +217,27 @@
 	    </div>
 	  </div>
 	</div>
+	<!--delete Modal -->
+	<c:forEach items="${pgiList}" var="pgiList" varStatus="loop">
+		<div class="modal fade" id="staticBackdrop4${pgiList.pgiKey}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="staticBackdropLabel">확인</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <form action="/calculate/deleteItem?partyName=${partyName}&pgiKey=${pgiList.pgiKey}" method="post">
+		      	<br>
+		      	<h4>삭제 하시겠습니까?</h4>
+		      	<div class="modal-body">
+			      	<input type="submit" class="btn btn-secondary" value="확인">
+		       	 	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		      	</div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
+	</c:forEach>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>
