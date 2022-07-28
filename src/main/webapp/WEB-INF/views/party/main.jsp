@@ -45,8 +45,7 @@
 			</tr>
 			<c:forEach var="imLeader" items="${myParty}">
 				<tr>
-					<td><a
-						href='<c:url value="imakeparty?gssUserId=${imLeader.gssUserId}&partyName=${imLeader.partyName}"/>'>
+						<td><a href='<c:url value="imakeparty?gssUserId=${imLeader.gssUserId}&partyName=${imLeader.partyName}"/>'>
 							${imLeader.partyName}</a></td>
 					<td>${imLeader.bossName}</td>
 					<td>${imLeader.bossGrade}</td>

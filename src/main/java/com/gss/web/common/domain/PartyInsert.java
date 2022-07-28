@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Party {
-	private String partyName;
-
-	
+public class PartyInsert {
+	private int gssUserNum;
+	private int partyNum;
+	private String charaterName;
+	private boolean partyLeader;
 }

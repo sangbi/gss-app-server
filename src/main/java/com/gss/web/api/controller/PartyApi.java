@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gss.web.api.dto.AuthInfo;
 import com.gss.web.api.dto.PartyCreateDto;
+import com.gss.web.api.dto.PartyInsertDto;
 import com.gss.web.api.dto.PartyPageDto;
 import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.domain.Member;
@@ -46,7 +46,7 @@ public class PartyApi {
 		Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
 		page.setId(member.getGssuserId());
 		pc.setPaging(page);
-		pc.setArticleCount(partyServiceImpl.getArticleCountNum());
+		pc.setArticleCount(partyServiceImpl.getArticleCountNum(member.getGssuserId()));
 		model.addAttribute("pc", pc);
 		model.addAttribute("myParty", partyServiceImpl.showMain(page));
 		model.addAttribute("myParty2", partyServiceImpl.showMain2(page));
@@ -96,15 +96,18 @@ public class PartyApi {
 		model.addAttribute("ienterParty", partyServiceImpl.getIenterInfo(partyName, gssUserId));
 		return "party/ienterParty";
 	}
-	@ResponseBody
-	@RequestMapping(value = "/getSearchList", method = RequestMethod.GET)
-	public List<PartySearchDto> getSearchList(@RequestParam("choice") String choice, @RequestParam("keyWord") String keyWord){
-		PartySearchDto partySearchDto = new PartySearchDto();
-		partySearchDto.setChoice(choice);
-		partySearchDto.setKeyWord(keyWord);
+	
+	@RequestMapping(value = "party/getSearchList", method = RequestMethod.GET)
+	public String getSearchList(PartySearchDto searchdto, Model model,String partyName,String gssUserId){
+		model.addAttribute("search",partyServiceImpl.getSearchList(searchdto));
+		model.addAttribute("myParty", partyServiceImpl.getMyPartyInfo(partyName, gssUserId));
+		System.out.println("�ȶ߳�");
+		return "party/imakeparty";
 		
-		return partyServiceImpl.getSearch(partySearchDto);
-		
-		
+	}
+	@RequestMapping(value = "party/insertPerson", method = RequestMethod.GET)
+	public String insertPerson(PartyInsertDto command, Model model) {
+		partyServiceImpl.insertPerson(command);
+		return "redirect:/party/main";
 	}
 }

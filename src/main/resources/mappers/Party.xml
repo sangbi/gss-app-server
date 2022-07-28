@@ -4,22 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gss.web.common.mapper.PartyMapper">
 
-	<select id="getSearch" parameterType="com.gss.web.api.dto.PartySearchDto" 
+	<insert id="insertPerson" parameterType="com.gss.web.common.domain.PartyInsert">
+		INSERT INTO memberofpartytab (
+		partynum,	
+		gssusernum,
+		charatername,
+		partyleader
+
+		) values(
+		#{partyNum},
+		#{gssUserNum},
+		#{charaterName},
+		#{partyLeader}
+		)
+	</insert>
+
+	<select id="getUserNumByName" parameterType="String"
+		resultType="int">
+		select g.gssusernum
+		from gssusertab g
+		where gssuserid=#{gssUserId}
+	</select>
+
+	<select id="getSearchList" parameterType="String" 
 						   resultType="com.gss.web.api.dto.PartySearchDto">
 		select g.gssuserid, g.email	
-		from gssusertab g 
-		where gssUserId like CONCAT('%',#[keyWord],'%')
+		from gssusertab g
+		where gssuserid LIKE CONCAT('%', #{keyWord}, '%')
 		
 	</select>
 
-	<select id="getArticleCountNum" resultType="int">
+	<select id="getArticleCountNum" parameterType="String"  resultType="int">
 		select count(partyname)
 		from bosstab b
 		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
 		join memberofpartytab m on b2.partynum = m.partynum
 		join partytab p on p.partynum = m.partynum
 		join gssusertab g on g.gssusernum = m.gssusernum
-		where g.gssuserid ='testk'
+		where g.gssuserid =#{userId}
 		and m.partyleader is true
 	</select>
 
@@ -55,8 +77,8 @@
 	</select>
 
 	<select id="getBossName" resultType="String">
-		select bossname
-		from bosstab
+		select DISTINCT bossname
+		from bosstab 
 	</select>
 
 	<select id="getBossGrade" resultType="String">
@@ -72,8 +94,8 @@
 	</select>
 
 	<select id="getPartyNumByName" parameterType="String" resultType="int">
-		select partynum
-		from partytab
+		select p.partynum
+		from partytab p
 		where partyname=#{partyName}
 	</select>
 

@@ -3,16 +3,18 @@ package com.gss.web.common.dao;
 import java.util.List;
 
 import com.gss.web.api.dto.MyPartyDto;
+import com.gss.web.api.dto.PartyInsertDto;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
 import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.domain.MemberOfPartyTab;
 import com.gss.web.common.domain.Party;
+import com.gss.web.common.domain.PartyInsert;
 
 public interface PartyDAO {
 
-	public int getArticleCountNum();
+	public int getArticleCountNum(String userId);
 
 	public int createParty(Party party);
 
@@ -42,7 +44,9 @@ public interface PartyDAO {
 
 	public List<String> getBossGrade();
 	
-	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto);
+	public List<PartySearchDto> getSearchList(PartySearchDto searchDto);
 	
-	public List<String> getBossGradeList(String choiceBossName);
+	public int insertPerson (PartyInsert partyInsert);
+	
+	public int getUserNumByName (String gssUserId);
 }

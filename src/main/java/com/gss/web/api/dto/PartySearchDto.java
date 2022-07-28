@@ -8,7 +8,7 @@ import lombok.Setter;
 public class PartySearchDto {
 	private String gssUserId;
 	private String email;
-	private String choice;
+	private String id;
 	private String keyWord;
 	
 	

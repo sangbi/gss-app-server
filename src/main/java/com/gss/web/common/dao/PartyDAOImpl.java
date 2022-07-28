@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gss.web.api.dto.MyPartyDto;
+import com.gss.web.api.dto.PartyInsertDto;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
 import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.domain.MemberOfPartyTab;
 import com.gss.web.common.domain.Party;
+import com.gss.web.common.domain.PartyInsert;
 import com.gss.web.common.mapper.PartyMapper;
 
 @Repository
@@ -92,13 +94,25 @@ public class PartyDAOImpl implements PartyDAO {
 	}
 
 	@Override
-	public int getArticleCountNum() {
-		return sqlsession.getMapper(PartyMapper.class).getArticleCountNum();
+	public int getArticleCountNum(String userId) {
+		return sqlsession.getMapper(PartyMapper.class).getArticleCountNum(userId);
 	}
 
 	@Override
-	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto) {
-		return sqlsession.getMapper(PartyMapper.class).getSearch(partySearchDto);
+	public List<PartySearchDto> getSearchList (PartySearchDto searchDto) {
+		return sqlsession.getMapper(PartyMapper.class).getSearchList(searchDto);
+	}
+
+	@Override
+	public int insertPerson(PartyInsert partyInsert) {
+		System.out.println(partyInsert.getGssUserNum()+"디에오 들어감");
+		return sqlsession.getMapper(PartyMapper.class).insertPerson(partyInsert);
+	}
+
+	@Override
+	public int getUserNumByName(String gssUserId) {
+		
+		return sqlsession.getMapper(PartyMapper.class).getUserNumByName(gssUserId);
 	}
 
 	@Override
