@@ -1,10 +1,13 @@
 package com.gss.web.common.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gss.web.common.domain.Member;
+import com.gss.web.common.domain.MyInfoList;
 import com.gss.web.common.mapper.MemberMapper;
 import com.gss.web.common.mapper.UserSEQMapper;
 
@@ -55,5 +58,25 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int selectLastUserSEQ() {
 		return sqlSession.getMapper(UserSEQMapper.class).selectLastUserSEQ();
+	}
+
+	@Override
+	public List<MyInfoList> findByMyInfoList(int userNum) {
+		return sqlSession.getMapper(MemberMapper.class).findByMyInfoList(userNum);
+	}
+
+	@Override
+	public List<MyInfoList> findByMyInfoListMember(int userNum) {
+		return sqlSession.getMapper(MemberMapper.class).findByMyInfoListMember(userNum);
+	}
+
+	@Override
+	public boolean checkPartyNick(MyInfoList MIL) {
+		return sqlSession.getMapper(MemberMapper.class).checkPartyNick(MIL);
+	}
+
+	@Override
+	public void updatePartyNick(MyInfoList MIL) {
+		sqlSession.getMapper(MemberMapper.class).updatePartyNick(MIL);
 	}
 }

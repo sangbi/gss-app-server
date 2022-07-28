@@ -19,5 +19,9 @@ public interface ItemOfBossMapper {
 	
 	public Boss selectByBoss(int bossNum);
 	
-	public Item selectInsertItemList(ItemOfBoss itemOfBoss);
+	public List<Integer> selectInsertItemList(Map map);
+	
+	public List<Item> selectItemListByItemNum (int itemNum); 
+	
+	public int deleteItemListByItemNum (ItemOfBoss itemOfBoss);
 }

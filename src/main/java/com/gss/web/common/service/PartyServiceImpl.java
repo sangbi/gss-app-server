@@ -90,4 +90,9 @@ public class PartyServiceImpl implements PartyService {
 		return partyDaoImpl.insertPerson(partyInsert);
 	}
 
+	@Override
+	public List<String> getBossGradeList(String choiceBossName) {
+		return partyDaoImpl.getBossGradeList(choiceBossName);
+	}
+
 }

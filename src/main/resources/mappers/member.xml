@@ -29,6 +29,17 @@
 			username=#{userName}
 		where gssuserid=#{gssuserId}	
 	</update>
+	<select id="findByMyInfoList" parameterType="int" resultType="com.gss.web.common.domain.MyInfoList">
+		select p.partyname ,m.charatername  
+		from memberofpartytab m join partytab p on m.partynum  =p.partynum  
+		where m.gssusernum =#{gssuserid} and m.partyleader= true
+	</select>
+	
+	<select id="findByMyInfoListMember" parameterType="int" resultType="com.gss.web.common.domain.MyInfoList">
+		select p.partyname ,m.charatername  
+		from memberofpartytab m join partytab p on m.partynum  =p.partynum  
+		where m.gssusernum =#{gssuserid} and m.partyleader= false
+	</select>
 	
 	<select id="checkEmail" parameterType="String" resultType="boolean">
 		select count(*)
@@ -86,4 +97,16 @@
 		from gssusertab
 		where gssuserid= #{userId} 
 	</select>
+	<select id="checkPartyNick" parameterType="com.gss.web.common.domain.MyInfoList" resultType="boolean">
+		SELECT count(m.charatername) 
+		from memberofpartytab m join partytab p
+		on m.partynum =p.partynum 
+		where p.partyname=#{partyName}
+	</select>
+	<update id="updatePartyNick" parameterType="com.gss.web.common.domain.MyInfoList">
+	update  memberofpartytab m 
+	set charatername  =#{charaterName}
+	from partytab p
+	where p.partynum =m.partynum and p.partyname=#{partyName}
+	</update>
 </mapper>

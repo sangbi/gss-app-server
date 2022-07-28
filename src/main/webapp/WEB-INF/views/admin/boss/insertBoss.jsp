@@ -36,6 +36,7 @@
 					<option value="카오스">카오스</option>
 					<option value="하드">하드</option>
 					<option value="노멀">노멀</option>
+					<option value="이지">이지</option>
 				</select>
 			</td>
 		</tr>

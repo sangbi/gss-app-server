@@ -49,6 +49,4 @@ public interface PartyDAO {
 	public int insertPerson (PartyInsert partyInsert);
 	
 	public int getUserNumByName (String gssUserId);
-	
-	
 }
