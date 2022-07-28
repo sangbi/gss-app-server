@@ -50,6 +50,7 @@
 
 	<select id="selectAllItem"	parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
 		select
+			itemnum,
 			classification,
 			itemimagepath,
 			itemname

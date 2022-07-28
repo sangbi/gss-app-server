@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item {
-	private long itemNum;	
+	private int itemNum;	
 	private String itemName;	
 	private String classification;	
 	private String itemImagepath;	
@@ -16,6 +16,13 @@ public class Item {
 	private String keyword;
 	
 	public Item(String itemName,String itemImagepath,String classification) {
+		this.itemName=itemName;
+		this.itemImagepath=itemImagepath;
+		this.classification=classification;
+	}
+	
+	public Item(int itemNum, String itemName,String itemImagepath,String classification) {
+		this.itemNum=itemNum;
 		this.itemName=itemName;
 		this.itemImagepath=itemImagepath;
 		this.classification=classification;

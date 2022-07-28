@@ -38,7 +38,17 @@ public class ItemOfBossDAOImpl implements ItemOfBossDAO{
 	}
 	
 	@Override
-	public Item selectInsertItemList(ItemOfBoss itemOfBoss) {
-		return sqlSession.getMapper(ItemOfBossMapper.class).selectInsertItemList(itemOfBoss);
+	public List<Integer> selectInsertItemList(Map map) {
+		return sqlSession.getMapper(ItemOfBossMapper.class).selectInsertItemList(map);
+	}
+	
+	@Override
+	public List<Item> selectItemListByItemNum(int itemNum) {
+		return sqlSession.getMapper(ItemOfBossMapper.class).selectItemListByItemNum(itemNum);
+	}
+	
+	@Override
+	public int deleteItemListByItemNum (ItemOfBoss itemOfBoss) {
+		return sqlSession.getMapper(ItemOfBossMapper.class).deleteItemListByItemNum(itemOfBoss);
 	}
 }
