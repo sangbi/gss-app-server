@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gss.web.common.domain.Member;
+import com.gss.web.common.domain.MyInfoList;
 
 @Mapper
 public interface MemberMapper {
@@ -13,11 +14,17 @@ public interface MemberMapper {
 	
 	int editUserInfo(Member member);
 	
+	List<MyInfoList> findByMyInfoList(int userNum);
+	
+	List<MyInfoList> findByMyInfoListMember(int userNum);
+	
 	boolean checkEmail(String email);
 	
 	boolean checkID(String userID);
 
 	boolean checkPhoneNum(String phoneNumber);
+
+	boolean checkPartyNick(MyInfoList MIL);
 	
 	Member findByUserPK(int userKey);
 	
@@ -28,6 +35,8 @@ public interface MemberMapper {
 	List<Map<String, Object>> getMenu(Member member);
 	
 	void insertLoginHist(Map<String, Object> param);
+	
+	int updatePartyNick(MyInfoList MIL);
 
 	List<Map<String, Object>> getAccountAuth(Member member);
 }

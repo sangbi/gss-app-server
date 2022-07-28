@@ -11,5 +11,5 @@ function logOut(){
     location.replace('/member/logout')
 }
 function moveMyPage(){
-    location.replace('/member/logout')
+    location.replace('/member/myMain')
 }
