@@ -49,7 +49,7 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/item/itemList">아이템</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">파티</a>
+				<li class="nav-item"><a class="nav-link" href="/party/main">파티</a>
 				</li>
 					<c:if test="${!empty authInfo}">
 						<li class="nav-item dropdown">

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gss.web.api.dto.MyPartyDto;
 import com.gss.web.api.dto.PartyCreateDto;
+import com.gss.web.api.dto.PartyInsertDto;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
@@ -14,6 +15,7 @@ import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.dao.PartyDAOImpl;
 import com.gss.web.common.domain.MemberOfPartyTab;
 import com.gss.web.common.domain.Party;
+import com.gss.web.common.domain.PartyInsert;
 
 @Service
 public class PartyServiceImpl implements PartyService {
@@ -66,13 +68,26 @@ public class PartyServiceImpl implements PartyService {
 	}
 
 	@Override
-	public int getArticleCountNum() {
-		return partyDaoImpl.getArticleCountNum();
+	public int getArticleCountNum(String userId) {
+		return partyDaoImpl.getArticleCountNum(userId);
 	}
 
 	@Override
-	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto) {
-		return partyDaoImpl.getSearch(partySearchDto);
+	public List<PartySearchDto> getSearchList(PartySearchDto searchDto) {
+		return partyDaoImpl.getSearchList(searchDto);
+	}
+
+	@Override
+	public int insertPerson(PartyInsertDto partyInsertdto) {
+		int usernum= partyDaoImpl.getUserNumByName(partyInsertdto.getGssUserId());
+		int partynum=	partyDaoImpl.getPartyNumByName(partyInsertdto.getPartyName());
+		boolean flat= false;
+		PartyInsert partyInsert= new PartyInsert(usernum,partynum,partyInsertdto.getCharaterName(),flat);
+		System.out.println(usernum);
+		System.out.println(partynum);
+		System.out.println(flat);
+		System.out.println(partyInsertdto.getCharaterName());
+		return partyDaoImpl.insertPerson(partyInsert);
 	}
 
 }
