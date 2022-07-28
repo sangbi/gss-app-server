@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	정산현황보러가기(정산링크연결 정규)
@@ -40,7 +41,7 @@
 			</tr>
 		</table>
 	</form>
-	<input type="button" value="파티원 추가하기"> 검색기능 추가
+	<input type="button" value="파티원 추가하기"> 
 	<input type="button" value="목록"
 		onClick="location.href='<c:url value="main" />'">
 </body>

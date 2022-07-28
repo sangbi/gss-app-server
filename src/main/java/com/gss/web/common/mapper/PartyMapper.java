@@ -9,6 +9,7 @@ import com.gss.web.api.dto.MyPartyDto;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
+import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.domain.MemberOfPartyTab;
 import com.gss.web.common.domain.Party;
 
@@ -44,4 +45,6 @@ public interface PartyMapper {
 	public List<String> getBossName();
 
 	public List<String> getBossGrade();
+	
+	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto);
 }

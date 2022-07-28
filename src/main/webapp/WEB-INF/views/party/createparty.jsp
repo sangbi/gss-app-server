@@ -38,8 +38,8 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td>생성자 아이디</td>
-				<td><input type="text" name="id" value="testk"></td>
+				<td>아이디</td>
+				<td><input type="text" name="id" value="${authInfo.id}" readonly></td>
 			</tr>
 			<tr>
 				<td>캐릭터이름</td>

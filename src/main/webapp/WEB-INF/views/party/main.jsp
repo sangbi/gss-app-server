@@ -53,7 +53,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<c:forEach var="pageNum" begin="${pc.beginPage }" end="${pc.endPage}">
+		<c:forEach var="pageNum" begin="${pc.beginPage}" end="${pc.endPage}">
 			<a href='<c:url value="/party/main?page=${pageNum}"/>'>${pageNum}</a>
 		</c:forEach>
 		<br> <br>
@@ -69,8 +69,7 @@
 			</tr>
 			<c:forEach var="imFollower" items="${myParty2}">
 				<tr>
-					<td><a
-						href='<c:url value="ienterParty?gssUserId=${imFollower.gssUserId}&partyName=${imFollower.partyName}"/>'>
+					<td><a href='<c:url value="ienterParty?gssUserId=${imFollower.gssUserId}&partyName=${imFollower.partyName}"/>'>
 							${imFollower.partyName}</a></td>
 					<td>${imFollower.bossName}</td>
 					<td>${imFollower.bossGrade}</td>

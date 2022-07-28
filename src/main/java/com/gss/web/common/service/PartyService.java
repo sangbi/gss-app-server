@@ -7,6 +7,7 @@ import com.gss.web.api.dto.PartyCreateDto;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
+import com.gss.web.api.dto.PartySearchDto;
 
 public interface PartyService {
 
@@ -25,4 +26,6 @@ public interface PartyService {
 	public MyPartyDto getIenterInfo(String partyName, String gssUserId);
 
 	public int getArticleCountNum();
+	
+	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto);
 }
