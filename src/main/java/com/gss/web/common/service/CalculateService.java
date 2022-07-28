@@ -54,4 +54,6 @@ public interface CalculateService {
 	public List<ItemInfo> selectItemByItemNumber(int bossNum);
 	
 	public int selectItemNumByBossNumber (int bossNum);
+	
+	public int deletePartyGetItem (int pgiKey);
 }

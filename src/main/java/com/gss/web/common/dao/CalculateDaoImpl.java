@@ -126,4 +126,9 @@ public class CalculateDaoImpl implements CalculateDao {
 	public int selectItemNumByBossNumber(int bossNum) {
 		return sqlSession.getMapper(CalculateMapper.class).selectItemNumByBossNumber(bossNum);
 	}
+	
+	@Override
+	public int deletePartyGetItem(int pgiKey) {
+		return sqlSession.getMapper(CalculateMapper.class).deletePartyGetItem(pgiKey);
+	}
 }

@@ -215,4 +215,14 @@ public class CalculateApi {
 		
 		return "calculate/calculateCompleteList";
 	}
+	
+	@PostMapping("/deleteItem")
+	public String deletePartyGetItem (@RequestParam("pgiKey") int pgiKey,
+										@RequestParam("partyName") String partyName,
+										RedirectAttributes redirectAttributes ) {
+		int delete = calculateService.deletePartyGetItem(pgiKey);
+		redirectAttributes.addAttribute("partyName", partyName);
+		
+		return"redirect:/calculate/calculateList";
+	}
 }

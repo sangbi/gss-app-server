@@ -57,3 +57,8 @@ html, body {
 .div_login{
 	float: left;
 }
+
+.div_td_img{
+	float: right;
+	text-align:right;
+}
