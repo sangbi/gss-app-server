@@ -101,4 +101,9 @@ public class PartyDAOImpl implements PartyDAO {
 		return sqlsession.getMapper(PartyMapper.class).getSearch(partySearchDto);
 	}
 
+	@Override
+	public List<String> getBossGradeList(String choiceBossName) {
+		return sqlsession.getMapper(PartyMapper.class).getBossGradeList(choiceBossName);
+	}
+
 }

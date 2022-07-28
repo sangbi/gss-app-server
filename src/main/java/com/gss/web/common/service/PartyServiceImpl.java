@@ -75,4 +75,9 @@ public class PartyServiceImpl implements PartyService {
 		return partyDaoImpl.getSearch(partySearchDto);
 	}
 
+	@Override
+	public List<String> getBossGradeList(String choiceBossName) {
+		return partyDaoImpl.getBossGradeList(choiceBossName);
+	}
+
 }

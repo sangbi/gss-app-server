@@ -28,4 +28,6 @@ public interface PartyService {
 	public int getArticleCountNum();
 	
 	public List<PartySearchDto> getSearch(PartySearchDto partySearchDto);
+	
+	public List<String> getBossGradeList(String choiceBossName);
 }

@@ -1,12 +1,16 @@
 package com.gss.web.api.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +52,16 @@ public class PartyApi {
 		model.addAttribute("myParty2", partyServiceImpl.showMain2(page));
 		return "party/main";
 	}
+	
+	@PostMapping("/bossGradeList")
+	@ResponseBody
+	public List<String> bossGradeList(String choiceBossName) {
+		List<String> gradeList = new ArrayList<String>();
+		
+		gradeList=partyServiceImpl.getBossGradeList(choiceBossName);
+		
+		return gradeList;
+	}
 
 	@RequestMapping(value = "party/createparty", method = RequestMethod.GET)
 	public String createParty(Model model) {
@@ -61,7 +75,7 @@ public class PartyApi {
 			Model model) {
 		System.out.println(gssUserId);
 		System.out.println(partyName);
-		System.out.println("ÆÄÆ¼¸¸µé±â ÀÌ»ó¹«");
+		System.out.println("ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½");
 		model.addAttribute("myParty", partyServiceImpl.getMyPartyInfo(partyName, gssUserId));
 		System.out.println(partyServiceImpl.getMyPartyInfo(partyName, gssUserId));
 		return "party/imakeparty";
@@ -71,14 +85,14 @@ public class PartyApi {
 	public String insert(PartyCreateDto command) {
 		System.out.println(command.getBossName());
 		partyServiceImpl.createParty(command);
-		System.out.println("ÆÄÆ¼Ãß°¡ÀÌ»ó¹«");
+		System.out.println("ï¿½ï¿½Æ¼ï¿½ß°ï¿½ï¿½Ì»ï¿½");
 		return "redirect:/party/main";
 	}
 
 	@RequestMapping(value = "party/ienterparty", method = RequestMethod.GET)
 	public String ienterParty(@RequestParam("gssUserId") String gssUserId, @RequestParam("partyName") String partyName,
 			Model model) {
-		System.out.println("Âü¿©ÇÑÆÄÆ¼ ÀÌ»ó¹« ");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ ï¿½Ì»ï¿½ ");
 		model.addAttribute("ienterParty", partyServiceImpl.getIenterInfo(partyName, gssUserId));
 		return "party/ienterParty";
 	}
