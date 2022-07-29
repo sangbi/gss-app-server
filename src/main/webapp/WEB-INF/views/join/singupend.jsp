@@ -42,7 +42,7 @@
 				<div class="carousel-item active">
 					<!--가로-->
 					<img class="d-block w-100" style="height: 500px;"
-						src="${pageContext.request.contextPath}../resources/bossImage/자쿰.PNG"
+						src="${pageContext.request.contextPath}../resources/bossImage/자쿰.png"
 						alt="First slide">
 					<div class="carousel-caption d-none d-md-block">
 					</div>
