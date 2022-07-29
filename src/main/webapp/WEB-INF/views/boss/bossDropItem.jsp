@@ -17,28 +17,29 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<h1>아이템</h1>
+	<div class="div_calculate_main">
 	<div class="div_item_list">
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
+					<th></th>
 					<th>아이템 이름</th>
 					<th>분류</th>
-					<th>아이템 이미지</th>
 				</tr>
 			</thead>
 				<tbody>
 				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
 				<tr>
+					<td width="100"><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
 					<td>
 					${itemList.itemName}</td>
 					<td>${itemList.classification}</td>
-					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	<a href="/boss/bossList"><input type="button" value="목록"></a>
+	</div>
 	</div>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>

@@ -34,7 +34,7 @@
 		from 
 			itemtab
 		where 
-			itemname LIKE CONCAT('%', #{keyword}, '%')
+			itemname LIKE '%' || #{keyword} || '%')
 	</select>
 
 	<select id="selectSearchClassification" parameterType="String" resultType="com.gss.web.common.domain.Item">
@@ -77,9 +77,48 @@
 		where 
 			itemname=#{itemName} and classification = #{classification}
 	</delete>
-	<!-- 
-	<update id="updateByItem" parameterType="">
 	
-	</update>
-	 -->
+	<select id="selectItemCount"  resultType="int">
+		select
+			count(*)
+		from
+			itemtab
+	</select>
+	
+	<select id="selectAllItemPaging" parameterType="int" resultType="com.gss.web.common.domain.Item">
+		select
+			itemname, 
+			itemimagepath,
+			classification
+		from 
+			itemtab
+		LIMIT 10
+			OFFSET (#{page} - 1) * 10
+	</select>
+	
+	<select id="selectSearchItemNamePaging" parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
+		select 
+			classification,
+			itemimagepath,
+			itemname
+		from 
+			itemtab
+		where 
+			itemname LIKE '%' || #{keyword} || '%'
+		LIMIT 10
+			OFFSET (#{page} - 1) * 10
+	</select>
+
+	<select id="selectSearchClassificationPaging" parameterType="com.gss.web.common.domain.Item" resultType="com.gss.web.common.domain.Item">
+		select
+			classification,
+			itemimagepath,
+			itemname
+		from 
+			itemtab
+		where 
+			classification LIKE '%' || #{keyword} || '%'
+		LIMIT 10
+			OFFSET (#{page} - 1) * 10
+	</select>
 </mapper>

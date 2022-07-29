@@ -54,4 +54,24 @@ public class ItemDAOImpl implements ItemDAO {
 	public Item selectByItemNameAndClassification(Map map) {
 		return sqlSession.getMapper(ItemMapper.class).selectByItemNameAndClassification(map);
 	}
+	
+	@Override
+	public List<Item> selectAllItemPaging(Integer page) {
+		return sqlSession.getMapper(ItemMapper.class).selectAllItemPaging(page);
+	}
+	
+	@Override
+	public int selectItemCount() {
+		return sqlSession.getMapper(ItemMapper.class).selectItemCount();
+	}
+	
+	@Override
+	public List<Item> selectSearchItemNamePaging(Item item) {
+		return sqlSession.getMapper(ItemMapper.class).selectSearchItemNamePaging(item);
+	}
+	
+	@Override
+	public List<Item> selectSearchClassificationPaging(Item item) {
+		return sqlSession.getMapper(ItemMapper.class).selectSearchClassificationPaging(item);
+	}
 }

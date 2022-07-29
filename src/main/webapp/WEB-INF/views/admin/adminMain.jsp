@@ -11,10 +11,11 @@
 <title>관리자 페이지</title>
 </head>
 <body>
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 <h1>관리자서버</h1>
 <a href="/admin/boss"><input type="button" value="보스정보 등록"></a><br>
 <a href="/admin/item"><input type="button" value="아이템정보 등록"></a><br>
 <a href="/admin/bossAndDrop"><input type="button" value="보스별 드랍 아이템 추가"></a>
-
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

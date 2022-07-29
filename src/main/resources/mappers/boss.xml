@@ -31,7 +31,28 @@
 			bossgrade
 		from 
 			bosstab
+		
 	</select>
+	
+	<select id="selectBossCount"  resultType="int">
+		select
+			count(*)
+		from
+			bosstab
+	</select>
+	
+	
+	<select id="selectAllBossPaging" parameterType="int" resultType="com.gss.web.common.domain.Boss">
+		select
+			bossname, 
+			bossimagepath,
+			bossgrade
+		from 
+			bosstab
+		LIMIT 7
+			OFFSET (#{page} - 1) * 7
+	</select>
+	
 	
 	<delete id="deleteByBossName" parameterType="Map">
 		delete

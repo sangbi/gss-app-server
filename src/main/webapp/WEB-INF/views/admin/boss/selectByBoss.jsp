@@ -17,6 +17,7 @@
 <title>${bossList.bossName}정보</title>
 </head>
 <body>
+	<div class="div_calculate_main">
 		<table 
 		width="30%"
 		height=200
@@ -35,5 +36,6 @@
 		</table>
 		<a href="/admin/boss"><input type="button" value="목록"></a>
 		<a href="/admin/deleteBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade}"><input type="button" value="삭제"></a>
+	</div>
 </body>
 </html>

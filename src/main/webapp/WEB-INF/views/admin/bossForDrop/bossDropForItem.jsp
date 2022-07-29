@@ -17,6 +17,7 @@
 </head>
 <body>
  <h1></h1>
+ <div class="div_calculate_main">
 <div class="div_item_list">
 		<table class="table">
 			<thead class="table-dark">
@@ -44,6 +45,7 @@
 		
 	<a href="/admin/bossAndDrop"><input type="button" value="목록"></a>
 	<a href=<c:url value="/admin/addDropItem?bossName=${bossName}&bossGrade=${bossGrade }"/>><input type="button" value="아이템정보 추가"></a>
+	</div>
 </div>
 </body>
 </html>

@@ -80,4 +80,34 @@ public class ItemServiceImpl implements ItemService{
 	public int deleteByItemName(Map map) {
 		return itemDAO.deleteByItemName(map);
 	}
+	
+	@Override
+	public List<Item> selectAllItemPaging(Integer page) {
+		return itemDAO.selectAllItemPaging(page);
+	}
+	
+	@Override
+	public int selectItemCount() {
+		int total = itemDAO.selectItemCount();
+		int lastBlockNum=-1;
+		
+		if( total % 10 == 0 ) {
+			lastBlockNum = (int)Math.floor(total/10);
+        }
+        else {
+        	lastBlockNum = (int)Math.floor(total/10) + 1;
+        }
+		
+		return lastBlockNum;
+	}
+	
+	@Override
+	public List<Item> selectSearchItemNamePaging(Item item) {
+		return itemDAO.selectSearchItemNamePaging(item);
+	}
+	
+	@Override
+	public List<Item> selectSearchClassificationPaging(Item item) {
+		return itemDAO.selectSearchClassificationPaging(item);
+	}
 }
