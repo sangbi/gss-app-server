@@ -95,7 +95,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public boolean checkPartyNick(MyInfoList MIL) {
+	public int checkPartyNick(MyInfoList MIL) {
 		return memberDAO.checkPartyNick(MIL);
 	}
 
@@ -191,10 +191,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	public Map<String, String>ValidCheckPartyNick(MyInfoList MIL, String charaterName){
 		Map<String, String> validatorResult = new HashMap<>();
-			if(!checkPartyNick(MIL)) {
-				System.out.println("불편");
+		int nickSize=checkPartyNick(MIL);
+			if(nickSize>=2) {
 				String validKeyName = "valid_alreadyNickName";
-				validatorResult.put(validKeyName, res.getMessage("valid_alreadyNickName", null, null));
+				validatorResult.put(validKeyName, res.getMessage("usingSameNickName", null, null));
 			}
 			return validatorResult;
 	}

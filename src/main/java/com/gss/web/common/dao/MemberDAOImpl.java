@@ -71,7 +71,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public boolean checkPartyNick(MyInfoList MIL) {
+	public int checkPartyNick(MyInfoList MIL) {
 		return sqlSession.getMapper(MemberMapper.class).checkPartyNick(MIL);
 	}
 

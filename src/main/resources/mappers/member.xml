@@ -97,7 +97,7 @@
 		from gssusertab
 		where gssuserid= #{userId} 
 	</select>
-	<select id="checkPartyNick" parameterType="com.gss.web.common.domain.MyInfoList" resultType="boolean">
+	<select id="checkPartyNick" parameterType="com.gss.web.common.domain.MyInfoList" resultType="int">
 		SELECT count(m.charatername) 
 		from memberofpartytab m join partytab p
 		on m.partynum =p.partynum 
