@@ -24,7 +24,7 @@ public interface MemberMapper {
 
 	boolean checkPhoneNum(String phoneNumber);
 
-	boolean checkPartyNick(MyInfoList MIL);
+	int checkPartyNick(MyInfoList MIL);
 	
 	Member findByUserPK(int userKey);
 	

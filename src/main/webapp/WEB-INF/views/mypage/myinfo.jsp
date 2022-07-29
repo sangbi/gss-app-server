@@ -28,7 +28,7 @@
 			<h2>안녕하세요! ${member.gssuserId }님!</h2>
 			<br> <br>
 			<c:if test="${not empty valid_alreadyNickName}">
-			<label class="text-danger">${valid_alreadyemail}</label>
+			<label class="text-danger">${valid_alreadyNickName}</label>
 			</c:if>
 			<c:if test="${!empty MIL}">
 				<div class="table-responsive-sm">
