@@ -19,4 +19,8 @@ public interface BossService {
 	public String bossExistence(Boss boss);
 
 	public Boss selectByBossNameAndGrade(Map map);
+	
+	public List<Boss> selectAllBossPaging(Integer page);
+	
+	public int selectBossCount();
 }

@@ -17,7 +17,7 @@
 <title>보스별드랍 보스리스트</title>
 </head>
 <body>
-<h1>보스정보</h1>
+<div class="div_calculate_main">
 <div class="div_item_list">
 	<table class="table">
 		<thead class="table-dark">
@@ -38,7 +38,37 @@
 			</c:forEach>
 			</tbody>
 	</table>
-	<a href="/admin/main"><input type="button" value="목록"></a>
+	</div>
 </div>
+	<a href="/admin/main"><input type="button" value="목록"></a>
+	
+	<!-- paging -->
+	<nav aria-label="Page navigation example" class="css-paging">
+	       <ul class="pagination justify-content-center">
+	           <!--이전-->
+	           <c:if test="${page ne 1 }">
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/admin/bossAndDrop?page=${page-1 }">&laquo;</a></li>
+	           </c:if>
+	
+	           <!--페이지 그룹-->
+	           <c:forEach begin="${start }" end="${end }" var="i">
+	               <c:choose>
+	                   <c:when test="${page eq i}"> <!-- pageNumber 시작은 0 , i는 1부터 -->
+	                       <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath }/admin/bossAndDrop?page=${i }" >${i}</a></li>
+	                   </c:when>
+	                   <c:otherwise>
+	                       <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/admin/bossAndDrop?page=${i }">${i}</a></li>
+	                   </c:otherwise>
+	               </c:choose>
+	           </c:forEach>
+	
+	           <!--다음-->
+	           <c:if test="${page ne end }">
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/admin/bossAndDrop?page=${page+1 }">&raquo;</a></li>
+	           </c:if>
+	       </ul>
+	   </nav>
+       <!-- paging -->
+	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

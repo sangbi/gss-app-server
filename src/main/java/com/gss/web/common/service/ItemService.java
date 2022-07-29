@@ -23,4 +23,12 @@ public interface ItemService {
 	public Item selectByItemNameAndClassification(Map map);
 	
 	public int deleteByItemName(Map map);
+	
+	public List<Item> selectAllItemPaging(Integer page);
+	
+	public int selectItemCount();
+	
+	public List<Item> selectSearchItemNamePaging(Item item);
+	
+	public List<Item> selectSearchClassificationPaging(Item item);
 }

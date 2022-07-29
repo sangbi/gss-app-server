@@ -39,6 +39,34 @@
 		</table>
 	<a href="/admin/main"><input type="button" value="목록"></a>
 	<a href="/admin/addItem"><input type="button" value="아이템정보 추가"></a>
+	
+	<!-- paging -->
+		<nav aria-label="Page navigation example" class="css-paging">
+	       <ul class="pagination justify-content-center">
+	           <!--이전-->
+	           <c:if test="${page ne 1 }">
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/admin/item?page=${page-1 }">&laquo;</a></li>
+	           </c:if>
+	
+	           <!--페이지 그룹-->
+	           <c:forEach begin="${start }" end="${end }" var="i">
+	               <c:choose>
+	                   <c:when test="${page eq i}"> <!-- pageNumber 시작은 0 , i는 1부터 -->
+	                       <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath }/admin/item?page=${i }" >${i}</a></li>
+	                   </c:when>
+	                   <c:otherwise>
+	                       <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/admin/item?page=${i }">${i}</a></li>
+	                   </c:otherwise>
+	               </c:choose>
+	           </c:forEach>
+	
+	           <!--다음-->
+	           <c:if test="${page ne end }">
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/admin/item?page=${page+1 }">&raquo;</a></li>
+	           </c:if>
+	       </ul>
+	   </nav>
+       <!-- paging -->
 </div>
 </body>
 </html>

@@ -14,9 +14,10 @@
 	<title>GSS</title>
 </head>
 <body>
+	<div class="main_background">
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 	<div class="div_main_mid">
-		<table class="table">
+		<table class="table table-light table-hover">
 			<thead class="table-dark">
 				<tr>
 					<th>공지사항</th><th>날짜</th>
@@ -25,7 +26,7 @@
 			<c:forEach items="${noticeList}" var="notice" varStatus="status">
 				<tbody>
 					<tr>
-						<td><a href="/main/notice?address=${notice.noticeUrl}">${notice.noticeTitle}</a></td>
+						<td><a href="/main/notice?address=${notice.noticeUrl}" style="color: black;">${notice.noticeTitle}</a></td>
 						<td>${notice.noticePostTime}</td>
 					</tr>
 				</tbody>
@@ -116,5 +117,6 @@
 		</nav>
 	</div>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
+	</div>
 </body>
 </html>

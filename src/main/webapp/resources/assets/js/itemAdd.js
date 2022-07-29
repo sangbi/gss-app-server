@@ -128,18 +128,12 @@ function moveToCalculateCompleteList(form){
         }
     });
 }
-
-function moveToPartyList(form){
-    var userId = form.userId.value
-    form.method = "post"
-    form.action = "/calculate/partyList"
+function moveToPartyList(id){
+    console.log(id);
     $.ajax({
         url:'http://localhost:8080/calculate/partyList',
         type:'post',
-        data:{userId:userId
-        },
-        success:function(data){
-            form.submit();
+        data:{userId:id
         }
     });
 }

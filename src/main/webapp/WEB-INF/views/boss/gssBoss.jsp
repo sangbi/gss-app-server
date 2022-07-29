@@ -17,28 +17,57 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<h1>보스</h1>
+	<div class="div_calculate_main">
 	<div class="div_boss_list">		
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
+					<th></th>
 					<th>보스 이름</th>
 					<th>난이도</th>
-					<th>보스 이미지</th>
 				</tr>
 			</thead>
 				<tbody>
 				<c:forEach var="bossList" items="${bossList}" varStatus="loop">
 				<tr>
+					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="70" height="70"></div></td>
 					<td><a href=<c:url value="/boss/selectBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
 					${bossList.bossName}</a></td>
-					<td>${bossList.bossGrade}</td>
-					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
+					<td>${bossList.bossGrade}</td>	
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	</div>   
+	<!-- paging -->
+	<nav aria-label="Page navigation example" class="css-paging">
+	       <ul class="pagination justify-content-center">
+	           <!--이전-->
+	           <c:if test="${page ne 1 }">
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/boss/bossList?page=${page-1 }">&laquo;</a></li>
+	           </c:if>
+	
+	           <!--페이지 그룹-->
+	           <c:forEach begin="${start }" end="${end }" var="i">
+	               <c:choose>
+	                   <c:when test="${page eq i}"> <!-- pageNumber 시작은 0 , i는 1부터 -->
+	                       <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath }/boss/bossList?page=${i }" >${i}</a></li>
+	                   </c:when>
+	                   <c:otherwise>
+	                       <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/boss/bossList?page=${i }">${i}</a></li>
+	                   </c:otherwise>
+	               </c:choose>
+	           </c:forEach>
+	
+	           <!--다음-->
+	           <c:if test="${page ne end }">
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/boss/bossList?page=${page+1 }">&raquo;</a></li>
+	           </c:if>
+	       </ul>
+	   </nav>
+       <!-- paging -->
+	
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>
