@@ -105,7 +105,7 @@ public class PartyDAOImpl implements PartyDAO {
 
 	@Override
 	public int insertPerson(PartyInsert partyInsert) {
-		System.out.println(partyInsert.getGssUserNum()+"µð¿¡¿À µé¾î°¨");
+		System.out.println(partyInsert.getGssUserNum()+"ï¿½ð¿¡¿ï¿½ ï¿½ï¿½î°¨");
 		return sqlsession.getMapper(PartyMapper.class).insertPerson(partyInsert);
 	}
 
@@ -119,5 +119,4 @@ public class PartyDAOImpl implements PartyDAO {
 	public List<String> getBossGradeList(String choiceBossName) {
 		return sqlsession.getMapper(PartyMapper.class).getBossGradeList(choiceBossName);
 	}
-
 }
