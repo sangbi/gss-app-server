@@ -189,12 +189,13 @@ public class MemberServiceImpl implements MemberService {
 		return validatorResult;
 	}
 	
-	public Map<String, String>ValidCheckPartyNick(MyInfoList MIL){
+	public Map<String, String>ValidCheckPartyNick(MyInfoList MIL, String charaterName){
 		Map<String, String> validatorResult = new HashMap<>();
-		if(!checkPartyNick(MIL)) {
-			String validKeyName = "valid_alreadyNickName";
-			validatorResult.put(validKeyName, res.getMessage("already.nickname", null, null));
-		}
-		return validatorResult;
+			if(!checkPartyNick(MIL)) {
+				System.out.println("불편");
+				String validKeyName = "valid_alreadyNickName";
+				validatorResult.put(validKeyName, res.getMessage("valid_alreadyNickName", null, null));
+			}
+			return validatorResult;
 	}
 }

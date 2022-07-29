@@ -252,18 +252,17 @@ public class MemberApi {
 	}
 
 	@GetMapping("/editMyPartyNick")
-	public String postEditMyPartyNick(@RequestParam String partyName,@RequestParam String charaterNick, Model model) {
+	public String editMyPartyNick(@RequestParam String partyName,@RequestParam String charaterNick, Model model) {
 		String charaterName=charaterNick;
 		String path;
 		Map<String, String> validatorResult = new HashMap<>();
 		MyInfoList MIL= new MyInfoList(partyName, charaterName);
-		
-		validatorResult=memberServiceImpl.ValidCheckPartyNick(MIL);
+		validatorResult=memberServiceImpl.ValidCheckPartyNick(MIL,charaterName);
 		if (!validatorResult.isEmpty()) {
 			for (String key : validatorResult.keySet()) {
 				model.addAttribute(key, validatorResult.get(key));
 			}
-			path = "/mypage/mypage";
+			path = "redirect:/member/myMain";
 		} else {
 			memberServiceImpl.updatePartyNick(MIL);
 			path="redirect:/member/myMain";

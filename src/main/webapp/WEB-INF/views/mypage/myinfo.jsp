@@ -27,14 +27,15 @@
 		<div class="mb-3">
 			<h2>안녕하세요! ${member.gssuserId }님!</h2>
 			<br> <br>
+			<c:if test="${not empty valid_alreadyNickName}">
+			<label class="text-danger">${valid_alreadyemail}</label>
+			</c:if>
 			<c:if test="${!empty MIL}">
-				<div id="1"class="table-responsive-sm">
-					<table id="2" class="table table-striped table-bordered table-sm col-md-6">
-						<caption id="3">${member.gssuserId }<spring:message
-								code="iamLeader" />
-						</caption>
-						<thead id="4" class="table-dark">
-							<tr id="5">
+				<div class="table-responsive-sm">
+				<label>${member.gssuserId }<spring:message code="iamLeader" /></label>
+					<table class="table caption-top table-striped table-bordered table-sm col-md-6">		
+						<thead class="table-dark">
+							<tr >
 								<th class="col-md-1"><spring:message code="party.name" /></th>
 								<th colspan="2" class="col-md-2"><spring:message
 										code="partyofmyNick" /></th>
@@ -67,11 +68,12 @@
 					</table>
 				</div>
 			</c:if>
-			<c:if test="${!empty MILMember}">
+		<c:if test="${!empty MILMember}">
 				<div class="table-responsive-sm">
-					<table class="table table-striped table-bordered table-sm col-md-6">
-						<caption>${member.gssuserId }<spring:message
-								code="iamMember" />
+					<label>${member.gssuserId }<spring:message
+								code="iamMember" /></label>
+					<table class="table   table-striped table-bordered table-sm col-md-6">
+						<caption>
 						</caption>
 						<thead class="table-dark">
 							<tr>
@@ -81,18 +83,24 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="MILM" items="${MILMember }">
+							<c:forEach var="MILMember" items="${MILMember }">
 								<tr>
-									<td><label>${MILMember.partyName} </label></td>
-									<td><label><a
-											href="<c:url value='/party/imakeparty?gssUserId=${member.gssuserId}&partyName=${MILMember.partyName }'/>">${MILMember.charaterName }</a></label></td>
-									<td><a
-										href="<c:url value='/party/imakeparty?gssUserId=${member.gssuserId}&partyName=${MILMember.partyName }'/>">
-											<button
-												class=" btn-sm btn-outline-success btn btn-dark btn-lg col-lg-8">
-												<spring:message code="editNick" />
-											</button>
-									</a></td>
+									<td ><label><a
+											href="<c:url value='/party/imakeparty?gssUserId=${member.gssuserId}&partyName=${MILMember.partyName }'/>">${MILMember.partyName}</a>
+									</label></td>
+									<td><input class="form-control-lg col-lg-9"
+										id="charaterNick" type="text" value="${MILMember.charaterName }"
+										placeholder="${MILMember.charaterName }"
+										onfocus="this.placeholder=''"
+										onblur="this.placeholder='${MILMember.charaterName }'"></td>
+									<td >
+										<button 
+											class="btn-sm btn-outline-success btn btn-dark btn-lg col-lg-8" id="nickBtn">
+											<spring:message code="editNick" />
+										</button> 
+									<input type="hidden" id="userPartyName"value="${MILMember.partyName }">
+									<input type="hidden" id="userPartyName"value="${MILMember.charaterName }">
+									</td>	
 								<tr>
 							</c:forEach>
 						</tbody>
@@ -100,6 +108,8 @@
 				</div>
 			</c:if>
 		</div>
+		
+		
 	</div>
 </body>
 </html>

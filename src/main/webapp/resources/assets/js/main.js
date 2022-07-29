@@ -11,9 +11,9 @@ function logOut(){
     location.replace('/member/logout')
 }
 function moveMyMain(){
-    location.replace('/member/myMain')
+    location.replace('http://localhost:8080/member/myMain')
 }
 
-function moveMyPartyPage(){
-    location.replace('/member/mypage')
+function moveMyPage(){
+    location.replace('http://localhost:8080/member/mypage')
 }

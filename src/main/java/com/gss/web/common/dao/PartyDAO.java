@@ -49,4 +49,6 @@ public interface PartyDAO {
 	public int insertPerson (PartyInsert partyInsert);
 	
 	public int getUserNumByName (String gssUserId);
+	
+	public List<String> getBossGradeList(String choiceBossName);
 }

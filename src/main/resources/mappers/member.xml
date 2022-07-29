@@ -32,13 +32,13 @@
 	<select id="findByMyInfoList" parameterType="int" resultType="com.gss.web.common.domain.MyInfoList">
 		select p.partyname ,m.charatername  
 		from memberofpartytab m join partytab p on m.partynum  =p.partynum  
-		where m.gssusernum =#{gssuserid} and m.partyleader= true
+		where m.gssusernum =#{gssuserid} and partyleader=true
 	</select>
 	
 	<select id="findByMyInfoListMember" parameterType="int" resultType="com.gss.web.common.domain.MyInfoList">
 		select p.partyname ,m.charatername  
 		from memberofpartytab m join partytab p on m.partynum  =p.partynum  
-		where m.gssusernum =#{gssuserid} and m.partyleader= false
+		where m.gssusernum =#{gssuserid} and partyleader=false
 	</select>
 	
 	<select id="checkEmail" parameterType="String" resultType="boolean">
@@ -101,7 +101,7 @@
 		SELECT count(m.charatername) 
 		from memberofpartytab m join partytab p
 		on m.partynum =p.partynum 
-		where p.partyname=#{partyName}
+		where  m.charatername=#{charaterName}
 	</select>
 	<update id="updatePartyNick" parameterType="com.gss.web.common.domain.MyInfoList">
 	update  memberofpartytab m 

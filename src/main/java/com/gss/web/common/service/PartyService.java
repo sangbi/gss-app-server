@@ -31,4 +31,6 @@ public interface PartyService {
 	public List<PartySearchDto> getSearchList(PartySearchDto searchDto);
 	
 	public int insertPerson(PartyInsertDto partyInsertdto);
+	
+	public List<String> getBossGradeList(String choiceBossName);
 }
