@@ -102,6 +102,8 @@
 		</div>
 		
 	</nav>
+	<div class="nav_background">
+	</div>
 	<jsp:include page="${content }" />
 </body>
 </html>

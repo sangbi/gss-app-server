@@ -20,4 +20,8 @@ public interface BossMapper {
 	public int deleteByBossName(Map map);
 	
 	public abstract Boss selectByBossNameAndGrade(Map map);
+	
+	public List<Boss> selectAllBossPaging(Integer page);
+	
+	public int selectBossCount();
 }

@@ -17,36 +17,39 @@
 <title>보스 추가페이지</title>
 </head>
 <body>
-<form:form modelAttribute="BossDto" method="POST" enctype="multipart/form-data" onsubmit="return check()">
-		<table 
-		width="50%" 
-		height=200
-		border="1">
-		<tr>
-		<td rowspan="4"><div class="select_img"><img style=width:150px; id="preview-image"/></div></td>
-		
-		<tr>
-			<th>보스이름</th>
-			<td><input type="text" name="bossName"></td>
-		</tr>
-		<tr>
-			<th>난이도</th>
-			<td><select name="bossGrade">
-					<option value="">난이도 선택</option>
-					<option value="카오스">카오스</option>
-					<option value="하드">하드</option>
-					<option value="노멀">노멀</option>
-					<option value="이지">이지</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<th>보스 이미지</th>
-			<td><input type="file" name="bossImagepath" id="input-image"class="hidden"value=""></td>
-		</tr>
-		</table>
-		<input type="submit" value="등록">
-		<a href="/admin/boss"><input type="button" value="뒤로가기"></a>
-	</form:form>
+	<div class="div_calculate_main">
+		<form:form modelAttribute="BossDto" method="POST" enctype="multipart/form-data" onsubmit="return check()">
+			<table 
+			width="50%" 
+			height=200
+			border="1">
+			<tr>
+			<td rowspan="4"><div class="select_img"><img style=width:150px; id="preview-image"/></div></td>
+			
+			<tr>
+				<th>보스이름</th>
+				<td><input type="text" name="bossName"></td>
+			</tr>
+			<tr>
+				<th>난이도</th>
+				<td><select name="bossGrade">
+						<option value="">난이도 선택</option>
+						<option value="익스트림">익스트림</option>
+						<option value="카오스">카오스</option>
+						<option value="하드">하드</option>
+						<option value="노멀">노멀</option>
+						<option value="이지">이지</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>보스 이미지</th>
+				<td><input type="file" name="bossImagepath" id="input-image"class="hidden"value=""></td>
+			</tr>
+			</table>
+			<input type="submit" value="등록">
+			<a href="/admin/boss"><input type="button" value="뒤로가기"></a>
+		</form:form>
+	</div>
 </body>
 </html>
