@@ -54,4 +54,6 @@ public interface CalculateDao {
 	public List<ItemInfo> selectItemByItemNumber(int bossNum);
 	
 	public int selectItemNumByBossNumber (int bossNum);
+	
+	public int deletePartyGetItem (int pgiKey);
 }

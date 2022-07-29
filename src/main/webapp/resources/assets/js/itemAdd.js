@@ -111,59 +111,40 @@ function moveCalculateList(form){
         type:'get',
         data:{partyName : partyName
         },
-        
         success:function(data){
-            
         }
     });
 }
-
 function moveToCalculateCompleteList(form){
     var partyName = form.partyName.value
     console.log(partyName)
-
     $.ajax({
         url:'http://localhost:8080/calculate/calculateCompleteList',
         type:'get',
         data:{partyName : partyName
         },
-        
         success:function(data){
-            
         }
     });
 }
-
-function moveToPartyList(form){
-    var userId = form.userId.value
-
-    form.method = "post"
-    form.action = "/calculate/partyList"
-
+function moveToPartyList(id){
+    console.log(id);
     $.ajax({
         url:'http://localhost:8080/calculate/partyList',
         type:'post',
-        data:{userId:userId
-        },
-  
-        success:function(data){
-            form.submit();
+        data:{userId:id
         }
     });
 }
-
 function moveToCalculateComplete(form){
     var userId = form.userId.value
-
     form.method = "post";
     form.action = "/calculate/calculateComplete";
-
     $.ajax({
         url:'http://localhost:8080/calculate/calculateComplete',
         type:'post',
         data:{userId:userId
         },
-  
         success:function(data){
             form.submit();
         }

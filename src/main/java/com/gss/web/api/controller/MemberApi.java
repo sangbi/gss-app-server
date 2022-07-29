@@ -29,6 +29,7 @@ import com.gss.web.api.dto.MemberCreateDto;
 import com.gss.web.api.vo.NaverLoginProfile;
 import com.gss.web.api.vo.NaverLoginVo;
 import com.gss.web.common.domain.Member;
+import com.gss.web.common.domain.MyInfoList;
 import com.gss.web.common.service.AuthService;
 import com.gss.web.common.service.MailService;
 import com.gss.web.common.service.MemberServiceImpl;
@@ -53,8 +54,6 @@ public class MemberApi {
 	private MailService mailService;
 	
 	private List<Map<String, String>> certifyCationEmailPass = new ArrayList<Map<String, String>>();
-	
-
 	
 	private static final String SESSION_COOKIE_NAME = "userSessionId";
 
@@ -174,6 +173,21 @@ public class MemberApi {
 		return path;
 	}
 	
+	@GetMapping("/myMain")
+	public String myMainPage(@ModelAttribute("MemberCreateDto")MemberCreateDto MCDto,Model model,HttpSession session) {
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}
+		AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+		Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+		List<MyInfoList> MIL=memberServiceImpl.findByMyInfoList(auth.getUserKey());
+		List<MyInfoList> MILMember=memberServiceImpl.findByMyInfoListMember(auth.getUserKey());
+		model.addAttribute("member",member);
+		model.addAttribute("MIL",MIL);
+		model.addAttribute("MILMember",MILMember);
+		return "mypage/myinfo";
+	}
+	
 	@GetMapping("/mypage")
 	public String myPage(@ModelAttribute("MemberCreateDto")MemberCreateDto MCDto,HttpSession session,Model model) {
 		if(session.getAttribute("authInfo")==null) {
@@ -236,6 +250,28 @@ public class MemberApi {
 		}
 		return path;
 	}
+
+	@GetMapping("/editMyPartyNick")
+	public String editMyPartyNick(@RequestParam String partyName,@RequestParam String charaterNick, Model model) {
+		String charaterName=charaterNick;
+		String path;
+		Map<String, String> validatorResult = new HashMap<>();
+		MyInfoList MIL= new MyInfoList(partyName, charaterName);
+		validatorResult=memberServiceImpl.ValidCheckPartyNick(MIL,charaterName);
+		if (!validatorResult.isEmpty()) {
+			for (String key : validatorResult.keySet()) {
+				model.addAttribute(key, validatorResult.get(key));
+			}
+			path = "redirect:/member/myMain";
+		} else {
+			memberServiceImpl.updatePartyNick(MIL);
+			path="redirect:/member/myMain";
+		}
+		
+		model.addAttribute("partyName",partyName);
+		model.addAttribute("charaterName",charaterName);
+		return path;
+	}
 	
 	@GetMapping("/editEnd")
 	public String editEnd(HttpSession session) {
@@ -270,7 +306,6 @@ public class MemberApi {
 		 }
 		return result;
 	}
-	
 	
 	@GetMapping("/logout")
 	public String logOut(HttpSession session) {

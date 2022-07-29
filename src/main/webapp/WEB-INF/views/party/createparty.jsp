@@ -8,9 +8,14 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/assets/js/bossgradelist.js"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
+	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 	party ________________
 	<br>
 	<form action="insert" method="post">
@@ -23,7 +28,7 @@
 				<td><input type="text" name="partyName"></td>
 			<tr>
 				<td>Boss select</td>
-				<td><select name='bossName'>
+				<td><select name='bossName' id="bossName">
 						<c:forEach var="bossName" items="${getBossName}">
 							<option value="${bossName}">${bossName}</option>
 						</c:forEach>
@@ -31,15 +36,14 @@
 			</tr>
 			<tr>
 				<td>난이도선택</td>
-				<td><select name='level'>
-						<c:forEach var="bossGrade" items="${getBossGrade}">
-							<option value="${ bossGrade}">${bossGrade}</option>
-						</c:forEach>
+				<td><select name='level' id="bossGrade">
+						<option value="">선택</option>
 				</select></td>
 			</tr>
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="id" value="${authInfo.id}" readonly></td>
+				<td><input type="text" name="id" value="${authInfo.id}"
+					readonly></td>
 			</tr>
 			<tr>
 				<td>캐릭터이름</td>

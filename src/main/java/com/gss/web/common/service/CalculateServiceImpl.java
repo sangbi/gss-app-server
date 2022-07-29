@@ -125,4 +125,9 @@ public class CalculateServiceImpl implements CalculateService {
 	public int selectItemNumByBossNumber(int bossNum) {
 		return calculateDao.selectItemNumByBossNumber(bossNum);
 	}
+	
+	@Override
+	public int deletePartyGetItem(int pgiKey) {
+		return calculateDao.deletePartyGetItem(pgiKey);
+	}
 }

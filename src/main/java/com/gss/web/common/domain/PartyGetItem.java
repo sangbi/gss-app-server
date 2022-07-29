@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PartyGetItem {
+	private long pgiKey;
 	private long itemSalePrice; 
 	private String itemName;
 }

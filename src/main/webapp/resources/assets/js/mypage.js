@@ -2,6 +2,11 @@ window.onload=function(){
    var certificationFlag= document.getElementById("certificationFlag");
    certificationFlag.setAttribute('value','');
 }
+
+function joinCancle(){
+	location.href="/main/home"
+}
+
 $(document).ready(function(){
 	$('#sendEmail').click(function(){
  var userinputemail=$('#email').val();

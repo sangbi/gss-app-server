@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gss.web.api.dto.AuthInfo;
 import com.gss.web.api.dto.PartyGetItemDto;
 import com.gss.web.api.dto.PriceRatioDto;
 import com.gss.web.api.dto.ResultTabDto;
@@ -39,15 +42,17 @@ public class CalculateApi {
 	@Autowired
 	private ItemService itemService;
 
-	@PostMapping("/partyList")
-	public String showMyPartyList(@RequestParam("userId") String userId, Model model) {
-		int userNum = calculateService.selectByUserId(userId);
-		List<CalculateMain> userList = new ArrayList<CalculateMain>();
-		
-		userList = calculateService.selectByUserNumber(userNum);
-		model.addAttribute("userList", userList);
-
+	@GetMapping("/partyList")
+	public String showMyPartyList() {
 		return "calculate/calculateMain";
+	}
+	
+	@PostMapping("/getPartyList")
+	@ResponseBody
+	public List<CalculateMain> getPartyList(HttpServletRequest req){
+		AuthInfo loginUser =  (AuthInfo) req.getSession().getAttribute("authInfo");
+		int userNum = calculateService.selectByUserId(loginUser.getId());
+		return calculateService.selectByUserNumber(userNum);
 	}
 	
 	@GetMapping("/calculateList")
@@ -214,5 +219,15 @@ public class CalculateApi {
 		model.addAttribute("price", price);
 		
 		return "calculate/calculateCompleteList";
+	}
+	
+	@PostMapping("/deleteItem")
+	public String deletePartyGetItem (@RequestParam("pgiKey") int pgiKey,
+										@RequestParam("partyName") String partyName,
+										RedirectAttributes redirectAttributes ) {
+		int delete = calculateService.deletePartyGetItem(pgiKey);
+		redirectAttributes.addAttribute("partyName", partyName);
+		
+		return"redirect:/calculate/calculateList";
 	}
 }

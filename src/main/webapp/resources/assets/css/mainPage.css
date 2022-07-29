@@ -74,4 +74,7 @@ html, body {
 .div_drop_paging{
 	margin:auto;
 	
+.div_td_img{
+	float: right;
+	text-align:right;
 }

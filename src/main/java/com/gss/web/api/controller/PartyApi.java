@@ -1,12 +1,16 @@
 package com.gss.web.api.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gss.web.api.dto.AuthInfo;
 import com.gss.web.api.dto.PartyCreateDto;
+import com.gss.web.api.dto.PartyInsertDto;
 import com.gss.web.api.dto.PartyPageDto;
 import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.domain.Member;
@@ -42,11 +47,21 @@ public class PartyApi {
 		Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
 		page.setId(member.getGssuserId());
 		pc.setPaging(page);
-		pc.setArticleCount(partyServiceImpl.getArticleCountNum());
+		pc.setArticleCount(partyServiceImpl.getArticleCountNum(member.getGssuserId()));
 		model.addAttribute("pc", pc);
 		model.addAttribute("myParty", partyServiceImpl.showMain(page));
 		model.addAttribute("myParty2", partyServiceImpl.showMain2(page));
 		return "party/main";
+	}
+	
+	@PostMapping("/bossGradeList")
+	@ResponseBody
+	public List<String> bossGradeList(String choiceBossName) {
+		List<String> gradeList = new ArrayList<String>();
+		
+		gradeList=partyServiceImpl.getBossGradeList(choiceBossName);
+		
+		return gradeList;
 	}
 
 	@RequestMapping(value = "party/createparty", method = RequestMethod.GET)
@@ -61,7 +76,7 @@ public class PartyApi {
 			Model model) {
 		System.out.println(gssUserId);
 		System.out.println(partyName);
-		System.out.println("ÆÄÆ¼¸¸µé±â ÀÌ»ó¹«");
+		System.out.println("ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½");
 		model.addAttribute("myParty", partyServiceImpl.getMyPartyInfo(partyName, gssUserId));
 		System.out.println(partyServiceImpl.getMyPartyInfo(partyName, gssUserId));
 		return "party/imakeparty";
@@ -71,26 +86,29 @@ public class PartyApi {
 	public String insert(PartyCreateDto command) {
 		System.out.println(command.getBossName());
 		partyServiceImpl.createParty(command);
-		System.out.println("ÆÄÆ¼Ãß°¡ÀÌ»ó¹«");
+		System.out.println("ï¿½ï¿½Æ¼ï¿½ß°ï¿½ï¿½Ì»ï¿½");
 		return "redirect:/party/main";
 	}
 
 	@RequestMapping(value = "party/ienterparty", method = RequestMethod.GET)
 	public String ienterParty(@RequestParam("gssUserId") String gssUserId, @RequestParam("partyName") String partyName,
 			Model model) {
-		System.out.println("Âü¿©ÇÑÆÄÆ¼ ÀÌ»ó¹« ");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ ï¿½Ì»ï¿½ ");
 		model.addAttribute("ienterParty", partyServiceImpl.getIenterInfo(partyName, gssUserId));
 		return "party/ienterParty";
 	}
-	@ResponseBody
-	@RequestMapping(value = "/getSearchList", method = RequestMethod.GET)
-	public List<PartySearchDto> getSearchList(@RequestParam("choice") String choice, @RequestParam("keyWord") String keyWord){
-		PartySearchDto partySearchDto = new PartySearchDto();
-		partySearchDto.setChoice(choice);
-		partySearchDto.setKeyWord(keyWord);
+	
+	@RequestMapping(value = "party/getSearchList", method = RequestMethod.GET)
+	public String getSearchList(PartySearchDto searchdto, Model model,String partyName,String gssUserId){
+		model.addAttribute("search",partyServiceImpl.getSearchList(searchdto));
+		model.addAttribute("myParty", partyServiceImpl.getMyPartyInfo(partyName, gssUserId));
+		System.out.println("ï¿½È¶ß³ï¿½");
+		return "party/imakeparty";
 		
-		return partyServiceImpl.getSearch(partySearchDto);
-		
-		
+	}
+	@RequestMapping(value = "party/insertPerson", method = RequestMethod.GET)
+	public String insertPerson(PartyInsertDto command, Model model) {
+		partyServiceImpl.insertPerson(command);
+		return "redirect:/party/main";
 	}
 }

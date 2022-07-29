@@ -1,6 +1,7 @@
 package com.gss.web.common.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.validation.FieldError;
 import com.gss.web.api.dto.MemberCreateDto;
 import com.gss.web.common.dao.MemberDAO;
 import com.gss.web.common.domain.Member;
+import com.gss.web.common.domain.MyInfoList;
 
 import lombok.AllArgsConstructor;
 
@@ -40,6 +42,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public void updatePartyNick(MyInfoList MIL) {
+		memberDAO.updatePartyNick(MIL);
+	}
+	
+	@Override
 	public int editUserInfo(MemberCreateDto dto) {
 		Member member = new Member(dto.getEmail(), dto.getPassword(), dto.getPhoneNumber(), dto.getName(),
 				dto.getUserid());
@@ -59,6 +66,19 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
+
+	@Override
+	public List<MyInfoList> findByMyInfoList(int userNum) {
+		List<MyInfoList> MIL=memberDAO.findByMyInfoList(userNum);
+		return MIL;
+	}
+
+	@Override
+	public List<MyInfoList> findByMyInfoListMember(int userNum) {
+		List<MyInfoList> MIL=memberDAO.findByMyInfoListMember(userNum);
+		return MIL;
+	}
+	
 	@Override
 	public boolean checkEmail(String email) {
 		return memberDAO.checkEmail(email);
@@ -72,6 +92,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean checkPhoneNum(String phoneNumber) {
 		return memberDAO.checkPhoneNum(phoneNumber);
+	}
+	
+	@Override
+	public boolean checkPartyNick(MyInfoList MIL) {
+		return memberDAO.checkPartyNick(MIL);
 	}
 
 	@Override
@@ -162,5 +187,15 @@ public class MemberServiceImpl implements MemberService {
 			validatorResult.put(validKeyName, res.getMessage("already.phonenumber", null, null));
 		}
 		return validatorResult;
+	}
+	
+	public Map<String, String>ValidCheckPartyNick(MyInfoList MIL, String charaterName){
+		Map<String, String> validatorResult = new HashMap<>();
+			if(!checkPartyNick(MIL)) {
+				System.out.println("불편");
+				String validKeyName = "valid_alreadyNickName";
+				validatorResult.put(validKeyName, res.getMessage("valid_alreadyNickName", null, null));
+			}
+			return validatorResult;
 	}
 }

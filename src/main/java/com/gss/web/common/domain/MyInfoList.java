@@ -2,13 +2,12 @@ package com.gss.web.common.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
-@NoArgsConstructor
+@ToString
 @AllArgsConstructor
-public class Party {
+public class MyInfoList {
 	private String partyName;
-
-	
+	private String charaterName;
 }

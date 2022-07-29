@@ -80,6 +80,7 @@
 	
 	<select id="selectItemNameAndPrice" parameterType="String" resultType="com.gss.web.common.domain.PartyGetItem">
 		select 
+			p.pgikey, 
 			p.itemsaleprice, 
 			i.itemname
 		from 
@@ -269,4 +270,12 @@
 		from itemtab as it join itemofbosstab as ib
 		on it.itemnum = ib.itemnum and ib.bossnum = #{bossNum};	
 	</select>
+	
+	<delete id="deletePartyGetItem" parameterType="int">
+		DELETE 
+		FROM 
+			partygetitemtab
+		WHERE 
+			pgikey=#{pgiKey};
+	</delete>
 </mapper>
