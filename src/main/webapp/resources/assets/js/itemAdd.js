@@ -115,6 +115,7 @@ function moveCalculateList(form){
         }
     });
 }
+
 function moveToCalculateCompleteList(form){
     var partyName = form.partyName.value
     console.log(partyName)
@@ -136,6 +137,7 @@ function moveToPartyList(id){
         }
     });
 }
+
 function moveToCalculateComplete(form){
     var userId = form.userId.value
     form.method = "post";
