@@ -138,7 +138,7 @@
 					class="btn btn-outline-success btn btn-dark btn-lg col-3 "
 					type="submit" value="회원 가입"> <input
 					class="btn btn-outline-success btn btn-dark btn-lg col-3 "
-					type="button" value="취소">
+					type="button" onclick="joinCancle()" value="취소">
 			</div>
 			<form:input type="hidden" path="certificationFlag" />
 		</form:form>

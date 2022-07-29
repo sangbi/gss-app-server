@@ -44,7 +44,17 @@
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
 					href="/main/home">Home<span class="sr-only">(current)</span></a></li>
-				<c:if test="${!empty authInfo }"><li class="nav-item"><a class="nav-link" href="/member/myMain">내정보</a></li></c:if>		
+				<c:if test="${!empty authInfo }">
+				<li class="nav-item dropdown">
+				<a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						        	내정보
+						    </a>
+				<ul class="dropdown-menu">
+				<li class="nav-item"><button class="dropdown-item" onclick="moveMypage">내정보 수정</button></li>
+				<li class="nav-item"><button class="dropdown-item" onclick="moveMain">나의 파티</button></li>
+				</ul>
+				</li>
+				</c:if>		
 				<li class="nav-item"><a class="nav-link" href="/boss/bossList">보스</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/item/itemList">아이템</a>
@@ -83,5 +93,6 @@
 				</c:if>
 			</div>
 	</nav>
+	<jsp:include page="${content }" />
 </body>
 </html>

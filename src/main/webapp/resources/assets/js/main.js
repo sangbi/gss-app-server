@@ -10,6 +10,10 @@ function moveJoin(){
 function logOut(){
     location.replace('/member/logout')
 }
-function moveMyPage(){
+function moveMyMain(){
     location.replace('/member/myMain')
+}
+
+function moveMyPartyPage(){
+    location.replace('/member/mypage')
 }
