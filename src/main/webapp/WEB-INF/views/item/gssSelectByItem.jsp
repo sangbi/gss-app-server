@@ -24,7 +24,7 @@
 			height=200
 			border="1">
 			<tr>
-			<td rowspan="3"><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="100%" height="100%" /></div></td>
+			<td rowspan="3"><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="100" height="100" /></div></td>
 			
 			<tr>
 				<th>아이템 이름</th>
