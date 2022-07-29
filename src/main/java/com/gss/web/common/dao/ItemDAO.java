@@ -22,4 +22,12 @@ public interface ItemDAO {
 	public List<Item> selectSearchClassification(String classification);
 	
 	public Item selectByItemNameAndClassification(Map map);
+	
+	public List<Item> selectAllItemPaging(Integer page);
+	
+	public int selectItemCount();
+	
+	public List<Item> selectSearchItemNamePaging(Item item);
+	
+	public List<Item> selectSearchClassificationPaging(Item item);
 }

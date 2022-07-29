@@ -83,5 +83,7 @@
 				</c:if>
 			</div>
 	</nav>
+	<div class="nav_background">
+	</div>
 </body>
 </html>

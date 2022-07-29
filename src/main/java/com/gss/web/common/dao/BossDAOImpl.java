@@ -46,4 +46,14 @@ public class BossDAOImpl implements BossDAO{
 	public  Boss selectByBossNameAndGrade(Map map) {
 		return sqlSession.getMapper(BossMapper.class).selectByBossNameAndGrade(map);
 	}
+	
+	@Override
+	public List<Boss> selectAllBossPaging(Integer page) {
+		return sqlSession.getMapper(BossMapper.class).selectAllBossPaging(page);
+	}
+	
+	@Override
+	public int selectBossCount() {
+		return sqlSession.getMapper(BossMapper.class).selectBossCount();
+	}
 }

@@ -56,24 +56,24 @@
 	       <ul class="pagination justify-content-center">
 	           <!--이전-->
 	           <c:if test="${page ne 1 }">
-	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemList?&page=${page-1}">&laquo;</a></li>
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemSearch?type=${type}&keyword=${keyword }&page=${page-1 }">&laquo;</a></li>
 	           </c:if>
 	
 	           <!--페이지 그룹-->
 	           <c:forEach begin="${start }" end="${end }" var="i">
 	               <c:choose>
 	                   <c:when test="${page eq i}"> <!-- pageNumber 시작은 0 , i는 1부터 -->
-	                       <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath }/item/itemList?page=${i }" >${i}</a></li>
+	                       <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath }/item/itemSearch?type=${type}&keyword=${keyword }&page=${i }" >${i}</a></li>
 	                   </c:when>
 	                   <c:otherwise>
-	                       <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemList?page=${i }">${i}</a></li>
+	                       <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemSearch?type=${type}&keyword=${keyword }&page=${i }">${i}</a></li>
 	                   </c:otherwise>
 	               </c:choose>
 	           </c:forEach>
 	
 	           <!--다음-->
 	           <c:if test="${page ne end }">
-	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemList?page=${page+1 }">&raquo;</a></li>
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemSearch?type=${type}&keyword=${keyword }&page=${page+1 }">&raquo;</a></li>
 	           </c:if>
 	       </ul>
 	   </nav>

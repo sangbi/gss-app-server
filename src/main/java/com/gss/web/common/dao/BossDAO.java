@@ -17,4 +17,8 @@ public interface BossDAO {
 	public  int deleteByBossName(Map map);
 	
 	public  Boss selectByBossNameAndGrade(Map map);
+	
+	public List<Boss> selectAllBossPaging(Integer page);
+	
+	public int selectBossCount();
 }

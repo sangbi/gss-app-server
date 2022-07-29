@@ -15,6 +15,8 @@ public class Item {
 	private String type;
 	private String keyword;
 	
+	private Integer page;
+	
 	public Item(String itemName,String itemImagepath,String classification) {
 		this.itemName=itemName;
 		this.itemImagepath=itemImagepath;
@@ -26,5 +28,10 @@ public class Item {
 		this.itemName=itemName;
 		this.itemImagepath=itemImagepath;
 		this.classification=classification;
+	}
+	
+	public Item(String keyword, Integer page) {
+		this.keyword = keyword;
+		this.page = page;
 	}
 }

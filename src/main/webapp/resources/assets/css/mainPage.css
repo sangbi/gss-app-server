@@ -57,3 +57,21 @@ html, body {
 .div_login{
 	float: left;
 }
+
+.main_background{
+	background-image: url("../../시간의신전.jpg");
+	background-repeat : no-repeat;
+    background-size : 100% 450px;
+}
+
+.div_drop_item{
+	margin:auto;
+	width:50%;
+	overflow:hidden;
+	height:auto;
+}
+
+.div_drop_paging{
+	margin:auto;
+	
+}
