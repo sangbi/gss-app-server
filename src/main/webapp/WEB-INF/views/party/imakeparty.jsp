@@ -39,39 +39,48 @@
 				<td><strong>캐릭터네임</strong></td>
 				<td>${myParty.charaterName}</td>
 			</tr>
+			<c:forEach var="myMembers" items="${myMember}">
+			<tr>
+				<td><strong>파티원</strong></td>
+				<td>${myMembers.gssUserId}</td>
+				<td><strong>캐릭터네임</strong></td>
+				<td>${myMembers.charaterName}</td></tr>
+				</c:forEach>
 		</table>
-		</form>
+	</form>
 	<input type="button" value="목록으로 돌아가기"
 		onClick="location.href='<c:url value="main" />'">
-		<div>
-	<form action="getSearchList" method="get">
-	<fieldset>
-		<legend> 글검색필드</legend>
-		<select name=id>
-		<option value ="gssUserId" > 아이디</option>
-		</select>
-		<label>검색어</label>
-		<input type="hidden" name=gssUserId value="${myParty.gssUserId}">
-		<input type="hidden" name=partyName value="${myParty.partyName}">
-	<input type="text" name= keyWord value=""> 
-	<input type="submit" value="검색">
-	
-	</fieldset>
-	</form>
-		</div>
-			
+	<div>
+		<form action="getSearchList" method="get">
+			<fieldset>
+				<legend> 글검색필드</legend>
+						 <input type="hidden" name=partyName value="${myParty.partyName}">
+					<select name=id>
+						<option value="gssUserId">아이디</option>
+					</select> <label>검색어</label>
+						 <input type="hidden" name=gssUserId value="${myParty.gssUserId}"> 
+						 <input type="text" name=keyWord value="">
+						 <input type="submit" value="검색">
+			</fieldset>
+		</form>
+	</div>
 		<form action="insertPerson" method="get">
+	
 			<c:forEach var="list" items="${search}">
-		<div style="border:1px  padding:15px;">	
-		<tr>
-		<td><input type="radio" name="gssUserId" value="${list.gssUserId}">${list.gssUserId}</td></tr>
-		<tr><td>EMAIL: ${list.email }</td></tr>
-		</div>
-			</c:forEach>
-			<input type="hidden" name=partyName value="${myParty.partyName}">
-			
-		<input type ="text" name="charaterName" > 캐릭터 이름 <br>
-		<input type ="submit" value="파티원으로 등록하기">
-			</form>
+				<div style="border: 1px padding:15px;">
+				<tr>
+					<td><input type="radio" name="insertId"
+						value="${list.gssUserId}">${list.gssUserId}</td>
+				</tr>
+				<tr>
+					<td>EMAIL: ${list.email }</td>
+				</tr>
+			</div>
+		</c:forEach>
+		<input type="hidden" name="partyName" value="${myParty.partyName}">
+		<input type="text" name="charaterName"> (캐릭터 이름) 
+		<input type="hidden" name="gssUserId" value="${myParty.gssUserId}">
+		 <input type="submit" value="파티원으로 등록하기">
+	</form>
 </body>
 </html>

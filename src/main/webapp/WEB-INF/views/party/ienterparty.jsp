@@ -19,21 +19,28 @@
 
 			<tr>
 				<td><strong>파티이름</strong></td>
-				<td>${ienterparty.partyname }</td>
+				<td>${ienterParty.partyName }</td>
 			</tr>
 
 			<tr>
 				<td><strong>보스이름</strong></td>
-				<td>${ienterparty.bossname}</td>
+				<td>${ienterParty.bossName}</td>
 				<td>보스난이도</td>
-				<td>${ienterparty.bossgrade}</td>
+				<td>${ienterParty.bossGrade}</td>
 			</tr>
 			<tr>
 				<td><strong>파티장</strong></td>
-				<td>${ienterparty.gssuserid}</td>
+				<td>${ienterParty.gssUserId}</td>
 				<td><strong>캐릭터네임</strong></td>
-				<td>${ienterparty.charatername}</td>
+				<td>${ienterParty.charaterName}</td>
 			</tr>
+			<c:forEach var="myMembers" items="${myMember}">
+			<tr>
+				<td><strong>파티원</strong></td>
+				<td>${myMembers.gssUserId}</td>
+				<td><strong>캐릭터네임</strong></td>
+				<td>${myMembers.charaterName}</td></tr>
+				</c:forEach>
 		</table>
 	</form>
 	<input type="button" value="목록"
