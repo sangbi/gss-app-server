@@ -87,6 +87,7 @@
 	
 	<select id="selectAllItemPaging" parameterType="int" resultType="com.gss.web.common.domain.Item">
 		select
+			itemnum,
 			itemname, 
 			itemimagepath,
 			classification

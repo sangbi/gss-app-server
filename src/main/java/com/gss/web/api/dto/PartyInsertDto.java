@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PartyInsertDto {
-	private String gssUserId;
+	private String insertId;
 	private String partyName;
 	private String charaterName;
 	

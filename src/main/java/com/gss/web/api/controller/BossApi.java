@@ -52,7 +52,6 @@ public class BossApi {
 		
 		for (int i = 0; i < result.size(); i++) {
 			itemList[i] =  itemOfBossService.selectByBossItem(result.get(i));
-			System.out.println(itemList[i].getItemName() + " : " + itemList[i].getClassification() + " : " + itemList[i].getItemImagepath() );
 		}
 		
 		model.addAttribute("itemList", itemList);

@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gss.web.api.dto.MyPartyDto;
+import com.gss.web.api.dto.MyPartyMember;
 import com.gss.web.api.dto.PartyCreateDto;
 import com.gss.web.api.dto.PartyInsertDto;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
+import com.gss.web.api.dto.PartyPageDto2;
 import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.dao.PartyDAOImpl;
 import com.gss.web.common.domain.MemberOfPartyTab;
@@ -42,8 +44,8 @@ public class PartyServiceImpl implements PartyService {
 	}
 
 	@Override
-	public List<PartyMainDto2> showMain2(PartyPageDto page) {
-		return partyDaoImpl.showMain2(page);
+	public List<PartyMainDto2> showMain2(PartyPageDto2 page2) {
+		return partyDaoImpl.showMain2(page2);
 	}
 
 	@Override
@@ -53,8 +55,8 @@ public class PartyServiceImpl implements PartyService {
 	}
 
 	@Override
-	public MyPartyDto getIenterInfo(String partyName, String gssUserId) {
-		return partyDaoImpl.getIenterParty(partyDaoImpl.getIenterNumByName(partyName), gssUserId);
+	public MyPartyDto getIenterInfo(String partyName) {
+		return partyDaoImpl.getIenterParty(partyDaoImpl.getIenterNumByName(partyName));
 	}
 
 	@Override
@@ -73,20 +75,22 @@ public class PartyServiceImpl implements PartyService {
 	}
 
 	@Override
+	public int getArticleCountNum2(String userId) {
+		return partyDaoImpl.getArticleCountNum2(userId);
+	}
+	
+	@Override
 	public List<PartySearchDto> getSearchList(PartySearchDto searchDto) {
 		return partyDaoImpl.getSearchList(searchDto);
 	}
 
 	@Override
-	public int insertPerson(PartyInsertDto partyInsertdto) {
-		int usernum= partyDaoImpl.getUserNumByName(partyInsertdto.getGssUserId());
-		int partynum=	partyDaoImpl.getPartyNumByName(partyInsertdto.getPartyName());
-		boolean flat= false;
-		PartyInsert partyInsert= new PartyInsert(usernum,partynum,partyInsertdto.getCharaterName(),flat);
-		System.out.println(usernum);
-		System.out.println(partynum);
-		System.out.println(flat);
-		System.out.println(partyInsertdto.getCharaterName());
+	public int insertPerson(PartyInsertDto partyInsertDto) {
+		System.out.println(partyInsertDto.getInsertId());
+		int usernum = partyDaoImpl.getUserNumByName(partyInsertDto.getInsertId());
+		int partynum = partyDaoImpl.getPartyNumByName(partyInsertDto.getPartyName());
+		boolean flat = false;
+		PartyInsert partyInsert = new PartyInsert(usernum, partynum, partyInsertDto.getCharaterName(), flat);
 		return partyDaoImpl.insertPerson(partyInsert);
 	}
 
@@ -94,5 +98,12 @@ public class PartyServiceImpl implements PartyService {
 	public List<String> getBossGradeList(String choiceBossName) {
 		return partyDaoImpl.getBossGradeList(choiceBossName);
 	}
+
+	@Override
+	public List<MyPartyMember> getMyPartyMembers(String partyName) {
+		return partyDaoImpl.getMyPartyMembers(partyDaoImpl.getPartyNumByName(partyName));
+	}
+
+	
 
 }

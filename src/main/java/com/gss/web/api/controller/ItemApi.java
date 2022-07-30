@@ -46,7 +46,6 @@ public class ItemApi {
 			 @RequestParam(value="keyword") String keyword,
 								 @RequestParam(defaultValue="1",required =false)Integer page ,Model model, RedirectAttributes redirect) throws Exception{
 		List<Item> itemList = new ArrayList<>();
-		System.out.println(type + " : " + keyword);
 		Item item = new Item(keyword, page);
 
 		if (type.equals("itemname")) {

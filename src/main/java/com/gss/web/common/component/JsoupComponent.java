@@ -13,10 +13,8 @@ import org.springframework.stereotype.Component;
 
 import com.gss.web.api.dto.NoticeDto;
 
-// ũ�Ѹ� ���
 @Component
 public class JsoupComponent {
-	// �������� ���� �������� ����� �����´�
 	public List<NoticeDto> getNoticePageList(String page) {
 		final String noticeUrl = "https://maplestory.nexon.com/News/Notice?page=" + page;
 		Connection conn = Jsoup.connect(noticeUrl);
@@ -29,7 +27,6 @@ public class JsoupComponent {
 		return null;
 	}
 	
-	// �������� ����� �ʱ�ȭ�Ѵ�
 	public List<NoticeDto> createNoticeList(Document document) {
 		Elements noticeUl = document.select("div.news_board ul");
 		List<NoticeDto> list = new ArrayList<>();
@@ -41,7 +38,6 @@ public class JsoupComponent {
 		return list;
 	}
 	
-	// �������� ������ �Է��Ѵ�
 	public NoticeDto createNotice(Element li) {
 		NoticeDto notice = NoticeDto.builder().build();
 		notice.setNoticeUrl(li.select("p a").attr("href"));
@@ -51,7 +47,6 @@ public class JsoupComponent {
 		return notice;
 	}
 	
-	// �ش� ���������� ������ �״�� �����´�
 	public String getNoticeHtml(String url) {
 		Connection conn = Jsoup.connect(url);
 

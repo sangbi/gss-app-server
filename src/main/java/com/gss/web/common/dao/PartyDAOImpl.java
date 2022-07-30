@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gss.web.api.dto.MyPartyDto;
-import com.gss.web.api.dto.PartyInsertDto;
+import com.gss.web.api.dto.MyPartyMember;
 import com.gss.web.api.dto.PartyMainDto1;
 import com.gss.web.api.dto.PartyMainDto2;
 import com.gss.web.api.dto.PartyPageDto;
+import com.gss.web.api.dto.PartyPageDto2;
 import com.gss.web.api.dto.PartySearchDto;
 import com.gss.web.common.domain.MemberOfPartyTab;
 import com.gss.web.common.domain.Party;
@@ -59,8 +60,8 @@ public class PartyDAOImpl implements PartyDAO {
 	}
 
 	@Override
-	public List<PartyMainDto2> showMain2(PartyPageDto page) {
-		return sqlsession.getMapper(PartyMapper.class).showMain2(page);
+	public List<PartyMainDto2> showMain2(PartyPageDto2 page2) {
+		return sqlsession.getMapper(PartyMapper.class).showMain2(page2);
 	}
 
 	@Override
@@ -79,8 +80,8 @@ public class PartyDAOImpl implements PartyDAO {
 	}
 
 	@Override
-	public MyPartyDto getIenterParty(int partyNum, String gssUserId) {
-		return sqlsession.getMapper(PartyMapper.class).getIenterParty(partyNum, gssUserId);
+	public MyPartyDto getIenterParty(int partyNum) {
+		return sqlsession.getMapper(PartyMapper.class).getIenterParty(partyNum);
 	}
 
 	@Override
@@ -99,19 +100,22 @@ public class PartyDAOImpl implements PartyDAO {
 	}
 
 	@Override
+	public int getArticleCountNum2(String userId) {
+		return sqlsession.getMapper(PartyMapper.class).getArticleCountNum2(userId);
+	}
+	
+	@Override
 	public List<PartySearchDto> getSearchList (PartySearchDto searchDto) {
 		return sqlsession.getMapper(PartyMapper.class).getSearchList(searchDto);
 	}
 
 	@Override
 	public int insertPerson(PartyInsert partyInsert) {
-		System.out.println(partyInsert.getGssUserNum()+"디에오 들어감");
 		return sqlsession.getMapper(PartyMapper.class).insertPerson(partyInsert);
 	}
 
 	@Override
 	public int getUserNumByName(String gssUserId) {
-		
 		return sqlsession.getMapper(PartyMapper.class).getUserNumByName(gssUserId);
 	}
 
@@ -120,4 +124,8 @@ public class PartyDAOImpl implements PartyDAO {
 		return sqlsession.getMapper(PartyMapper.class).getBossGradeList(choiceBossName);
 	}
 
+	@Override
+	public List<MyPartyMember> getMyPartyMembers(int partyNum) {
+		return sqlsession.getMapper(PartyMapper.class).getMyPartyMembers(partyNum);
+	}
 }

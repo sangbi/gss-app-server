@@ -115,6 +115,7 @@ function moveCalculateList(form){
         }
     });
 }
+
 function moveToCalculateCompleteList(form){
     var partyName = form.partyName.value
     console.log(partyName)
@@ -127,6 +128,7 @@ function moveToCalculateCompleteList(form){
         }
     });
 }
+
 function moveToPartyList(id){
     console.log(id);
     $.ajax({
@@ -139,17 +141,15 @@ function moveToPartyList(id){
         }
     });
 }
-function moveToCalculateComplete(form){
-    var userId = form.userId.value
-    form.method = "post";
-    form.action = "/calculate/calculateComplete";
+
+function moveToCalculateComplete(id){
+    console.log(id)
     $.ajax({
         url:'http://localhost:8080/calculate/calculateComplete',
         type:'post',
-        data:{userId:userId
+        data:{userId:id
         },
-        success:function(data){
-            form.submit();
-        }
     });
 }
+
+

@@ -81,18 +81,17 @@
 									<li class="page-item"><a class="page-link" href="/main/home/page=${(pageCount-(pageCount%10))+status.count}">${(pageCount-(pageCount%10))+status.count}</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="/main/home/page=${(pageCount-(pageCount%10)-10)+status.count}">${(pageCount-(pageCount%10)-10)+status.count}</a></li>
+									<li class="page-item"><a class="page-link" href="/main/home/page=${(pageCount-(pageCount%10)-10)+status.count}">${(pageCount-(pageCount%10))+status.count}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="i" begin="1" end="10" varStatus="status">
-							<li class="page-item"><a class="page-link" href="/main/home/page=${(pageCount-(pageCount%10)-10)+status.count}">${(pageCount-(pageCount%10)-10)+status.count}</a></li>
+							<li class="page-item"><a class="page-link" href="/main/home/page=${(pageCount-(pageCount%10)-1)+status.count}">${(pageCount-(pageCount%10)-1)+status.count}</a></li>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
-				<c:if test="${pageCount < endPageCount}">
 				<c:choose>
 					<c:when test="${pageCount != 1}">
 						<li class="page-item">
@@ -110,11 +109,10 @@
 					</c:otherwise>
 				</c:choose>
 				<li class="page-item">
-					<a class="page-link" href="/main/home/page=${(page-(page%10)+1)+10}" aria-label="Next">
+					<a class="page-link" href="/main/home/page=${(page-(page%10))+10}" aria-label="Next">
 			        	<span aria-hidden="true">&raquo;</span>
 			      	</a>
 			    </li>
-				</c:if>
 			</ul>
 		</nav>
 	</div>
