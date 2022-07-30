@@ -1,4 +1,4 @@
-package com.gss.web.common.domain;
+package com.gss.web.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Party {
-	private String partyName;
-
+public class MyPartyMember {
+	private String gssUserId;
+	private String charaterName;
+	
 }

@@ -4,6 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gss.web.common.mapper.PartyMapper">
 
+	<select id="getMyPartyMembers" parameterType="int"
+	resultType="com.gss.web.api.dto.MyPartyMember">
+		select gssuserid, charatername
+		from bosstab b
+		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
+		join memberofpartytab m on b2.partynum = m.partynum
+		join partytab p on p.partynum=m.partynum
+		join gssusertab g on g.gssusernum=m.gssusernum
+		where p.partynum=#{partyNum} and m.partyleader is false  
+	</select>
+
 	<insert id="insertPerson" parameterType="com.gss.web.common.domain.PartyInsert">
 		INSERT INTO memberofpartytab (
 		partynum,	
@@ -26,12 +37,12 @@
 		where gssuserid=#{gssUserId}
 	</select>
 
-	<select id="getSearchList" parameterType="String" 
+	<select id="getSearchList" parameterType="com.gss.web.api.dto.PartySearchDto" 
 						   resultType="com.gss.web.api.dto.PartySearchDto">
 		select g.gssuserid, g.email	
 		from gssusertab g
-		where gssuserid LIKE CONCAT('%', #{keyWord}, '%')
-		
+		where g.gssuserid LIKE CONCAT('%', #{keyWord}, '%') 
+		and g.gssuserid not like #{gssUserId}
 	</select>
 
 	<select id="getArticleCountNum" parameterType="String"  resultType="int">
@@ -43,6 +54,17 @@
 		join gssusertab g on g.gssusernum = m.gssusernum
 		where g.gssuserid =#{userId}
 		and m.partyleader is true
+	</select>
+
+	<select id="getArticleCountNum2" parameterType="String"  resultType="int">
+		select count(partyname)
+		from bosstab b
+		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
+		join memberofpartytab m on b2.partynum = m.partynum
+		join partytab p on p.partynum = m.partynum
+		join gssusertab g on g.gssusernum = m.gssusernum
+		where g.gssuserid =#{userId}
+		and m.partyleader is false
 	</select>
 
 	<select id="getMyPartyInfo"
@@ -57,7 +79,7 @@
 		and p.partynum=#{partyNum} and m.partyleader is true 
 	</select>
 
-	<select id="getIenterParty"
+	<select id="getIenterParty"  parameterType="int"
 		resultType="com.gss.web.api.dto.MyPartyDto">
 		select partyname, bossname, bossgrade, gssuserid, charatername
 		from bosstab b
@@ -65,8 +87,7 @@
 		join memberofpartytab m on b2.partynum = m.partynum
 		join partytab p on p.partynum=m.partynum
 		join gssusertab g on g.gssusernum=m.gssusernum
-		where g.gssuserid =#{gssUserId}
-		and p.partynum=#{partyNum} and m.partyleader is true ;
+		where p.partynum=#{partyNum} and m.partyleader is true 
 	</select>
 
 	<select id="getIenterNumByName" parameterType="String"
@@ -154,7 +175,7 @@
 	</select>
 
 	<select id="showMain2"
-		parameterType="com.gss.web.api.dto.PartyPageDto"
+		parameterType="com.gss.web.api.dto.PartyPageDto2"
 		resultType="com.gss.web.api.dto.PartyMainDto2">
 		select gssuserid, partyname, bossname, bossgrade
 		from bosstab b
