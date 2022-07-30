@@ -133,6 +133,9 @@ function moveToPartyList(id){
         url:'http://localhost:8080/calculate/partyList',
         type:'post',
         data:{userId:id
+        },
+        success:function(data){
+            location.href=""
         }
     });
 }
