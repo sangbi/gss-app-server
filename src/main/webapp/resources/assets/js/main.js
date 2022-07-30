@@ -10,6 +10,10 @@ function moveJoin(){
 function logOut(){
     location.replace('/member/logout')
 }
+function moveMyMain(){
+    location.replace('http://localhost:8080/member/myMain')
+}
+
 function moveMyPage(){
-    location.replace('/member/myMain')
+    location.replace('http://localhost:8080/member/mypage')
 }

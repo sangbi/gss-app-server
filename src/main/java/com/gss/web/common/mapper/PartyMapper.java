@@ -58,6 +58,6 @@ public interface PartyMapper {
 	public int getUserNumByName(String gssUserId);
 
 	public List<String> getBossGradeList(String choiceBossName);
-	
+  
 	public List<MyPartyMember> getMyPartyMembers(int partyNum);
 }

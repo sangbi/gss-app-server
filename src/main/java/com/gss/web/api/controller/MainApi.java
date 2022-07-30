@@ -2,6 +2,7 @@ package com.gss.web.api.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gss.web.api.dto.AuthInfo;
-import com.gss.web.common.domain.Member;
 import com.gss.web.common.service.MemberServiceImpl;
 import com.gss.web.common.service.NoticeService;
 
@@ -51,7 +50,7 @@ public class MainApi {
 	@GetMapping("/home")
 	public String mainPage(Model model) {
 		int pageCount = 1;
-		int endPageCount = 510;
+		int endPageCount = noticeService.getNoticeList("1").size();
 		
 		model.addAttribute("noticeList", noticeService.getNoticeList("1"));
 		model.addAttribute("pageCount", pageCount);
@@ -59,10 +58,11 @@ public class MainApi {
 		
 		return "main/gssMain";
 	}
+	
 	@PostMapping("/home")
-	public String PostMainPage(Model model) {
+	public String postMainPage(Model model) {
 		int pageCount = 1;
-		int endPageCount = 510;
+		int endPageCount = noticeService.getNoticeList("1").size();
 		
 		model.addAttribute("noticeList", noticeService.getNoticeList("1"));
 		model.addAttribute("pageCount", pageCount);
@@ -70,10 +70,12 @@ public class MainApi {
 		
 		return "main/gssMain";
 	}
+	
 	@GetMapping("/home/page={page}")
-	public String mainPage(Model model, @PathVariable("page") String page) {
+	public String mainPage(Model model, @PathVariable("page") String page, Document document) {
 		int pageCount = 1;
-		int endPageCount = 510;
+		int endPageCount = noticeService.getNoticeList(page).size();
+	
 		pageCount = Integer.parseInt(page);
 
 		model.addAttribute("noticeList", noticeService.getNoticeList(page));

@@ -71,18 +71,44 @@ public class AdminApi {
 	}
 
 	@GetMapping("/boss")
-	public String adminBoss(Model model) {
+	public String adminBoss(Model model,@RequestParam(defaultValue="1",required =false)Integer page,HttpSession session) {
 		List<Boss> bossList = new ArrayList<>();
 		
-		bossList = bossService.selectAllBoss();
+		bossList = bossService.selectAllBossPaging(page);
+		model.addAttribute("bossList", bossList);
+		model.addAttribute("start",1);
+		model.addAttribute("end",bossService.selectBossCount());
+		model.addAttribute("page",page);
 		model.addAttribute("bossList", bossList);
 		
-		return "/admin/boss/bossList";
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}else {
+			AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+			Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+			if(member.getPrivilge().equals("ADMIN")) {
+				return "admin/boss";
+			}
+			else {
+				return "redirect:/main/home";
+			}
+		}
 	}
 	
 	@GetMapping("/addBoss")
-	public String insertBoss(@ModelAttribute("BossDto") BossDto bossDto) {
-		return "/admin/boss/insertBoss";
+	public String insertBoss(@ModelAttribute("BossDto") BossDto bossDto,HttpSession session) {
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}else {
+			AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+			Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+			if(member.getPrivilge().equals("ADMIN")) {
+				return "/admin/boss/insertBoss";
+			}
+			else {
+				return "redirect:/main/home";
+			}
+		}
 	}
 	
 	@PostMapping("/addBoss")
@@ -133,18 +159,45 @@ public class AdminApi {
 	}
 	
 	@GetMapping("/item")
-	public String adminItem(Model model) {
+	public String adminItem(Model model, @RequestParam(defaultValue="1",required =false)Integer page,HttpSession session) {
 		List<Item> itemList = new ArrayList<>();
-		
-		itemList = itemService.selectAllItem();
+		itemList = itemService.selectAllItemPaging(page);
+
 		model.addAttribute("itemList", itemList);
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("start",1);
+		model.addAttribute("end",itemService.selectItemCount());
+		model.addAttribute("page",page);
 		
-		return "/admin/item/itemList";
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}else {
+			AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+			Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+			if(member.getPrivilge().equals("ADMIN")) {
+				return "/admin/item/itemList";
+			}
+			else {
+				return "redirect:/main/home";
+			}
+		}
 	}
 
 	@GetMapping("/addItem")
-	public String insertItem(@ModelAttribute("ItemDto") ItemDto itemDto) {
-		return "/admin/item/insertItem";
+	public String insertItem(@ModelAttribute("ItemDto") ItemDto itemDto,HttpSession session) {
+		
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}else {
+			AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+			Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+			if(member.getPrivilge().equals("ADMIN")) {
+				return "/admin/item/insertItem";
+			}
+			else {
+				return "redirect:/main/home";
+			}
+		}	
 	}
 	
 	@PostMapping("/addItem")
@@ -194,13 +247,27 @@ public class AdminApi {
 	}
 	
 	@GetMapping("/bossAndDrop")
-	public String adminDrop(Model model,HttpServletRequest req) {
+	public String adminDrop(Model model,HttpServletRequest req,@RequestParam(defaultValue="1",required =false)Integer page,HttpSession session) {
 		List<Boss> bossList = new ArrayList<>();
 		
-		bossList = bossService.selectAllBoss();
+		bossList = bossService.selectAllBossPaging(page);		
 		model.addAttribute("bossList", bossList);
+		model.addAttribute("start",1);
+		model.addAttribute("end",bossService.selectBossCount());
+		model.addAttribute("page",page);
 		
-		return "/admin/bossForDrop/dropBossList";
+		if(session.getAttribute("authInfo")==null) {
+			return "redirect:/main/home";
+		}else {
+			AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+			Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
+			if(member.getPrivilge().equals("ADMIN")) {
+				return "/admin/bossForDrop/dropBossList";
+			}
+			else {
+				return "redirect:/main/home";
+			}
+		}
 	}
 	
 	@GetMapping("/bossDropItem")
@@ -225,14 +292,16 @@ public class AdminApi {
 	
 	@GetMapping("/addDropItem")
 	public String showDropItem(Model model,@RequestParam("bossName") String bossName, 
-			@RequestParam("bossGrade") String bossGrade) {
+							@RequestParam("bossGrade") String bossGrade,
+							@RequestParam(defaultValue="1",required =false)Integer page,
+							RedirectAttributes redirectAttribute) {
 		
 		Map<String, String> map= new HashMap<String, String>();
 		map.put("bossName", bossName);
 		map.put("bossGrade", bossGrade);
 		
 		List<Integer> result= itemOfBossService.selectInsertItemList(map);
-		List<Item> allItemList=itemService.selectAllItem();
+		List<Item> allItemList=itemService.selectAllItemPaging(page);
 		for(int i=0; i<allItemList.size(); i++) {
 			for(int j=0; j<result.size(); j++) {
 				if(allItemList.get(i).getItemNum() == result.get(j)) {
@@ -240,10 +309,17 @@ public class AdminApi {
 					i--;
 				}
 			}
-		}	
+		}
+		
 		model.addAttribute("item",allItemList);
 		model.addAttribute("bossName", bossName);
 		model.addAttribute("bossGrade", bossGrade);
+		model.addAttribute("start",1);
+		model.addAttribute("end",itemService.selectItemCount());
+		model.addAttribute("page",page);
+		
+		redirectAttribute.addAttribute("bossName", bossName);
+		redirectAttribute.addAttribute("bossGrade", bossGrade);
 		
 		return "/admin/bossForDrop/insertDropItem";
 	}
@@ -253,8 +329,6 @@ public class AdminApi {
 										@RequestParam("bossName") String bossName, 
 										@RequestParam("bossGrade") String bossGrade,
 										RedirectAttributes redirectAttribute) {
-		
-		System.out.println(itemNum + " :" + bossName + " : " + bossGrade);
 		ItemOfBoss itemOfBoss = new ItemOfBoss(itemNum,bossName,bossGrade);
 		int result = itemOfBossService.insertItemOfBoss(itemOfBoss);
 		

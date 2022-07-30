@@ -111,7 +111,6 @@ public class PartyDAOImpl implements PartyDAO {
 
 	@Override
 	public int insertPerson(PartyInsert partyInsert) {
-		System.out.println(partyInsert.getGssUserNum()+"디에오 들어감");
 		return sqlsession.getMapper(PartyMapper.class).insertPerson(partyInsert);
 	}
 
@@ -129,6 +128,4 @@ public class PartyDAOImpl implements PartyDAO {
 	public List<MyPartyMember> getMyPartyMembers(int partyNum) {
 		return sqlsession.getMapper(PartyMapper.class).getMyPartyMembers(partyNum);
 	}
-
-
 }

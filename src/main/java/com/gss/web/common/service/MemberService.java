@@ -29,7 +29,7 @@ public interface MemberService {
 	
 	boolean checkPhoneNum(String phoneNumber);
 	
-	boolean checkPartyNick(MyInfoList MIL);
+	int checkPartyNick(MyInfoList MIL);
 	
 	int selectLastUserSEQ();
 }

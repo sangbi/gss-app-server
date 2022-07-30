@@ -30,12 +30,14 @@ public class BossApi {
 	private ItemOfBossService itemOfBossService;
 
 	@GetMapping("/bossList")
-	public String GetNavPage(Model model) {
+	public String GetNavPage(Model model,@RequestParam(defaultValue="1",required =false)Integer page) {
 		List<Boss> bossList = new ArrayList<>();
 		
-		bossList = bossService.selectAllBoss();
+		bossList = bossService.selectAllBossPaging(page);
 		model.addAttribute("bossList", bossList);
-		
+		model.addAttribute("start",1);
+		model.addAttribute("end",bossService.selectBossCount());
+		model.addAttribute("page",page);
 		return "boss/gssBoss";
 	}	
 	
@@ -48,10 +50,8 @@ public class BossApi {
 		List<Integer> result= itemOfBossService.selectAllItemOfBoss(map);
 		Item[] itemList = new Item[result.size()];
 		
-		
 		for (int i = 0; i < result.size(); i++) {
 			itemList[i] =  itemOfBossService.selectByBossItem(result.get(i));
-			System.out.println(itemList[i].getItemName() + " : " + itemList[i].getClassification() + " : " + itemList[i].getItemImagepath() );
 		}
 		
 		model.addAttribute("itemList", itemList);

@@ -28,7 +28,7 @@ public interface MemberDAO {
 	
 	boolean checkPhoneNum(String phoneNumber);
 	
-	boolean checkPartyNick(MyInfoList MIL);
+	int checkPartyNick(MyInfoList MIL);
 	
 	int selectLastUserSEQ();
 }

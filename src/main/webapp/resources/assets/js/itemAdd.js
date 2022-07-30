@@ -102,3 +102,51 @@ function searchItem(form){
         }
     });
 }
+
+function moveCalculateList(form){
+    var partyName = form.partyName.value
+    console.log(partyName)
+    $.ajax({
+        url:'http://localhost:8080/calculate/calculateList',
+        type:'get',
+        data:{partyName : partyName
+        },
+        success:function(data){
+        }
+    });
+}
+
+function moveToCalculateCompleteList(form){
+    var partyName = form.partyName.value
+    console.log(partyName)
+    $.ajax({
+        url:'http://localhost:8080/calculate/calculateCompleteList',
+        type:'get',
+        data:{partyName : partyName
+        },
+        success:function(data){
+        }
+    });
+}
+
+function moveToPartyList(id){
+    console.log(id);
+    $.ajax({
+        url:'http://localhost:8080/calculate/partyList',
+        type:'post',
+        data:{userId:id
+        }
+    });
+}
+
+function moveToCalculateComplete(id){
+    console.log(id)
+    $.ajax({
+        url:'http://localhost:8080/calculate/calculateComplete',
+        type:'post',
+        data:{userId:id
+        },
+    });
+}
+
+

@@ -70,4 +70,24 @@ public class BossServiceImpl implements BossService{
 	public Boss selectByBossNameAndGrade(Map map) {
 		return bossDAO.selectByBossNameAndGrade(map);
 	}
+	
+	@Override
+	public List<Boss> selectAllBossPaging(Integer page){
+		return bossDAO.selectAllBossPaging(page);
+	}
+	
+	@Override
+	public int selectBossCount() {
+		int total = bossDAO.selectBossCount();
+		int lastBlockNum=-1;
+		
+		if( total % 7 == 0 ) {
+			lastBlockNum = (int)Math.floor(total/7);
+        }
+        else {
+        	lastBlockNum = (int)Math.floor(total/7) + 1;
+        }
+		
+		return lastBlockNum;
+	}
 }

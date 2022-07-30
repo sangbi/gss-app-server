@@ -17,39 +17,67 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<h1>아이템</h1>
-	<div class="div_item_list">		
-	<div>
-			<form name="search-form" method="post" action="/item/itemList">
-				<select name="type">
-					<option selected value="">검색 내용 선택</option>
-					<option value="itemname">이름</option>
-					<option value="classification">분류</option>
-				</select>
-				<input type="text" name="keyword" value=""></input>
-				<input type="submit" class="btn btn=outline-primart mr-2" value="검색"></input>
-			</form>
-		</div>
+	<div class="div_calculate_main">	
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
+					<th></th>
 					<th>아이템 이름</th>
 					<th>분류</th>
-					<th>아이템 이미지</th>
 				</tr>
 			</thead>
 				<tbody>
 				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
 				<tr>
+				<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="30" height="30"></div></td>
 					<td><a href=<c:url value="/item/gssSelectItem?itemName=${itemList.itemName}&classification=${itemList.classification}"/>>
 						${itemList.itemName}</a></td>
 					<td>${itemList.classification}</td>
-					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
+					
 				</tr>
 				</c:forEach>
 			</tbody>
-	</div>
 		</table>
+		<div>
+			<form name="search-form" method="get" action="/item/itemSearch">
+				<select name="type" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+					<option selected value="">선택</option>
+					<option value="itemname">이름</option>
+					<option value="classification">분류</option>
+				</select>
+				<input type="text" name="keyword" value=""></input>
+				<input type="submit" class="btn btn-outline-dark" style="font-size:15px; padding:2px 5px;" value="검색"></input>
+			</form>
+		</div>
+		</div>
+		
+		<!-- paging -->
+		<nav aria-label="Page navigation example" class="css-paging">
+	       <ul class="pagination justify-content-center">
+	           <!--이전-->
+	           <c:if test="${page ne 1 }">
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemList?&page=${page-1}">&laquo;</a></li>
+	           </c:if>
+	
+	           <!--페이지 그룹-->
+	           <c:forEach begin="${start }" end="${end }" var="i">
+	               <c:choose>
+	                   <c:when test="${page eq i}"> <!-- pageNumber 시작은 0 , i는 1부터 -->
+	                       <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath }/item/itemList?page=${i }" >${i}</a></li>
+	                   </c:when>
+	                   <c:otherwise>
+	                       <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemList?page=${i }">${i}</a></li>
+	                   </c:otherwise>
+	               </c:choose>
+	           </c:forEach>
+	
+	           <!--다음-->
+	           <c:if test="${page ne end }">
+	               <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/item/itemList?page=${page+1 }">&raquo;</a></li>
+	           </c:if>
+	       </ul>
+	   </nav>
+       <!-- paging -->
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

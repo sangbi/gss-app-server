@@ -54,6 +54,6 @@ public interface PartyDAO {
 	public int getUserNumByName(String gssUserId);
 
 	public List<String> getBossGradeList(String choiceBossName);
-	
-	List<MyPartyMember> getMyPartyMembers(int partyNum);
+
+	public List<MyPartyMember> getMyPartyMembers(int partyNum);
 }
