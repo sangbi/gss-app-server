@@ -17,31 +17,33 @@
 <title>보스별드랍 보스리스트</title>
 </head>
 <body>
-<div class="div_calculate_main">
-<div class="div_item_list">
-	<table class="table">
-		<thead class="table-dark">
-			<tr>
-				<th>보스 이름</th>
-				<th>난이도</th>
-				<th>보스 이미지</th>
-			</tr>
-		</thead>
-			<tbody>
-			<c:forEach var="bossList" items="${bossList}" varStatus="loop">
-			<tr>
-				<td><a href=<c:url value="/admin/bossDropItem?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
-				${bossList.bossName}</a></td>
-				<td>${bossList.bossGrade}</td>
-				<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
-			</tr>
-			</c:forEach>
-			</tbody>
-	</table>
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+	<div class="div_admin_bossDropMain">
+		<div class="div_item_list">
+			<table class="table">
+				<thead class="table-dark">
+					<tr>
+						<th>보스 이름</th>
+						<th>난이도</th>
+						<th>보스 이미지</th>
+					</tr>
+				</thead>
+					<tbody>
+					<c:forEach var="bossList" items="${bossList}" varStatus="loop">
+					<tr>
+						<td style="vertical-align:middle"><a href=<c:url value="/admin/bossDropItem?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
+						${bossList.bossName}</a></td>
+						<td style="vertical-align:middle">${bossList.bossGrade}</td>
+						<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
+					</tr>
+					</c:forEach>
+					</tbody>
+			</table>
+		</div>
 	</div>
-</div>
-	<a href="/admin/main"><input type="button" value="목록"></a>
-	
+	<div class="div_admin_bottom">
+		<a href="/admin/main"><input type="button" class="btn btn-dark" value="목록"></a>
+	</div>
 	<!-- paging -->
 	<nav aria-label="Page navigation example" class="css-paging">
 	       <ul class="pagination justify-content-center">

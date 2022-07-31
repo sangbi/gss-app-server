@@ -12,10 +12,15 @@
 </head>
 <body>
 <c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-<h1>관리자서버</h1>
-<a href="/admin/boss"><input type="button" value="보스정보 등록"></a><br>
-<a href="/admin/item"><input type="button" value="아이템정보 등록"></a><br>
-<a href="/admin/bossAndDrop"><input type="button" value="보스별 드랍 아이템 추가"></a>
+<div class="div_admin_main">
+	<fieldset>
+    	<legend>관리자 페이지</legend>
+		<br>
+		<a href="/admin/boss"><input type="button" class="btn btn-outline-secondary" style="width:200px" value="보스정보 등록"></a><br><br>
+		<a href="/admin/item"><input type="button" class="btn btn-outline-secondary" style="width:200px" value="아이템정보 등록"></a><br><br>
+		<a href="/admin/bossAndDrop"><input type="button" class="btn btn-outline-secondary" style="width:200px" value="보스별 드랍 아이템 추가"></a>
+	</fieldset>
+</div>
 <c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

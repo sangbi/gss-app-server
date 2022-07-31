@@ -43,18 +43,13 @@ public class CalculateApi {
 	private ItemService itemService;
 
 	@GetMapping("/partyList")
-	public String showMyPartyList() {
-		return "calculate/calculateMain";
-	}
-	
-	@PostMapping("/getPartyList")
-	@ResponseBody
-	public List<CalculateMain> getPartyList(HttpServletRequest req){
+	public String showMyPartyList(HttpServletRequest req, Model model) {
 		AuthInfo loginUser =  (AuthInfo) req.getSession().getAttribute("authInfo");
 		int userNum = calculateService.selectByUserId(loginUser.getId());
-		return calculateService.selectByUserNumber(userNum);
+		model.addAttribute("userList", calculateService.selectByUserNumber(userNum));
+		return "calculate/calculateMain";
 	}
-	
+
 	@GetMapping("/calculateList")
 	public String showCalculateList(@RequestParam("partyName") String partyName, Model model) {
 		List<Calculate> calcMember = new ArrayList<Calculate>();
@@ -180,9 +175,10 @@ public class CalculateApi {
 		return "redirect:/main/home";
 	}
 	
-	@PostMapping("/calculateComplete")
-	public String calculateComplete(@RequestParam("userId") String userId, Model model) {
-		List<CalculateComplete> calculateComplet = calculateService.selectCalculateCompletList(userId);
+	@GetMapping("/calculateComplete")
+	public String calculateComplete(HttpServletRequest req, Model model) {
+		AuthInfo loginUser =  (AuthInfo) req.getSession().getAttribute("authInfo");
+		List<CalculateComplete> calculateComplet = calculateService.selectCalculateCompletList(loginUser.getId());
 		model.addAttribute("calculateComplete", calculateComplet);
 		
 		return "calculate/calculateComplete";

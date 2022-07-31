@@ -59,10 +59,8 @@
 											<spring:message code="editNick" />
 										</button> 
 									<input type="hidden" id="userPartyName"value="${MIL.partyName }">
-									</td>	
-									
+									</td>									
 								<tr>
-						
 							</c:forEach>
 						</tbody>
 					</table>
@@ -85,7 +83,7 @@
 						<tbody>
 							<c:forEach var="MILMember" items="${MILMember }">
 								<tr>
-									<td ><label><a
+									<td><label><a
 											href="<c:url value='/party/imakeparty?gssUserId=${member.gssuserId}&partyName=${MILMember.partyName }'/>">${MILMember.partyName}</a>
 									</label></td>
 									<td><input class="form-control-lg col-lg-9"
@@ -93,7 +91,7 @@
 										placeholder="${MILMember.charaterName }"
 										onfocus="this.placeholder=''"
 										onblur="this.placeholder='${MILMember.charaterName }'"></td>
-									<td >
+									<td>
 										<button 
 											class="btn-sm btn-outline-success btn btn-dark btn-lg col-lg-8" id="nickBtn">
 											<spring:message code="editNick" />
@@ -107,9 +105,8 @@
 					</table>
 				</div>
 			</c:if>
-		</div>
-		
-		
+		</div>		
 	</div>
+	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

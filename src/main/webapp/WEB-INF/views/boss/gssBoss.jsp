@@ -17,7 +17,7 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div class="div_calculate_main">
+
 	<div class="div_boss_list">		
 		<table class="table">
 			<thead class="table-dark">
@@ -30,16 +30,16 @@
 				<tbody>
 				<c:forEach var="bossList" items="${bossList}" varStatus="loop">
 				<tr>
-					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="70" height="70"></div></td>
-					<td><a href=<c:url value="/boss/selectBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
+					<td><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="60" height="60"></td>
+					<td style="vertical-align:middle; color:black;"><a href=<c:url value="/boss/selectBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
 					${bossList.bossName}</a></td>
-					<td>${bossList.bossGrade}</td>	
+					<td style="vertical-align:middle">${bossList.bossGrade}</td>	
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	</div>   
+ 
 	<!-- paging -->
 	<nav aria-label="Page navigation example" class="css-paging">
 	       <ul class="pagination justify-content-center">

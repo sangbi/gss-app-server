@@ -16,8 +16,9 @@
 <title>아이템정보등록 아이템리스트</title>
 </head>
 <body>
-<h1>아이템정보 등록</h1>
-<div class="div_item_list">
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<div class="div_admin_itemList">
+		<h1>아이템정보 등록</h1>
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
@@ -29,17 +30,17 @@
 				<tbody>
 				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
 				<tr>
-					<td><a href=<c:url value="/admin/selectItem?itemName=${itemList.itemName}&classification=${itemList.classification}"/>>
+					<td style="vertical-align:middle"><a href=<c:url value="/admin/selectItem?itemName=${itemList.itemName}&classification=${itemList.classification}"/>>
 						${itemList.itemName}</a></td>
-					<td>${itemList.classification}</td>
+					<td style="vertical-align:middle">${itemList.classification}</td>
 					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-	<a href="/admin/main"><input type="button" value="목록"></a>
-	<a href="/admin/addItem"><input type="button" value="아이템정보 추가"></a>
-	
+	<a href="/admin/main"><input type="button" class="btn btn-dark" value="목록"></a>
+	<a href="/admin/addItem"><input type="button" class="btn btn-dark" value="추가"></a>
+</div> 
 	<!-- paging -->
 		<nav aria-label="Page navigation example" class="css-paging">
 	       <ul class="pagination justify-content-center">
@@ -67,6 +68,6 @@
 	       </ul>
 	   </nav>
        <!-- paging -->
-</div>
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

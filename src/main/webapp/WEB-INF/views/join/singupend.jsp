@@ -106,5 +106,6 @@
 			</div>
 		</div>
 	</div>
+	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

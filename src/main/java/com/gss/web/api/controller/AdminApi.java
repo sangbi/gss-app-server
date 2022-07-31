@@ -87,7 +87,7 @@ public class AdminApi {
 			AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
 			Member member=memberServiceImpl.findByUserPK(auth.getUserKey());
 			if(member.getPrivilge().equals("ADMIN")) {
-				return "admin/boss";
+				return "admin/boss/bossList";
 			}
 			else {
 				return "redirect:/main/home";
