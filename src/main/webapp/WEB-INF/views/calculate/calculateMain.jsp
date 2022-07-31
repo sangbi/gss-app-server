@@ -29,7 +29,7 @@
 				<tbody>	
 					<tr>
 						<td><input type="submit" name="partyName" value="${userList.partyName}" class="btn btn-link" style="color: black;" onclick="moveCalculateList(this.form)"></td>
-						<td>${userList.charaterName}</td>	
+						<td style="vertical-align:middle">${userList.charaterName}</td>	
 					</tr>
 				</tbody>
 			</table>
@@ -38,22 +38,5 @@
 	</c:forEach>
 	</div>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
-	
-	<script>
-		$(document).ready(function(){
-			getPartyList();			
-		});
-		
-		function getPartyList(){
-			$.ajax({
-				url : 'http://localhost:8080/calculate/getPartyList',
-				type : 'post',
-				data : {},
-				success : function(data) {
-					console.log(data);
-				}
-			});
-		}
-	</script>
 </body>
 </html>

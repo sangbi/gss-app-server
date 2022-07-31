@@ -45,6 +45,7 @@
 	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION }">
 	<p style="color:red; font-weight:bold;"> login Failed : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</p>
 	<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
+	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </c:if>
 </body>
 </html>

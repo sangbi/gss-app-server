@@ -21,9 +21,9 @@
 
 					<tr>
 						<td><input type="submit" name="partyName" value="${calculateComplete.partyName}" class="btn btn-link" style="color: black;" onclick="moveToCalculateCompleteList(this.form)"></td>
-						<td>${calculateComplete.charaterName}</td>
-						<td>${calculateComplete.resultprice}</td>
-						<td>${calculateComplete.resultDate}</td>
+						<td style="vertical-align: middle">${calculateComplete.charaterName}</td>
+						<td style="vertical-align: middle">${calculateComplete.resultprice}</td>
+						<td style="vertical-align: middle">${calculateComplete.resultDate}</td>
 					</tr>
 				</c:forEach>
 			</table>
