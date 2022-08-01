@@ -72,9 +72,15 @@
 					<li class="nav-item"><a class="nav-link" href="/boss/bossList">보스</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="/item/itemList">아이템</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="/party/main">파티</a>
-					</li>
+					<c:if test="${!empty authInfo}">
+						<li class="nav-item dropdown"><a class="nav-link" href="#"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								파티 </a> <input type="hidden" value="${authInfo.id}" name="userId">
+							<ul class="dropdown-menu">
+								<li><a href="/party/main" class="dropdown-item">내가 만든 파티</a></li>
+								<li><a href="/party/mainMember" class="dropdown-item">내가 들어간 파티</a>
+							</ul></li>
+					</c:if>	
 					<c:if test="${!empty authInfo}">
 						<li class="nav-item dropdown"><a class="nav-link" href="#"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -25,64 +25,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<div class="div_party_mainPage">
 	<div class="div_party_list">
-
-		
-	<center> <input type="button"value="파티생성" onClick="location.href='<c:url value="createparty" />'"></center>
-		<br>
-		<table border="1">
-			<center><input type="button" value="내가만든파티정보"></center>
-			<center>
-		<c:forEach var="pageNum" begin="${pc1.beginPage}" end="${pc1.endPage}">
-			<a href='<c:url value="/party/main?page=${pageNum}"/>'>${pageNum}</a>
-		</c:forEach>
-		</center>
+		<table class="table table-bordered" style="table-layout: fixed"> 
 			<tr>
-				<td colspan="2">파티리스트</td>
-			</tr>
-			<tr>
-				<td>파티이름</td>
-				<td>보스이름</td>
-				<td>난이도</td>
+				<th class="table-dark">파티 이름</th>
+				<th class="table-dark">캐릭터 이름</th>
 			</tr>
 			<c:forEach var="imLeader" items="${myParty}">
 			<tr>
 				<td><a href='<c:url value="imakeparty?gssUserId=${imLeader.gssUserId}&partyName=${imLeader.partyName}"/>'>${imLeader.partyName}</a></td>
-				<td>${imLeader.bossName}</td>
-				<td>${imLeader.bossGrade}</td>
+				<td>${imLeader.charaterName}</td>
 			</tr>
 			</c:forEach>
-			
-		
 		</table>
-		<br> <br>
-		<table border="1">
-			<center>
-		<c:forEach var="pageNum" begin="${pc2.beginPage}" end="${pc2.endPage}">
-			<a href='<c:url value="/party/main?page=${pageNum}"/>'>${pageNum}</a>
-		</c:forEach>
-		</center>
-		<center>	<input type="button" value="내가참여한파티보기"></center>
-			<tr>
-				<td colspan="2">파티리스트</td>
-			</tr>
-			<tr>
-				<td>파티이름</td>
-				<td>보스이름</td>
-				<td>난이도</td>
-			</tr>
-			<c:forEach var="imFollower" items="${myParty2}">
-				<tr>
-					<td><a href='<c:url value="ienterparty?gssUserId=${imFollower.gssUserId}&partyName=${imFollower.partyName}"/>'>
-							${imFollower.partyName}</a></td>
-					<td>${imFollower.bossName}</td>
-					<td>${imFollower.bossGrade}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<br> <br>
 	</div>
-	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
+	<div class="div_party_bottom">
+		<input type="button" class="btn btn-dark" value="파티생성" onClick="location.href='<c:url value="createparty" />'">
+	</div>
+	<div>
+	<ul class="pagination container-fluid justify-content-center">
+		<c:forEach var="pageNum" begin="${pc1.beginPage}" end="${pc1.endPage}">
+			<li class="page-item">
+				<a class="page-link" href='<c:url value="/party/main?page=${pageNum}"/>'>${pageNum}</a>
+			</li>
+		</c:forEach>
+	</ul>
+	</div>
+</div>
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

@@ -21,7 +21,8 @@
 <title>User Info</title>
 </head>
 <body>
-	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<div class="div_info_mid">
 	<div class="container text-center">
 		<br> <br>
 		<div class="mb-3">
@@ -33,7 +34,7 @@
 			<c:if test="${!empty MIL}">
 				<div class="table-responsive-sm">
 				<label>${member.gssuserId }<spring:message code="iamLeader" /></label>
-					<table class="table caption-top table-striped table-bordered table-sm col-md-6">		
+					<table class="table table-bordered table-sm col-md-6">		
 						<thead class="table-dark">
 							<tr >
 								<th class="col-md-1"><spring:message code="party.name" /></th>
@@ -43,19 +44,17 @@
 						</thead>
 						<tbody>
 							<c:forEach var="MIL" items="${MIL }" varStatus="status">
-								
 								<tr class="tr${status.index }" id="tr${status.index }">
-									<td ><label><a
-											href="<c:url value='/party/imakeparty?gssUserId=${member.gssuserId}&partyName=${MIL.partyName }'/>">${MIL.partyName}</a>
+									<td><label><a href="<c:url value='/party/imakeparty?gssUserId=${member.gssuserId}&partyName=${MIL.partyName }'/>"  style="color:black; vertical-align:middle;">${MIL.partyName}</a>
 									</label></td>
-									<td><input class="form-control-lg col-lg-9"
+									<td><input class="form-control form-control-sm"
 										id="charaterNick" type="text" value="${MIL.charaterName }"
 										placeholder="${MIL.charaterName }"
 										onfocus="this.placeholder=''"
 										onblur="this.placeholder='${MIL.charaterName }'"></td>
 									<td id="18181">
 										<button 
-											class="btn-sm btn-outline-success btn btn-dark btn-lg col-lg-8" id="nickBtn">
+											class="btn-sm btn-dark btn-lg col-lg-8" id="nickBtn">
 											<spring:message code="editNick" />
 										</button> 
 									<input type="hidden" id="userPartyName"value="${MIL.partyName }">
@@ -70,7 +69,7 @@
 				<div class="table-responsive-sm">
 					<label>${member.gssuserId }<spring:message
 								code="iamMember" /></label>
-					<table class="table   table-striped table-bordered table-sm col-md-6">
+					<table class="table table-bordered table-sm col-md-6">
 						<caption>
 						</caption>
 						<thead class="table-dark">
@@ -83,17 +82,16 @@
 						<tbody>
 							<c:forEach var="MILMember" items="${MILMember }">
 								<tr>
-									<td><label><a
-											href="<c:url value='/party/imakeparty?gssUserId=${member.gssuserId}&partyName=${MILMember.partyName }'/>">${MILMember.partyName}</a>
+									<td><label><a href="<c:url value='/party/imakeparty?gssUserId=${member.gssuserId}&partyName=${MILMember.partyName }'/>" style="color:black; vertical-align:middle;">${MILMember.partyName}</a>
 									</label></td>
-									<td><input class="form-control-lg col-lg-9"
+									<td><input class="form-control form-control-sm"
 										id="charaterNick" type="text" value="${MILMember.charaterName }"
 										placeholder="${MILMember.charaterName }"
 										onfocus="this.placeholder=''"
 										onblur="this.placeholder='${MILMember.charaterName }'"></td>
 									<td>
 										<button 
-											class="btn-sm btn-outline-success btn btn-dark btn-lg col-lg-8" id="nickBtn">
+											class="btn-sm btn-dark btn-lg" id="nickBtn">
 											<spring:message code="editNick" />
 										</button> 
 									<input type="hidden" id="userPartyName"value="${MILMember.partyName }">
@@ -107,6 +105,7 @@
 			</c:if>
 		</div>		
 	</div>
-	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
+</div>
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

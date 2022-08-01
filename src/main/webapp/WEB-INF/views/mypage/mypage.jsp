@@ -37,9 +37,9 @@
 						onblur="this.placeholder='e-mail로 발송된 문자를 넣어주세요'"  size="60"/> 
 						<br><br>
 						<input
-						class="btn btn-outline-success btn btn-dark btn-lg"
+						class="btn btn-dark btn-lg"
 						id="sendEmail" type="button" value="이메일 인증 발송"> <input
-						class="btn btn-outline-success btn btn-dark btn-lg"
+						class="btn btn-dark btn-lg"
 						id="certificationEmailConfirm" type="button" value="이메일 인증">
 				</div>
 				<c:choose>
@@ -125,9 +125,9 @@
 				<form:input type="hidden" path="certificationFlag" />
 				<div class="row justify-content-center">
 					<br> <input
-						class="btn btn-outline-success btn btn-dark btn-lg col-3 "
+						class="btn btn-dark btn-lg col-3 "
 						id="submit" type="submit" value="정보 수정"> <input
-						class="btn btn-outline-success btn btn-dark btn-lg col-3 "
+						class="btn btn-dark btn-lg col-3 "
 						type="button" value="취소">
 				</div>
 			</form:form>

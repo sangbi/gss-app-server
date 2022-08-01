@@ -14,4 +14,5 @@ public class PartyMainDto2 {
 	private String partyName;
 	private String bossName;
 	private String bossGrade;
+	private String charaterName;
 }

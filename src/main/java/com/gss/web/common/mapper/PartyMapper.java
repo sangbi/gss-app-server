@@ -60,4 +60,6 @@ public interface PartyMapper {
 	public List<String> getBossGradeList(String choiceBossName);
   
 	public List<MyPartyMember> getMyPartyMembers(int partyNum);
+	
+	public List<Integer> getPartyListNum(String name); 
 }

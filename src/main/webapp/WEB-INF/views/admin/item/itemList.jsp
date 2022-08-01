@@ -18,7 +18,6 @@
 <body>
 <c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 <div class="div_admin_itemList">
-		<h1>아이템정보 등록</h1>
 		<table class="table">
 			<thead class="table-dark">
 				<tr>

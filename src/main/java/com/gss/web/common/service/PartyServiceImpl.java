@@ -104,6 +104,8 @@ public class PartyServiceImpl implements PartyService {
 		return partyDaoImpl.getMyPartyMembers(partyDaoImpl.getPartyNumByName(partyName));
 	}
 
-	
-
+	@Override
+	public List<Integer> getPartyListNum(String name) {
+		return partyDaoImpl.getPartyListNum(name);
+	}
 }

@@ -17,29 +17,44 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div class="div_calculate_main">
-	<div class="div_item_list">
-		<table class="table">
-			<thead class="table-dark">
-				<tr>
-					<th></th>
-					<th>아이템 이름</th>
-					<th>분류</th>
-				</tr>
-			</thead>
-				<tbody>
-				<c:forEach var="itemList" items="${itemList}" varStatus="loop">
-				<tr>
-					<td width="100"><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
-					<td>
-					${itemList.itemName}</td>
-					<td>${itemList.classification}</td>
-				</tr>
-				</c:forEach>
-			</tbody>
+	<div class="div_bossDrop_bossList">
+		<table class="table table-dark table-striped">
+		<tr>
+		<td rowspan="3"><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="100%" height="100%" /></div></td>
+		
+		<tr>
+			<th>보스이름</th>
+			<td>${bossList.bossName}</td>
+		</tr>
+		<tr>
+			<th>난이도</th>
+			<td>${bossList.bossGrade }</td>
+		</tr>
 		</table>
-	<a href="/boss/bossList"><input type="button" value="목록"></a>
 	</div>
+	<div class="div_bosList_main">
+		<div class="div_item_list">
+			<table class="table">
+				<thead class="table-dark">
+					<tr>
+						<th></th>
+						<th>아이템 이름</th>
+						<th>분류</th>
+					</tr>
+				</thead>
+					<tbody>
+					<c:forEach var="itemList" items="${itemList}" varStatus="loop">
+					<tr>
+						<td width="100"><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
+						<td>
+						${itemList.itemName}</td>
+						<td>${itemList.classification}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		<a href="/boss/bossList"><input type="button" class="btn btn-dark" value="목록"></a>
+		</div>
 	</div>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
