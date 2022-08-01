@@ -15,44 +15,45 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	party ________________
-	<br>
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<div class="div_create_party">
 	<form action="insert" method="post">
-		<table border="1">
-			<caption>
-				<strong>파티생성해보자 </strong>
-			</caption>
+	<table class="table" id="modalItem" style="table-layout: fixed">
 			<tr>
-				<td>파티이름</td>
-				<td><input type="text" name="partyName"></td>
+				<th class="table-dark" colspan="2">파티이름</th>
+				<th class="table-dark" colspan="2">아이디</th>
+			</tr>
 			<tr>
-				<td>Boss select</td>
-				<td><select name='bossName' id="bossName">
+				<td colspan="2"><input type="text" name="partyName" style="width:150px"></td>
+				<td colspan="2"><input type="text" name="id" value="${authInfo.id}"
+					readonly style="width:150px"></td>
+			</tr>
+			<tr>
+				<th class="table-dark" colspan="2">보스</th>
+				<th class="table-dark" colspan="2">난이도</th>
+			</tr>
+			<tr>
+				<td colspan="2"><select name='bossName' id="bossName" style="width:150px">
 						<c:forEach var="bossName" items="${getBossName}">
 							<option value="${bossName}">${bossName}</option>
 						</c:forEach>
 				</select></td>
-			</tr>
-			<tr>
-				<td>난이도선택</td>
-				<td><select name='level' id="bossGrade">
+				
+				<td colspan="2"><select name='level' id="bossGrade" style="width:150px">
 						<option value="">선택</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="id" value="${authInfo.id}"
-					readonly></td>
-			</tr>
-			<tr>
-				<td>캐릭터이름</td>
-				<td><input type="text" name="charaterName"></td>
+				<td colspan="2" class="table-dark">캐릭터 이름</td>
+				<td colspan="2"><input type="text" name="charaterName" style="width:150px"></td>
 			</tr>
 		</table>
-		<input type="submit" value="파티생성">
-	</form>
-	<input type="button" value="목록으로 돌아가기"
+		<br><br>
+		<input type="submit" class="btn btn-dark" value="파티생성">
+		<input type="button" class="btn btn-dark" value="목록으로 돌아가기"
 		onClick="location.href='<c:url value="main" />'">
+	</form>
+</div>
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

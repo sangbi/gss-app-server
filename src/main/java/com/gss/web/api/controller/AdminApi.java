@@ -302,14 +302,6 @@ public class AdminApi {
 		
 		List<Integer> result= itemOfBossService.selectInsertItemList(map);
 		List<Item> allItemList=itemService.selectAllItemPaging(page);
-		for(int i=0; i<allItemList.size(); i++) {
-			for(int j=0; j<result.size(); j++) {
-				if(allItemList.get(i).getItemNum() == result.get(j)) {
-					allItemList.remove(i);
-					i--;
-				}
-			}
-		}
 		
 		model.addAttribute("item",allItemList);
 		model.addAttribute("bossName", bossName);

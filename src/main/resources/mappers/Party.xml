@@ -162,7 +162,7 @@
 	<select id="showMain"
 		parameterType="com.gss.web.api.dto.PartyPageDto"
 		resultType="com.gss.web.api.dto.PartyMainDto1">
-		select g.gssuserid, p.partyname, b.bossname, b.bossgrade
+		select DISTINCT g.gssuserid, p.partyname, m.charatername
 		from bosstab b
 		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
 		join memberofpartytab m on b2.partynum = m.partynum
@@ -170,14 +170,13 @@
 		join gssusertab g on g.gssusernum = m.gssusernum
 		where g.gssuserid =#{id}
 		and m.partyleader is true
-		order by p.partynum desc
 		limit #{counterPage} offset #{pageStart}
 	</select>
 
 	<select id="showMain2"
 		parameterType="com.gss.web.api.dto.PartyPageDto2"
 		resultType="com.gss.web.api.dto.PartyMainDto2">
-		select gssuserid, partyname, bossname, bossgrade
+		select DISTINCT g.gssuserid, p.partyname, m.charatername
 		from bosstab b
 		join bosshuntingatpartytab b2 on b.bossnum = b2.bossnum
 		join memberofpartytab m on b2.partynum = m.partynum
@@ -203,5 +202,10 @@
 		#{partyLeader}
 		)
 	</insert>
-
+	
+	<select id="getPartyListNum" parameterType="String" resultType="int">
+		select partynum
+		from partytab 
+		where partyname=#{partyName}
+	</select>
 </mapper>

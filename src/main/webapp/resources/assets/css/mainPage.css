@@ -92,6 +92,7 @@ html, body {
 	margin-top:5%;
 	overflow:hidden;
 	height:100%;
+	text-align:center;
 }
 
 .div_item_search{
@@ -106,6 +107,7 @@ html, body {
 	margin-top:5%;
 	overflow:hidden;
 	height:100%;
+	text-align:center;
 }
 
 .div_info_main {
@@ -188,7 +190,7 @@ html, body {
 	width:50%;
 	margin-top:5%;
 	overflow:hidden;
-	height:150%;
+	height:190%;
 	text-align:center;
 }
 
@@ -197,6 +199,109 @@ html, body {
 	width:50%;
 	margin-top:5%;
 	overflow:hidden;
-	height:120%;
+	height:150%;
 	text-align:center;
+}
+
+.div_create_party {
+	margin:auto;
+	width:50%;
+	margin-top:5%;
+	overflow:hidden;
+	height:100%;
+	text-align:center;
+}
+
+.div_party_list {
+	margin:auto;
+	width:50%;
+	margin-top:5%;
+	overflow:hidden;
+	text-align:center;
+}
+
+.div_party_mainPage {
+	margin:auto;
+	width:50%;
+	margin-top:5%;
+	overflow:hidden;
+	height:70%;
+}
+
+.div_party_bottom{
+	margin:auto;
+	width:50%;
+	overflow:hidden;
+	height:20%;
+}
+
+.div_makeParty_main {
+	margin:auto;
+	width:50%;
+	margin-top:5%;
+	overflow:hidden;
+	height:200%;
+}
+
+.div_makeParty_mid{
+	margin:auto;
+	width:100%;
+	margin-top:5%;
+	overflow:hidden;
+	height:50%;
+	text-align:center;
+}
+
+.div_makeParty_insert{
+	margin:auto;
+	width:100%;
+	margin-top:3%;
+	overflow:hidden;
+	height:50%;
+	text-align:center;
+}
+
+.div_partyButton {	
+	float:left;
+}
+
+.div_info_mid {
+	margin:auto;
+	width:70%;
+	overflow:hidden;
+	height:100%;
+	text-align:center;
+}
+
+.div_ienParty_main {
+	margin:auto;
+	width:50%;
+	margin-top:5%;
+	overflow:hidden;
+	height:120%;
+}
+
+.div_ienParty_mid{
+	margin:auto;
+	width:100%;
+	margin-top:5%;
+	overflow:hidden;
+	height:100%;
+	text-align:center;
+}
+
+.div_bosList_main {
+	margin:auto;
+	width:50%;
+	overflow:hidden;
+	height:100%;
+	text-align:center;
+}
+
+.div_bossDrop_bossList {
+	margin:auto;
+	width:50%;
+	margin-top:5%;
+	overflow:hidden;
+	height:70%;
 }

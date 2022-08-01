@@ -22,7 +22,6 @@ import com.gss.web.api.dto.PriceRatioDto;
 import com.gss.web.api.dto.ResultTabDto;
 import com.gss.web.common.domain.Calculate;
 import com.gss.web.common.domain.CalculateComplete;
-import com.gss.web.common.domain.CalculateMain;
 import com.gss.web.common.domain.Item;
 import com.gss.web.common.domain.ItemInfo;
 import com.gss.web.common.domain.PartyGetItem;

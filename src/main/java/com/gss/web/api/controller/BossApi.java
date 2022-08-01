@@ -49,12 +49,14 @@ public class BossApi {
 		map.put("bossGrade", bossGrade);
 		List<Integer> result= itemOfBossService.selectAllItemOfBoss(map);
 		Item[] itemList = new Item[result.size()];
+		Boss boss = bossService.selectByBossNameAndGrade(map);
 		
 		for (int i = 0; i < result.size(); i++) {
 			itemList[i] =  itemOfBossService.selectByBossItem(result.get(i));
 		}
 		
 		model.addAttribute("itemList", itemList);
+		model.addAttribute("bossList",boss);
 		
 		return "/boss/bossDropItem";
 	}

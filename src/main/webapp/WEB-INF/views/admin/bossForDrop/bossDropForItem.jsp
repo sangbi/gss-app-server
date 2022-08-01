@@ -34,7 +34,7 @@
 					<td>
 					${itemList.itemName}</td>
 					<td>${itemList.classification}</td>
-					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
+					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="30" height="30"></div></td>
 					<td><a href=<c:url value="/admin/deleteDropItem?bossNum=${bossList.bossnum}&itemNum=${itemList.itemNum}&bossName=${bossName}&bossGrade=${bossGrade}"/>><input type="button" class="btn btn-dark" value="삭제"></a></td>
 				</tr>
 				<input type="hidden" value="${itemList.itemNum}">

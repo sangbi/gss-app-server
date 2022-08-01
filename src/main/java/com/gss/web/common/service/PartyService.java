@@ -39,4 +39,6 @@ public interface PartyService {
 	public List<String> getBossGradeList(String choiceBossName);
 	
 	List<MyPartyMember> getMyPartyMembers(String partyName);
+	
+	public List<Integer> getPartyListNum(String name); 
 }

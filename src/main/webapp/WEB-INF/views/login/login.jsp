@@ -56,7 +56,7 @@
 							</div>
 						</c:if>
 						<br>
-						<input class="btn btn-outline-success btn btn-dark btn-lg col-3 "type="submit" value="<spring:message code="login.btn"/>">
+						<input class="btn btn-dark btn-lg col-3 "type="submit" value="<spring:message code="login.btn"/>">
 					</form:form>
 					<br>
 				</div>
