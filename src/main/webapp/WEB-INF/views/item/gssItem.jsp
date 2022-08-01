@@ -17,7 +17,7 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div class="div_calculate_main">	
+	<div class="div_item_main">	
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
@@ -38,7 +38,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div>
+		</div>
+		<div class="div_item_search">
 			<form name="search-form" method="get" action="/item/itemSearch">
 				<select name="type" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
 					<option selected value="">선택</option>
@@ -46,9 +47,8 @@
 					<option value="classification">분류</option>
 				</select>
 				<input type="text" name="keyword" value=""></input>
-				<input type="submit" class="btn btn-outline-dark" style="font-size:15px; padding:2px 5px;" value="검색"></input>
+				<input type="submit" class="btn btn-dark" style="font-size:15px; padding:4px 5px;" value="검색"></input>
 			</form>
-		</div>
 		</div>
 		
 		<!-- paging -->

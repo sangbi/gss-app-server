@@ -17,11 +17,9 @@
 <title>${bossList.bossName}정보</title>
 </head>
 <body>
-	<div class="div_calculate_main">
-		<table 
-		width="30%"
-		height=200
-		border="1">
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+	<div class="div_damin_bossList">
+		<table class="table table-dark table-striped">
 		<tr>
 		<td rowspan="3"><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="100%" height="100%" /></div></td>
 		
@@ -34,8 +32,9 @@
 			<td>${bossList.bossGrade }</td>
 		</tr>
 		</table>
-		<a href="/admin/boss"><input type="button" value="목록"></a>
-		<a href="/admin/deleteBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade}"><input type="button" value="삭제"></a>
+		<a href="/admin/boss"><input type="button" class="btn btn-dark" value="목록"></a>
+		<a href="/admin/deleteBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade}"><input type="button" class="btn btn-dark" value="삭제"></a>
 	</div>
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

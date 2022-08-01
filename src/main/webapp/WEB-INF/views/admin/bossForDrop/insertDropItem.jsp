@@ -18,7 +18,7 @@
 </head>
 <body>
 <c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div class="div_drop_item">
+	<div class="div_admin_insertDropItem">
 		<div class="div_item_list">
 			<table class="table">
 				<thead class="table-dark">
@@ -35,15 +35,17 @@
 						<td>
 						${item.itemName}</td>
 						<td>${item.classification}</td>
-						<td><div class="select_img"><img src="${pageContext.request.contextPath}/${item.itemImagepath}" width="30" height="30"></div></td>
-						<td><a href=<c:url value="/admin/insertDropItem?itemNum=${item.itemNum}&bossName=${bossName}&bossGrade=${bossGrade}"/>><input type="button" value="추가"></a></td>
+						<td><div class="select_img"><img src="${pageContext.request.contextPath}/${item.itemImagepath}" width="50" height="50"></div></td>
+						<td><a href=<c:url value="/admin/insertDropItem?itemNum=${item.itemNum}&bossName=${bossName}&bossGrade=${bossGrade}"/>><input type="button" class="btn btn-dark" value="추가"></a></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<a href="/admin/bossAndDrop"><input type="button" value="목록"></a>
+	<div class="div_admin_bottom">
+		<a href="/admin/bossAndDrop"><input type="button" class="btn btn-dark" value="목록"></a>
+	</div>
 	<div class="div_drop_paging">
 	<!-- paging -->
 	<nav aria-label="Page navigation example" class="css-paging">

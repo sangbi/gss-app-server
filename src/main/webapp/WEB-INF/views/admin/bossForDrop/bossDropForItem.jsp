@@ -16,8 +16,8 @@
 <title>${bossName} 드랍아이템</title>
 </head>
 <body>
- <h1></h1>
- <div class="div_calculate_main">
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<div class="div_admin_bossDropList">
 <div class="div_item_list">
 		<table class="table">
 			<thead class="table-dark">
@@ -35,7 +35,7 @@
 					${itemList.itemName}</td>
 					<td>${itemList.classification}</td>
 					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="50" height="50"></div></td>
-					<td><a href=<c:url value="/admin/deleteDropItem?bossNum=${bossList.bossnum}&itemNum=${itemList.itemNum}&bossName=${bossName}&bossGrade=${bossGrade}"/>><input type="button" value="삭제"></a></td>
+					<td><a href=<c:url value="/admin/deleteDropItem?bossNum=${bossList.bossnum}&itemNum=${itemList.itemNum}&bossName=${bossName}&bossGrade=${bossGrade}"/>><input type="button" class="btn btn-dark" value="삭제"></a></td>
 				</tr>
 				<input type="hidden" value="${itemList.itemNum}">
 				<input type="hidden" value="${bossList.bossNum}">
@@ -43,9 +43,10 @@
 			</tbody>
 		</table>
 		
-	<a href="/admin/bossAndDrop"><input type="button" value="목록"></a>
-	<a href=<c:url value="/admin/addDropItem?bossName=${bossName}&bossGrade=${bossGrade }"/>><input type="button" value="아이템정보 추가"></a>
+	<a href="/admin/bossAndDrop"><input type="button" class="btn btn-dark" value="목록"></a>
+	<a href=<c:url value="/admin/addDropItem?bossName=${bossName}&bossGrade=${bossGrade }"/>><input type="button" class="btn btn-dark" value="아이템정보 추가"></a>
 	</div>
 </div>
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

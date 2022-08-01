@@ -81,10 +81,11 @@
 								정산 </a> <input type="hidden" value="${authInfo.id}" name="userId">
 							<ul class="dropdown-menu">
 								<li><a href="/calculate/partyList" class="dropdown-item">진행중인 정산</a></li>
-								<li><input type="button"
-									onclick="moveToCalculateComplete(this.form)"
-									class="dropdown-item" value="완료된 정산"></li>
+								<li><a href="/calculate/calculateComplete" class="dropdown-item">완료 된 정산</a>
 							</ul></li>
+					</c:if>
+					<c:if test="${authInfo.id eq 'admin'}">
+						<li class="nav-item"><a class="nav-link" href="/admin/main">관리자</a></li>
 					</c:if>
 				</ul>
 			<c:if test="${empty authInfo}">

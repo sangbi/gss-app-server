@@ -17,6 +17,7 @@
 <title>보스정보등록 보스리스트</title>
 </head>
 <body>
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
 	<div class="div_calculate_main">
 	<h1>보스정보 등록</h1>
 		<div class="div_item_list">
@@ -31,19 +32,21 @@
 				<tbody>
 				<c:forEach var="bossList" items="${bossList}" varStatus="loop">
 				<tr>
-					<td>
+					<td style="vertical-align:middle">
 					<a href=<c:url value="/admin/selectBoss?bossName=${bossList.bossName}&bossGrade=${bossList.bossGrade }"/>>
 						${bossList.bossName}</a></td>
-					<td>${bossList.bossGrade}</td>
+					<td style="vertical-align:middle">${bossList.bossGrade}</td>
 					<td><div class="select_img"><img src="${pageContext.request.contextPath}/${bossList.bossImagepath}" width="50" height="50"></div></td>
 				</tr>
 				</c:forEach>
 				</tbody>
 			</table>
+		</div>
 	</div>
-</div>
-<a href="/admin/main"><input type="button" value="목록"></a>
-		<a href="/admin/addBoss"><input type="button" value="보스정보 추가"></a>
+	<div class="div_admin_bossMain">
+		<a href="/admin/main"><input type="button" class="btn btn-dark" value="목록"></a>
+		<a href="/admin/addBoss"><input type="button" class="btn btn-dark" value="추가"></a>
+	</div>
 <!-- paging -->
 	<nav aria-label="Page navigation example" class="css-paging">
 	       <ul class="pagination justify-content-center">
@@ -71,8 +74,6 @@
 	       </ul>
 	   </nav>
        <!-- paging -->
-       
-
 <c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

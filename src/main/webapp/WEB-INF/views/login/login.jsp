@@ -63,6 +63,7 @@
 			</div>
 		</div>
 	</div>
+	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 	<!-- <div><button onclick="showLoginPopup();">네이버</button></div> -->
 </body>
 </html>
