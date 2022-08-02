@@ -13,7 +13,12 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div class="div_main_mid">
+	<div class="div_hr">
+		<hr>
+		<h4 class="text-muted"> CALCULATE </h4>
+		<hr>
+	</div>
+	<div class="div_calc_mid">
 		<form onsubmit="return priceList('${partyName}')" method="post">
 		<table class="table" id="modalItem" style="table-layout: fixed">
 			<ul class="list-group list-group-flush">

@@ -17,7 +17,11 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div class="div_boss_list">		
+	<div class="div_hr">
+		<hr class="border-3 opacity-75">
+		<h4 class="text-muted"> BOSS ITEM </h4><hr class="border-3 opacity-75">	
+	</div>
+	<div class="div_boss_list">	
 		<table class="table">
 			<thead class="table-dark">
 				<tr>

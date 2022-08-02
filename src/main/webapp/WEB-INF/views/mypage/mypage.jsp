@@ -16,12 +16,13 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+	<div class="div_hr">
+		<hr class="border-3 opacity-75">
+		<h4 class="text-muted"> MY INFO </h4><hr class="border-3 opacity-75">	
+	</div>
 	<div class="div_info_main">
 		<div class="container">
-			<br> <br> <br>
 			<form:form modelAttribute="MemberCreateDto">
-				<h2>정보 수정</h2>
-				<br>
 				<form:input path="userid" type="hidden" value="${member.gssuserId}" />
 				<div class="form-group col-lg-12">
 					<label for="email" style="text-align: left"

@@ -44,7 +44,9 @@ public class CalculateApi {
 	@GetMapping("/partyList")
 	public String showMyPartyList(HttpServletRequest req, Model model) {
 		AuthInfo loginUser =  (AuthInfo) req.getSession().getAttribute("authInfo");
+		System.out.println(loginUser.getId());
 		int userNum = calculateService.selectByUserId(loginUser.getId());
+
 		model.addAttribute("userList", calculateService.selectByUserNumber(userNum));
 		return "calculate/calculateMain";
 	}
