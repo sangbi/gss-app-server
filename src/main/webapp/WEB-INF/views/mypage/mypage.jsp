@@ -26,21 +26,19 @@
 				<div class="form-group col-lg-12">
 					<label for="email" style="text-align: left"
 						class="font-weight-bolder  col-lg-6">E-MAIL</label>
-					<form:input class="form-control-lg" path="email"
-						type="text" value="${member.email}" placeholder="e-mail 입력"
-						onfocus="this.placeholder=''" onblur="this.placeholder='e-mail 입력'"  size="60"/>
+					<form:input class="form-control-lg" path="email" type="text"
+						value="${member.email}" placeholder="e-mail 입력"
+						onfocus="this.placeholder=''"
+						onblur="this.placeholder='e-mail 입력'" size="60" />
 				</div>
 				<div class="form-group col-lg-12">
-					<input class="form-control-lg" id="certificationNumber"
-						type="text" placeholder="e-mail로 발송된 문자를 넣어주세요"
-						onfocus="this.placeholder=''"
-						onblur="this.placeholder='e-mail로 발송된 문자를 넣어주세요'"  size="60"/> 
-						<br><br>
-						<input
-						class="btn btn-dark btn-lg"
-						id="sendEmail" type="button" value="이메일 인증 발송"> <input
-						class="btn btn-dark btn-lg"
-						id="certificationEmailConfirm" type="button" value="이메일 인증">
+					<input class="form-control-lg" id="certificationNumber" type="text"
+						placeholder="e-mail로 발송된 문자를 넣어주세요" onfocus="this.placeholder=''"
+						onblur="this.placeholder='e-mail로 발송된 문자를 넣어주세요'" size="60" /> <br>
+					<br> <input class="btn btn-dark btn-lg" id="sendEmail"
+						type="button" value="이메일 인증 발송"> <input
+						class="btn btn-dark btn-lg" id="certificationEmailConfirm"
+						type="button" value="이메일 인증">
 				</div>
 				<c:choose>
 					<c:when test="${not empty valid_email}">
@@ -62,7 +60,8 @@
 						class="font-weight-bolder  col-lg-6">NAME</label>
 					<form:input class="form-control-lg" path="name"
 						value="${member.userName}" type="text" placeholder="이름 입력"
-						onfocus="this.placeholder=''" onblur="this.placeholder='이름 입력'"  size="60"/>
+						onfocus="this.placeholder=''" onblur="this.placeholder='이름 입력'"
+						size="60" />
 				</div>
 				<c:if test="${not empty valid_name}">
 					<label class="text-danger">${valid_name}</label>
@@ -70,15 +69,14 @@
 				<div class="form-group col-lg-12">
 					<label for="password" style="text-align: left"
 						class="font-weight-bolder  col-lg-6">PASSWORD</label>
-					<form:input class="form-control-lg" path="password"
-						type="password" placeholder="8자 이상 숫자, 영문, 특수문자 조합"
-						onfocus="this.placeholder=''"
-						onblur="this.placeholder='8자 이상 숫자, 영문, 특수문자 조합'"  size="60"/>
+					<form:input class="form-control-lg" path="password" type="password"
+						placeholder="8자 이상 숫자, 영문, 특수문자 조합" onfocus="this.placeholder=''"
+						onblur="this.placeholder='8자 이상 숫자, 영문, 특수문자 조합'" size="60" />
 				</div>
 				<c:if test="${not empty valid_password}">
 					<label class="text-danger">${valid_password}</label>
 				</c:if>
-	
+
 				<div class="form-group col-lg-12">
 					<label for="confirmPassword" style="text-align: left"
 						style="text-align:left" class="font-weight-bolder  col-lg-6">CONFIRM
@@ -86,7 +84,7 @@
 					<form:input class="form-control-lg" path="confirmPassword"
 						type="password" placeholder="8자 이상 숫자, 영문, 특수문자 조합"
 						onfocus="this.placeholder=''"
-						onblur="this.placeholder='8자 이상 숫자, 영문, 특수문자 조합'"  size="60"/>
+						onblur="this.placeholder='8자 이상 숫자, 영문, 특수문자 조합'" size="60" />
 				</div>
 				<c:choose>
 					<c:when test="${not empty valid_confirmPassword}">
@@ -107,7 +105,7 @@
 						value="${member.userPhone}" type="text"
 						placeholder="-를 포함하여 입력. EX)010-1234-5678"
 						onfocus="this.placeholder=''"
-						onblur="this.placeholder='-를 포함하여 입력. EX)010-1234-5678'"  size="60"/>
+						onblur="this.placeholder='-를 포함하여 입력. EX)010-1234-5678'" size="60" />
 				</div>
 				<c:choose>
 					<c:when test="${not empty valid_phoneNumber}">
@@ -123,16 +121,14 @@
 				<br>
 				<br>
 				<form:input type="hidden" path="certificationFlag" />
-				<div class="row justify-content-center">
-					<br> <input
-						class="btn btn-dark btn-lg col-3 "
-						id="submit" type="submit" value="정보 수정"> <input
-						class="btn btn-dark btn-lg col-3 "
+				<div class="form-group col-lg-12">
+					<input class="btn btn-dark btn-lg col-3 " id="submit" type="submit"
+						value="정보 수정"> <input class="btn btn-dark btn-lg col-3 "
 						type="button" value="취소">
 				</div>
 			</form:form>
 		</div>
-	</div>	
+	</div>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

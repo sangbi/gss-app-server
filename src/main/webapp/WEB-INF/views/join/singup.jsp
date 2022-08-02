@@ -137,7 +137,7 @@
 					</c:when>
 				</c:choose>
 				<br>
-				<div class="row justify-content-center">
+				<div class="form-group col-lg-12">
 					<br> <input
 						class="btn btn-dark btn-lg col-3 "
 						type="submit" value="회원 가입"> <input
