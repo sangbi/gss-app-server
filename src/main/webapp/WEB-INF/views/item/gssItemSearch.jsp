@@ -17,6 +17,10 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+	<div class="div_hr">
+		<hr class="border-3 opacity-75">
+		<h4 class="text-muted"> I T E M </h4><hr class="border-3 opacity-75">	
+	</div>
 	<div class="div_calculate_main">	
 		<table class="table">
 			<thead class="table-dark">

@@ -22,8 +22,7 @@
 			gssusertab as g 
 			join memberofpartytab as m
 		on 
-			g.gssusernum = m.gssusernum 
-			and g.gssuserid  = #{userId};
+			g.gssuserid  = #{userId};
 	</select>
 	
 	<select id="selectCountMember" parameterType="String" resultType="int">

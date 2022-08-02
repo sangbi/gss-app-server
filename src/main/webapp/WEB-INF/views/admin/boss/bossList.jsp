@@ -18,8 +18,12 @@
 </head>
 <body>
 <c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+	<div class="div_hr">
+		<hr class="border-3 opacity-75">
+		<h4 class="text-muted"> ADMIN BOSS </h4>
+		<hr class="border-3 opacity-75">
+	</div>
 	<div class="div_calculate_main">
-	<h1>보스정보 등록</h1>
 		<div class="div_item_list">
 			<table class="table">
 						<thead class="table-dark">
