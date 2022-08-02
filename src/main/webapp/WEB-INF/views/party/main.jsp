@@ -32,7 +32,8 @@
 				<img
 					src="${pageContext.request.contextPath}/resources/tagImage/mir.png"
 					style="width: 150px; height: 150px;">
-				<p class="text-muted">THE PAGE EMPTY</p>
+				<p class="text-muted">THE PAGE EMPTY</p><input type="button" class="btn btn-dark" value="파티생성"
+				onClick="location.href='<c:url value="createparty" />'">
 			</div>
 		</c:when>
 		<c:otherwise>
