@@ -20,7 +20,7 @@
 		<h4 class="text-muted">CALCULATE COMPLETE</h4>
 		<hr>
 	</div>
-	<div class="div_main_mid">
+	<div class="div_calcComp_mid">
 		<table class="table" id="modalItem" style="table-layout: fixed">
 			<ul class="list-group list-group-flush">
 				<thead class="table-dark">

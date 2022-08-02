@@ -20,6 +20,7 @@ html, body {
 	width:50%;
 	overflow:hidden;
 	height:auto;
+	margin-top:5%;
 	margin-bottom:5%;
 	text-align:center;
 }
@@ -348,5 +349,14 @@ html, body {
 	margin-top:5%;
 	width:50%;
 	overflow:hidden;
+	text-align:center;
+}
+
+.div_calcComp_mid {
+	margin:auto;
+	width:50%;
+	overflow:hidden;
+	height:auto;
+	margin-bottom:5%;
 	text-align:center;
 }
