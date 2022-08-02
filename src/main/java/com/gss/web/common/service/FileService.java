@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class FileService {
-	
-	
+public class FileService {	
 	public String fileUpload(MultipartFile mul, String fileName, String filePath) {
 		String imagePath=filePath;
 		System.out.println(filePath);

@@ -58,6 +58,27 @@ public class PartyApi {
 		model.addAttribute("myParty2", partyServiceImpl.showMain2(page2));
 		return "party/main";
 	}
+	
+	@RequestMapping(value = "party/mainMember", method = RequestMethod.GET)
+	public String mainMember(Model model, PartyPageDto page, PartyPageCreatorService pc, HttpSession session,
+			String authInfo,PartyPageCreatorServiceDown pc2, PartyPageDto2 page2) {
+		if (session.getAttribute("authInfo") == null) {
+			return "redirect:/main/home";
+		}
+		AuthInfo auth = (AuthInfo) session.getAttribute("authInfo");
+		Member member = memberServiceImpl.findByUserPK(auth.getUserKey());
+		page.setId(member.getGssuserId());
+		page2.setId(member.getGssuserId());
+		pc.setPaging(page);
+		pc2.setPaging(page2);
+		pc.setArticleCount(partyServiceImpl.getArticleCountNum(member.getGssuserId()));
+		pc2.setArticleCount(partyServiceImpl.getArticleCountNum2(member.getGssuserId()));
+		model.addAttribute("pc1", pc);
+		model.addAttribute("pc2", pc2);
+		model.addAttribute("myParty", partyServiceImpl.showMain(page));
+		model.addAttribute("myParty2", partyServiceImpl.showMain2(page2));
+		return "party/mainmemberlist";
+	}
 
 	@PostMapping("/bossGradeList")
 	@ResponseBody
@@ -108,9 +129,6 @@ public class PartyApi {
 
 	@RequestMapping(value = "party/insertPerson", method = RequestMethod.GET)
 	public String insertPerson(PartyInsertDto command, Model model,@RequestParam("gssUserId")String gssUserId) {
-		System.out.println(command.getInsertId());
-		System.out.println(command.getPartyName());
-		System.out.println(command.getCharaterName());
 		partyServiceImpl.insertPerson(command);
 		model.addAttribute("myParty", partyServiceImpl.getMyPartyInfo(command.getPartyName(),gssUserId));
 		model.addAttribute("myMember", partyServiceImpl.getMyPartyMembers(command.getPartyName()));

@@ -8,42 +8,53 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내가 소속된 파티</title>
 </head>
 <body>
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<div class="div_ienParty_main">
+	<div class="div_ienParty_mid">
 	<form>
-		<table border="1">
-			<caption>
-				<strong>내가 소속된 파티정보 </strong>
-			</caption>
-
+		<table class="table table-bordered" style="table-layout: fixed">	
 			<tr>
-				<td><strong>파티이름</strong></td>
-				<td>${ienterParty.partyName }</td>
+				<th class="table-dark" colspan="2"><strong>파티 이름</strong></th>
 			</tr>
-
 			<tr>
-				<td><strong>보스이름</strong></td>
+				<td colspan="2">${ienterParty.partyName }</td>
+			</tr>
+			<tr>
+				<th class="table-dark"><strong>보스 이름</strong></th>
+				<th class="table-dark"><strong>난이도</strong></th>
+			</tr>			
+			<tr>
 				<td>${ienterParty.bossName}</td>
-				<td>보스난이도</td>
 				<td>${ienterParty.bossGrade}</td>
 			</tr>
 			<tr>
-				<td><strong>파티장</strong></td>
+				<th class="table-dark"><strong>파티장</strong></th>
+				<th class="table-dark"><strong>캐릭터 이름</strong></th>
+	
+			</tr>
+			<tr>
 				<td>${ienterParty.gssUserId}</td>
-				<td><strong>캐릭터네임</strong></td>
 				<td>${ienterParty.charaterName}</td>
+			</tr>
+			<tr>
+				<th class="table-dark"><strong>파티원</strong></th>
+				<th class="table-dark"><strong>캐릭터 이름</strong></th>
 			</tr>
 			<c:forEach var="myMembers" items="${myMember}">
 			<tr>
-				<td><strong>파티원</strong></td>
 				<td>${myMembers.gssUserId}</td>
-				<td><strong>캐릭터네임</strong></td>
-				<td>${myMembers.charaterName}</td></tr>
-				</c:forEach>
+				<td>${myMembers.charaterName}</td>
+			</tr>
+			</c:forEach>
 		</table>
 	</form>
-	<input type="button" value="목록"
+	<input type="button" value="목록" class="btn btn-dark"
 		onClick="location.href='<c:url value="main" />'">
+	</div>
+</div>
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>

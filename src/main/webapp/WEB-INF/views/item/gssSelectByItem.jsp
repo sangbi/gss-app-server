@@ -17,27 +17,22 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-	<div class="div_calculate_main">
-		<div class="div_item_list">		
-			<table 
-			width="30%"
-			height=200
-			border="1">
-			<tr>
-			<td rowspan="3"><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="100" height="100" /></div></td>
-			
-			<tr>
-				<th>아이템 이름</th>
-				<td>${itemList.itemName}</td>
-			</tr>
-			<tr>
-				<th>분류</th>
-				<td>${itemList.classification}</td>
-			</tr>
+		<div class="div_damin_item">		
+			<table class="table table-dark table-striped">
+				<tr>
+				<td rowspan="3"><div class="select_img"><img src="${pageContext.request.contextPath}/${itemList.itemImagepath}" width="100" height="100" /></div></td>
+				
+				<tr>
+					<th>아이템 이름</th>
+					<td>${itemList.itemName}</td>
+				</tr>
+				<tr>
+					<th>분류</th>
+					<td>${itemList.classification}</td>
+				</tr>
 			</table>
+			<a href="/item/itemList"><input type="button" value="목록" class="btn btn-dark"></a>
 		</div>
-		<a href="/item/itemList"><input type="button" value="목록"></a>
-	</div>
 	<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </body>

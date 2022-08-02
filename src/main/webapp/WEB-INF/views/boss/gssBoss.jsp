@@ -17,7 +17,6 @@
 </head>
 <body>
 	<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
-
 	<div class="div_boss_list">		
 		<table class="table">
 			<thead class="table-dark">

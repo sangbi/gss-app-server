@@ -128,4 +128,9 @@ public class PartyDAOImpl implements PartyDAO {
 	public List<MyPartyMember> getMyPartyMembers(int partyNum) {
 		return sqlsession.getMapper(PartyMapper.class).getMyPartyMembers(partyNum);
 	}
+	
+	@Override
+	public List<Integer> getPartyListNum(String name) {
+		return sqlsession.getMapper(PartyMapper.class).getPartyListNum(name);
+	}
 }

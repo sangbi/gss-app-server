@@ -9,78 +9,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
-	정산현황보러가기(정산링크연결 정규)
-	<br>
-	<br>
-
-	<form>
-		<table border="1">
-			<caption>
-				<strong>내가만든 파티정보</strong>
-			</caption>
-
-			<tr>
-				<td><strong>파티이름</strong></td>
-				<td>${myParty.partyName}</td>
-			</tr>
-
-			<tr>
-				<td><strong>보스이름</strong></td>
-				<td>${myParty.bossName}</td>
-				<td>난이도</td>
-				<td>${myParty.bossGrade}</td>
-			</tr>
-			<tr>
-				<td><strong>파티장</strong></td>
-				<td>${myParty.gssUserId}</td>
-				<td><strong>캐릭터네임</strong></td>
-				<td>${myParty.charaterName}</td>
-			</tr>
-			<c:forEach var="myMembers" items="${myMember}">
-			<tr>
-				<td><strong>파티원</strong></td>
-				<td>${myMembers.gssUserId}</td>
-				<td><strong>캐릭터네임</strong></td>
-				<td>${myMembers.charaterName}</td></tr>
+<c:import url="${pageContext.request.contextPath}/main/nav"></c:import>
+<div class="div_makeParty_main">
+	<div class="div_makeParty_mid">
+		<form>
+			<table class="table table-bordered" style="table-layout: fixed">	
+				<tr>
+					<th class="table-dark" colspan="2"><strong>파티 이름</strong></th>
+				</tr>
+				<tr>
+					<td colspan="2">${myParty.partyName}</td>
+				</tr>
+				<tr>
+					<th class="table-dark"><strong>보스 이름</strong></th>
+					<th class="table-dark"><strong>난이도</strong></th>
+				</tr>
+				<tr>
+					<td>${myParty.bossName}</td>
+					<td>${myParty.bossGrade}</td>
+				</tr>
+				<tr>
+					<th class="table-dark"><strong>파티장</strong></th>
+					<th class="table-dark"><strong>캐릭터 이름</strong></th>
+	
+				</tr>
+				<tr>
+					<td>${myParty.gssUserId}</td>
+					<td>${myParty.charaterName}</td>
+				</tr>
+				<tr>
+					<th class="table-dark"><strong>파티원</strong></th>
+					<th class="table-dark"><strong>캐릭터 이름</strong></th>
+				</tr>
+				<c:forEach var="myMembers" items="${myMember}">
+					<tr>
+						<td>${myMembers.gssUserId}</td>
+						<td>${myMembers.charaterName}</td>
+					</tr>
 				</c:forEach>
-		</table>
-	</form>
-	<input type="button" value="목록으로 돌아가기"
-		onClick="location.href='<c:url value="main" />'">
+			</table>
+		</form>
+	</div>
+	
 	<div>
 		<form action="getSearchList" method="get">
 			<fieldset>
-				<legend> 글검색필드</legend>
-						 <input type="hidden" name=partyName value="${myParty.partyName}">
-					<select name=id>
-						<option value="gssUserId">아이디</option>
-					</select> <label>검색어</label>
-						 <input type="hidden" name=gssUserId value="${myParty.gssUserId}"> 
-						 <input type="text" name=keyWord value="">
-						 <input type="submit" value="검색">
+				<legend> 파티원 추가 </legend>
+					<input type="hidden" name=partyName value="${myParty.partyName}">
+					<input type="hidden" name="id" value="gssUserId">
+					<input type="hidden" name=gssUserId value="${myParty.gssUserId}"> 
+					<div class="div_partyButton">
+						<input type="text" name=keyWord value="" class="form-control" style="width:300px">
+					</div>	
+					<input type="submit" value="검색" class="btn btn-dark">
+					
 			</fieldset>
 		</form>
 	</div>
-		<form action="insertPerson" method="get">
-	
-			<c:forEach var="list" items="${search}">
-				<div style="border: 1px padding:15px;">
+	<div class="div_makeParty_insert">
+		<form action="insertPerson" method="get">	
+			<table class="table table-bordered" style="table-layout: fixed">
 				<tr>
-					<td><input type="radio" name="insertId"
-						value="${list.gssUserId}">${list.gssUserId}</td>
+					<th class="table-dark">ID</th>
+					<th class="table-dark">E-MAIL</th>
 				</tr>
+				<c:forEach var="list" items="${search}">
+					<tr>
+						<td><input type="radio" name="insertId" class="form-check-input"
+							value="${list.gssUserId}"> ${list.gssUserId}</td>
+						<td>EMAIL: ${list.email }</td>
+					</tr>
+				</c:forEach>
 				<tr>
-					<td>EMAIL: ${list.email }</td>
+					<th class="table-light" style="vertical-align:middle">
+						캐릭터 이름
+					</th>
+					<td>
+						<input type="hidden" name="partyName" value="${myParty.partyName}">	
+						<input type="text" name="charaterName" class="form-control" style="width:300px">
+					</td>
 				</tr>
-			</div>
-		</c:forEach>
-		<input type="hidden" name="partyName" value="${myParty.partyName}">
-		<input type="text" name="charaterName"> (캐릭터 이름) 
-		<input type="hidden" name="gssUserId" value="${myParty.gssUserId}">
-		 <input type="submit" value="파티원으로 등록하기">
-	</form>
+			</table>
+			<input type="hidden" name="gssUserId" value="${myParty.gssUserId}">
+			<input type="submit" value="추가" class="btn btn-dark">
+			<input type="button" value="목록" class="btn btn-dark" onClick="location.href='<c:url value="main" />'">
+		</form>
+	</div>
+</div>	
+<c:import url="${pageContext.request.contextPath}/main/bottom"></c:import>
 </body>
 </html>
