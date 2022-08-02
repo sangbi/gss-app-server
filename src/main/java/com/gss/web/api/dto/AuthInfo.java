@@ -12,4 +12,5 @@ import lombok.Setter;
 public class AuthInfo {
 	private int userKey;
 	private String id;
+	private String privilge;
 }
