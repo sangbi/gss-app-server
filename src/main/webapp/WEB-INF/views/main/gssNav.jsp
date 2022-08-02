@@ -90,7 +90,7 @@
 								<li><a href="/calculate/calculateComplete" class="dropdown-item">완료 된 정산</a>
 							</ul></li>
 					</c:if>
-					<c:if test="${authInfo.id eq 'admin'}">
+					<c:if test="${authInfo.privilge eq 'ADMIN'}">
 						<li class="nav-item"><a class="nav-link" href="/admin/main">관리자</a></li>
 					</c:if>
 				</ul>
