@@ -305,3 +305,38 @@ html, body {
 	overflow:hidden;
 	height:70%;
 }
+
+.div_signend_slide {
+	margin:auto;
+	width:50%;
+	overflow:hidden;
+	height:40%;
+	margin-bottom:5%;
+}
+
+.div_signend_main{
+	margin:auto;
+	margin-top:5%;
+	overflow:hidden;
+	height:100%;
+}
+
+.div_signend_bottom{
+	margin:auto;
+	width:50%;
+	overflow:hidden;
+	height:50%;
+	margin-bottom:5%;
+}
+
+.div_signupend_modalButton{
+	float:right;
+}
+
+.div_signend_modal{
+	margin:auto;
+	width:100%;
+	overflow:hidden;
+	height:40%;
+	margin-bottom:5%;
+}
