@@ -10,4 +10,10 @@ import lombok.ToString;
 public class MyInfoList {
 	private String partyName;
 	private String charaterName;
+	private int gssUserNum;
+	
+	public MyInfoList(String partyName, String charaterName) {
+		this.partyName=partyName;
+		this.charaterName=charaterName;
+	}
 }

@@ -252,11 +252,13 @@ public class MemberApi {
 	}
 
 	@GetMapping("/editMyPartyNick")
-	public String editMyPartyNick(@RequestParam String partyName,@RequestParam String charaterNick, Model model) {
+	public String editMyPartyNick(@RequestParam String partyName,@RequestParam String charaterNick, Model model,HttpSession session) {
 		String charaterName=charaterNick;
 		String path;
+		AuthInfo auth=  (AuthInfo) session.getAttribute("authInfo");
+		int gssUserNum=Integer.valueOf(auth.getUserKey());
 		Map<String, String> validatorResult = new HashMap<>();
-		MyInfoList MIL= new MyInfoList(partyName, charaterName);
+		MyInfoList MIL= new MyInfoList(partyName, charaterName,gssUserNum);
 		validatorResult=memberServiceImpl.ValidCheckPartyNick(MIL,charaterName);
 		if (!validatorResult.isEmpty()) {
 			for (String key : validatorResult.keySet()) {

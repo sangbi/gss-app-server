@@ -107,6 +107,6 @@
 	update  memberofpartytab m 
 	set charatername  =#{charaterName}
 	from partytab p
-	where p.partynum =m.partynum and p.partyname=#{partyName}
+	where p.partynum =m.partynum and p.partyname=#{partyName} and m.gssusernum=#{gssUserNum}
 	</update>
 </mapper>
